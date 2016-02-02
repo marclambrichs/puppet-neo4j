@@ -1,3 +1,7 @@
+##2016-02-02 - Release 1.0.3
+### Summary
+Taken over module from Amos Wood
+
 ##2014-10-13 - Supported Release 1.0.2
 ### Summary
 Added logical log parameter to configuration

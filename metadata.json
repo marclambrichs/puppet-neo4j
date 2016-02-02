@@ -1,12 +1,12 @@
 {
-  "name": "amosjwood-neo4j",
-  "version": "1.0.2",
-  "author": "Amos Wood",
+  "name": "mlambrichs-neo4j",
+  "version": "1.0.3",
+  "author": "Marc Lambrichs <marc@monitorista.com>",
   "license": "Licensed under (Apache 2.0)",
   "summary": "A module installing and configuring Neo4j community or enterprise editions.",
-  "source": "https://github.com/amoswood/puppet-neo4j",
-  "project_page": "(https://forge.puppetlabs.com/amosjwood/amosjwood-neo4j)",
-  "issues_url": "",
+  "source": "https://github.com/mlambrichs/puppet-neo4j",
+  "project_page": "https://github.com/mlambrichs/puppet-neo4j",
+  "issues_url": "https://github.com/mlambrichs/puppet-neo4j/issues",
   "tags": ["neo", "neo4j", "nosql", "graph", "database", "relationship"],
   "operatingsystem_support": [
     {
