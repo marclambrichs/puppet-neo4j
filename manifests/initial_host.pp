@@ -17,13 +17,13 @@
 define neo4j::initial_host (
   $ip,
   $ha_cluster_name,
-  $ha_cluster_port = 5001,
+  $ha_cluster_port = 5001
 ) {
   $fragment_file = $::neo4j::properties_file
 
   concat::fragment{ "${title} fragment ":
     target  => $fragment_file,
     content => "${ip}:${ha_cluster_port},",
-    order   => 10,
+    order   => 10
   }
 }

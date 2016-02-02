@@ -78,7 +78,7 @@ class neo4j (
 )
 {
   #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
-  $package_name = "neo4j-${edition}-${version}"
+  $package_name    = "neo4j-${edition}-${version}"
   $package_tarball = "${package_name}.tgz"
 
   if($::kernel != 'Linux') {
@@ -107,28 +107,28 @@ class neo4j (
     ensure => present,
     gid    => 'neo4j',
     shell  => '/bin/bash',
-    home   => $install_prefix,
+    home   => $install_prefix
   }
   group { 'neo4j':
-    ensure=>present,
+    ensure=>present
   }
 
   File {
     owner => 'neo4j',
     group => 'neo4j',
-    mode  => '0644',
+    mode  => '0644'
   }
 
   Exec {
-    path => ['/usr/bin', '/usr/local/bin', '/bin', '/sbin'],
+    path => ['/usr/bin', '/usr/local/bin', '/bin', '/sbin']
   }
 
   file { $install_prefix:
-    ensure => directory,
+    ensure => directory
   }
 
   file { "${install_prefix}/data":
-    ensure => directory,
+    ensure => directory
   }
 
   if ! defined(Package['wget']) {
@@ -143,21 +143,21 @@ class neo4j (
     command => "wget \"http://www.neo4j.com/customer/download/${package_name}-unix.tar.gz\" -O ${install_prefix}/${package_tarball}",
     creates => "${install_prefix}/${package_tarball}",
     notify  => Exec["untar ${package_tarball}"],
-    require => [Package['wget'], File[$install_prefix]],
+    require => [Package['wget'],File[$install_prefix]]
   }
 
   # untar the tarball at the desired location
   exec { "untar ${package_tarball}":
-      command     => "tar -xzf ${install_prefix}/${package_tarball} -C ${install_prefix}/; chown neo4j:neo4j -R ${install_prefix}",
-      refreshonly => true,
-      require     => [Exec ["wget ${package_tarball}"], File[$install_prefix], Package['tar']],
+    command     => "tar -xzf ${install_prefix}/${package_tarball} -C ${install_prefix}/; chown neo4j:neo4j -R ${install_prefix}",
+    refreshonly => true,
+    require     => [Exec["wget ${package_tarball}"],File[$install_prefix],Package['tar']]
   }
 
   #install the service
   file {'/etc/init.d/neo4j':
     ensure  => link,
     target  => "${install_prefix}/${package_name}/bin/neo4j",
-    require => Exec["untar ${package_tarball}"],
+    require => Exec["untar ${package_tarball}"]
   }
 
   # Track the configuration files
@@ -168,35 +168,35 @@ class neo4j (
     mode    => '0600',
     require => Exec["untar ${package_tarball}"],
     before  => Service['neo4j'],
-    notify  => Service['neo4j'],
+    notify  => Service['neo4j']
   }
 
   $properties_file = "${install_prefix}/${package_name}/conf/neo4j.properties"
 
   concat{ $properties_file :
-    owner   => 'neo4j',
-    group   => 'neo4j',
-    mode    => '0644',
-    before  => Service['neo4j'],
-    notify  => Service['neo4j'],
+    owner  => 'neo4j',
+    group  => 'neo4j',
+    mode   => '0644',
+    before => Service['neo4j'],
+    notify => Service['neo4j']
   }
 
   concat::fragment{ 'neo4j properties header':
     target  => $properties_file,
     content => template('neo4j/neo4j.properties.concat.1.erb'),
-    order   => 01,
+    order   => 01
   }
 
   concat::fragment{ 'neo4j properties ha_initial_hosts':
     target  => $properties_file,
     content => 'ha.initial_hosts=',
-    order   => 02,
+    order   => 02
   }
 
   concat::fragment{ 'neo4j properties footer':
     target  => $properties_file,
     content => "\n\n#End of file\n",
-    order   => 99,
+    order   => 99
   }
 
   file { 'neo4j-wrapper.conf':
@@ -206,13 +206,13 @@ class neo4j (
     mode    => '0600',
     require => Exec["untar ${package_tarball}"],
     before  => Service['neo4j'],
-    notify  => Service['neo4j'],
+    notify  => Service['neo4j']
   }
 
   service{'neo4j':
     ensure  => $service_ensure,
     enable  => $service_enable,
-    require => File['/etc/init.d/neo4j'],
+    require => File['/etc/init.d/neo4j']
   }
 
   if($auth_ensure != absent) {
@@ -234,7 +234,7 @@ class neo4j (
       path    => "${install_prefix}/${package_name}/plugins/${authentication_plugin_name}",
       source  => "puppet:///modules/neo4j/${authentication_plugin_name}",
       notify  => Service['neo4j'],
-      require => Exec["untar ${package_tarball}"],
+      require => Exec["untar ${package_tarball}"]
     }
 
     # Track the user management files
@@ -243,21 +243,21 @@ class neo4j (
       path    => "${install_prefix}/${package_name}/bin/createNeo4jUser",
       source  => 'puppet:///modules/neo4j/createNeo4jUser.sh',
       mode    => '0755',
-      require => Exec["untar ${package_tarball}"],
+      require => Exec["untar ${package_tarball}"]
     }
     file { 'updateNeo4jUser.sh':
       ensure  => file,
       path    => "${install_prefix}/${package_name}/bin/updateNeo4jUser",
       source  => 'puppet:///modules/neo4j/updateNeo4jUser.sh',
       mode    => '0755',
-      require => Exec["untar ${package_tarball}"],
+      require => Exec["untar ${package_tarball}"]
     }
     file { 'removeNeo4jUser.sh':
       ensure  => file,
       path    => "${install_prefix}/${package_name}/bin/removeNeo4jUser",
       source  => 'puppet:///modules/neo4j/removeNeo4jUser.sh',
       mode    => '0755',
-      require => Exec["untar ${package_tarball}"],
+      require => Exec["untar ${package_tarball}"]
     }
 
     if(is_hash($auth_users)) {
