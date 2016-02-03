@@ -8,11 +8,11 @@
 #
 # === Authors
 #
-# Amos Wood <amosjwood@gmail.com>
+# Marc Lambrichs <marc.lambrichs@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2014 Amos Wood, unless otherwise noted.
+# Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 define neo4j::initial_host (
   $ip,
