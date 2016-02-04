@@ -33,6 +33,30 @@ class neo4j::config ()
     notify => Service['neo4j'],
   }
 
+  $cache_type                        = $neo4j::cache_type
+  $cache_memory_ratio                = $neo4::cache_memory_ratio
+  $ha_allow_init_cluster             = $neo4j::ha_allow_init_cluster
+  $ha_cluster_port                   = $neo4j::ha_cluster_port
+  $ha_data_port                      = $neo4j::ha_data_port
+  $ha_ensure                         = $neo4j::ha_ensure
+  $ha_server_id                      = $neo4j::ha_server_id
+  $ha_pull_interval                  = $neo4j::ha_pull_interval
+  $ha_slave_only                     = $neo4j::ha_slave_only
+  $ha_tx_push_factor                 = $neo4j::ha_tx_push_factor
+  $ha_tx_push_strategy               = $neo4j::ha_tx_push_strategy
+  $ipaddress                         = $neo4j::ipaddress
+  $keep_logical_logs                 = $neo4j::keep_logical_logs
+  $node_cache_array_fraction         = $neo4j::node_cache_array_fraction
+  $node_cache_size                   = $neo4j::node_cache_size
+  $nodestore_memory                  = $neo4j::nodestore_memory
+  $propertystore_arrays_memory       = $neo4j::propertystore_arrays_memory
+  $propertystore_memory              = $neo4j::propertystore_memory
+  $propertystore_strings_memory      = $neo4j::propertystore_strings_memory
+  $relationship_cache_array_fraction = $neo4j::relationship_cache_array_fraction
+  $relationship_cache_size           = $neo4j::relationship_cache_size
+  $relationship_memory               = $neo4j::relationship_memory
+  $version                           = $neo4j::version
+
   concat::fragment{ 'neo4j properties header':
     target  => $properties_file,
     content => template('neo4j/neo4j.properties.concat.1.erb'),
@@ -50,6 +74,11 @@ class neo4j::config ()
     content => "\n\n#End of file\n",
     order   => 99,
   }
+
+  $install_prefix    = $neo4j::install_prefix
+  $jvm_init_memory   = $neo4j::jvm_init_memory
+  $jvm_max_memory    = $neo4j::jvm_max_memory
+  $newrelic_jar_path = $neo4j::newrelic_jar_path
 
   file { 'neo4j-wrapper.conf':
     ensure  => file,
