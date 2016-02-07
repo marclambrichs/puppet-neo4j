@@ -19,8 +19,14 @@ class neo4j::install ()
     ensure => directory,
   }
 
-  file { "${neo4j::install_prefix}/data":
+  file { $neo4j::data_dir:
     ensure => directory,
+  }
+
+  if ( ! $neo4j::http_log_dir ){
+    file { $neo4j::http_log_dir:
+      ensure => directory,
+    }
   }
 
   if ! defined(Package['wget']) {
@@ -28,6 +34,9 @@ class neo4j::install ()
   }
   if ! defined(Package['tar']) {
     package { 'tar' : }
+  }
+  if ! defined(Package['lsof']) {
+    package { 'lsof' : }
   }
 
   # get the tgz file

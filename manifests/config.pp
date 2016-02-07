@@ -34,7 +34,7 @@ class neo4j::config ()
   }
 
   $cache_type                        = $neo4j::cache_type
-  $cache_memory_ratio                = $neo4::cache_memory_ratio
+  $cache_memory_ratio                = $neo4j::cache_memory_ratio
   $ha_allow_init_cluster             = $neo4j::ha_allow_init_cluster
   $ha_cluster_port                   = $neo4j::ha_cluster_port
   $ha_data_port                      = $neo4j::ha_data_port

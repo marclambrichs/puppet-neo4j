@@ -1,4 +1,4 @@
-# == Class: neo4j
+# == Class: neo4j::authentication
 #
 # Installs Neo4J (http://www.neo4j.com) on RHEL/Ubuntu/Debian from their
 # distribution tarballs downloaded directly from their site.
@@ -13,14 +13,13 @@
 #
 class neo4j::authentication ()
 {
-
   #determine the plugin version
   if(versioncmp($neo4j::version, '2.1.0') >= 0) {
     $authentication_plugin_name = 'authentication-extension-2.1.2-1.0-SNAPSHOT.jar'
   } elsif(versioncmp($neo4j::version, '2.0.0') >= 0) {
     $authentication_plugin_name = 'authentication-extension-2.0.3-1.0-SNAPSHOT.jar'
   } else {
-    fail("Authenitcation in version ${neo4j::version} is not supported. It is only available in version >= 2.0.0.")
+    fail("Authentication in version ${neo4j::version} is not supported. It is only available in version >= 2.0.0.")
   }
 
   if( ! $neo4j::auth_admin_user or ! $neo4j::auth_admin_password) {
