@@ -79,7 +79,7 @@
 #   Default: false
 #
 # [*http_log_dir*]
-#   Indicates the http logging directory
+#   Indicates the http logging directory. When given, should be absolute path.
 #   Default: 'data/log'
 #
 # [*install_prefix*]
@@ -227,12 +227,18 @@ class neo4j (
   }
 
   if ($data_prefix) {
+    if (validate_absolute_path($data_prefix)) {
+      fail('$data_prefix should contain an absolute path')
+    }
     $data_dir = $data_prefix
   } else {
     $data_dir = "${neo4j::params::install_prefix}/data"
   }
 
   if ($http_log_dir) {
+    if (validate_absolute_path($http_log_dir)) {
+      fail('$htp_log_dir should contain an absolute path')
+    }
     $http_logfile = "${http_log_dir}/http.log"
   } else {
     $http_logfile = "${data_dir}/log/http.log"
@@ -288,11 +294,9 @@ class neo4j (
 
   contain neo4j::install
   contain neo4j::config
-  contain neo4j::logging
   contain neo4j::service
 
   Class['neo4j::install'] ->
-  Class['neo4j::config'] ->
-  Class['neo4j::logging'] ~>
+  Class['neo4j::config'] ~>
   Class['neo4j::service']
 }

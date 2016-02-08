@@ -13,14 +13,32 @@
 #
 class neo4j::config ()
 {
-  # Track the configuration files
-  file { 'neo4j-server.properties':
+
+  File {
     ensure  => file,
-    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-server.properties",
-    content => template('neo4j/neo4j-server.properties.erb'),
     mode    => '0600',
+    owner   => 'neo4j',
+    group   => 'neo4j',
     before  => Service['neo4j'],
     notify  => Service['neo4j'],
+  }
+
+  # Track the configuration files
+  file { 'neo4j-server.properties':
+    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-server.properties",
+    content => template('neo4j/neo4j-server.properties.erb'),
+  }
+
+  file { 'neo4j-http-logging.xml':
+    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-http-logging.xml",
+    content => template('neo4j/neo4j-http-logging.xml.erb'),
+  }
+
+  if ( $neo4j::http_log_dir ) {
+    file { $neo4j::http_log_dir:
+      ensure => directory,
+      mode   => '0744'
+    }
   }
 
   $properties_file = "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j.properties"
@@ -81,11 +99,7 @@ class neo4j::config ()
   $newrelic_jar_path = $neo4j::newrelic_jar_path
 
   file { 'neo4j-wrapper.conf':
-    ensure  => file,
     path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-wrapper.conf",
     content => template('neo4j/neo4j-wrapper.conf.erb'),
-    mode    => '0600',
-    before  => Service['neo4j'],
-    notify  => Service['neo4j'],
   }
 }
