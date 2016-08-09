@@ -49,12 +49,13 @@ class neo4j::install ()
 
   # untar the tarball at the desired location
   exec { "untar ${neo4j::package_tarball}":
-      command     => "tar -xzf ${neo4j::install_prefix}/${neo4j::package_tarball} -C ${neo4j::install_prefix}/; chown neo4j:neo4j -R ${neo4j::install_prefix}",
+      command     => "tar -xzf ${neo4j::install_prefix}/${neo4j::package_tarball} -C ${neo4j::install_prefix}/;\
+ chown neo4j:neo4j -R ${neo4j::install_prefix}",
       refreshonly => true,
       require     => [Exec["wget ${neo4j::package_tarball}"], File[$neo4j::install_prefix], Package['tar']],
   }
 
-  #install the service
+  # install the service
   file {'/etc/init.d/neo4j':
     ensure  => link,
     target  => "${neo4j::install_prefix}/${neo4j::package_name}/bin/neo4j",

@@ -12,8 +12,8 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::service (
-  $service_enable = $neo4j::service_enable
-  $service_ensure = $neo4j::service_ensure,
+  $service_enable = $neo4j::service_enable,
+  $service_ensure = $neo4j::service_ensure
 )
 {
   service{'neo4j':

@@ -10,6 +10,7 @@ class neo4j::params {
   $cache_type                        = undef
   $cache_memory_ratio                = undef
   $edition                           = 'community'
+  $group                             = 'neo4j'
   $ha_enabled                        = false
   $ha_server_id                      = undef
   $ha_cluster_port                   = '5001'
@@ -43,6 +44,7 @@ class neo4j::params {
   $service_ensure                    = running
   $tls_certificate_file              = 'conf/ssl/snakeoil.cert'
   $tls_key_file                      = 'conf/ssl/snakeoil.key'
+  $user                              = 'neo4j'
   $version                           = '2.1.2'
 
   if ! member( ['community','enterprise'], $edition ){

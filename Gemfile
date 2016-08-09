@@ -11,11 +11,10 @@ def location_for(place, fake_version = nil)
 end
 
 group :test do
-  gem 'rspec-core', '3.1.7',     :require => false
+  gem 'rspec-core',              :require => false
   gem 'puppetlabs_spec_helper',  :require => false
   gem 'simplecov',               :require => false
   gem 'puppet_facts',            :require => false
-  gem 'json',                    :require => false
   gem 'metadata-json-lint',      :require => false
 end
 
@@ -23,6 +22,8 @@ group :development do
   gem 'travis',       :require => false
   gem 'travis-lint',  :require => false
   gem 'guard-rake',   :require => false
+  gem 'json',         '1.8.3'
+  gem 'json_pure',    '1.8.3'
 end
 
 group :system_tests do
