@@ -1,5 +1,20 @@
-pkg/
+## MAC OS
+.DS_Store
+
+## EMACS
 *~
-\#*\#
+\#*
 .\#*
+
+## VIM
+*.swp
+tags
+
+pkg/
+
 RELEASE
+.bundle
+Gemfile.lock
+
+spec/fixtures/manifests
+spec/fixtures/modules
