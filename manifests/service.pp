@@ -16,7 +16,7 @@ class neo4j::service (
   $service_ensure = $neo4j::service_ensure
 )
 {
-  service{'neo4j':
+  service{ 'neo4j':
     ensure => $neo4j::service_ensure,
     enable => $neo4j::service_enable
   }

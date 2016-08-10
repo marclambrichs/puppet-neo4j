@@ -23,6 +23,8 @@ class neo4j::install ()
     ensure => directory,
   }
 
+  File[$neo4j::install_prefix] -> File[$neo4j::data_dir]
+
   if ( ! $neo4j::http_log_dir ){
     file { $neo4j::http_log_dir:
       ensure => directory,
@@ -41,24 +43,35 @@ class neo4j::install ()
 
   # get the tgz file
   exec { "wget ${neo4j::package_tarball}" :
-    command => "wget \"http://www.neo4j.com/customer/download/${neo4j::package_name}-unix.tar.gz\" -O ${neo4j::install_prefix}/${neo4j::package_tarball}",
-    creates => "${neo4j::install_prefix}/${neo4j::package_tarball}",
+    command => "/usr/bin/wget \"http://www.neo4j.com/customer/download/${neo4j::package_name}-unix.tar.gz\" -O /tmp/${neo4j::package_tarball}",
+    unless  => "/usr/bin/test -f /tmp/${neo4j::package_tarball}",
     notify  => Exec["untar ${neo4j::package_tarball}"],
-    require => [Package['wget'], File[$neo4j::install_prefix]],
-  }
+    require => Package['wget']
+  } ->
 
   # untar the tarball at the desired location
   exec { "untar ${neo4j::package_tarball}":
-      command     => "tar -xzf ${neo4j::install_prefix}/${neo4j::package_tarball} -C ${neo4j::install_prefix}/;\
- chown neo4j:neo4j -R ${neo4j::install_prefix}",
-      refreshonly => true,
-      require     => [Exec["wget ${neo4j::package_tarball}"], File[$neo4j::install_prefix], Package['tar']],
+      command => "/bin/tar -xzf /tmp/${neo4j::package_tarball} -C ${neo4j::install_prefix}",
+      unless  => "/usr/bin/test -f ${neo4j::neo4j_home}",
+      require => [File[$neo4j::install_prefix], Package['tar']]
+  } ->
+
+  file { $neo4j::neo4j_home:
+      ensure  => directory,
+      owner   => $neo4j::user,
+      group   => $neo4j::group,
+      recurse => true,
+      require => [User[$neo4j::user], Group[$neo4j::group]]
   }
+
+#  file { "/tmp/${neo4j::package_tarball}":
+#    ensure => absent
+#  }
 
   # install the service
   file {'/etc/init.d/neo4j':
     ensure  => link,
-    target  => "${neo4j::install_prefix}/${neo4j::package_name}/bin/neo4j",
+    target  => "${neo4j::neo4j_home}/bin/neo4j",
     require => Exec["untar ${neo4j::package_tarball}"],
   }
 }

@@ -17,20 +17,18 @@ class neo4j::config ()
   File {
     ensure  => file,
     mode    => '0600',
-    owner   => 'neo4j',
-    group   => 'neo4j',
     before  => Service['neo4j'],
     notify  => Service['neo4j'],
   }
 
   # Track the configuration files
   file { 'neo4j-server.properties':
-    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-server.properties",
+    path    => "${neo4j::neo4j_home}/conf/neo4j-server.properties",
     content => template('neo4j/neo4j-server.properties.erb'),
   }
 
   file { 'neo4j-http-logging.xml':
-    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-http-logging.xml",
+    path    => "${neo4j::neo4j_home}/conf/neo4j-http-logging.xml",
     content => template('neo4j/neo4j-http-logging.xml.erb'),
   }
 
@@ -41,11 +39,11 @@ class neo4j::config ()
     }
   }
 
-  $properties_file = "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j.properties"
+  $properties_file = "${neo4j::neo4j_home}/conf/neo4j.properties"
 
-  concat{ $properties_file :
-    owner  => 'neo4j',
-    group  => 'neo4j',
+  concat { $properties_file :
+    owner  => $neo4j::user,
+    group  => $neo4j::group,
     mode   => '0644',
     before => Service['neo4j'],
     notify => Service['neo4j'],
@@ -93,13 +91,12 @@ class neo4j::config ()
     order   => 99,
   }
 
-  $install_prefix    = $neo4j::install_prefix
   $jvm_init_memory   = $neo4j::jvm_init_memory
   $jvm_max_memory    = $neo4j::jvm_max_memory
   $newrelic_jar_path = $neo4j::newrelic_jar_path
 
   file { 'neo4j-wrapper.conf':
-    path    => "${neo4j::install_prefix}/${neo4j::package_name}/conf/neo4j-wrapper.conf",
+    path    => "${neo4j::neo4j_home}/conf/neo4j-wrapper.conf",
     content => template('neo4j/neo4j-wrapper.conf.erb'),
   }
 }

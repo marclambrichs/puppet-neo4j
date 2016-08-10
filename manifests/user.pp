@@ -61,7 +61,7 @@ define neo4j::user (
 
   Exec {
     path => [
-      "${install_prefix}/${package_name}/bin",
+      "${::neo4j_home}/bin",
       '/bin',
       '/sbin',
       '/usr/bin',

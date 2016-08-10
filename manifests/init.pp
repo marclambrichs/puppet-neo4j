@@ -266,6 +266,7 @@ class neo4j (
   #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
   $package_name    = "neo4j-${edition}-${version}"
   $package_tarball = "${package_name}.tgz"
+  $neo4j_home      = "${install_prefix}/${package_name}"
 
   if ( $::kernel != 'Linux' ) {
     fail('Only Linux is supported at this time.')
@@ -340,7 +341,6 @@ class neo4j (
   File {
     owner => $user,
     group => $group,
-    mode  => '0644'
   }
 
   Exec {
