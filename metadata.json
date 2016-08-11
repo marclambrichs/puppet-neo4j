@@ -1,7 +1,7 @@
 {
   "name": "mlambrichs-neo4j",
   "version": "1.0.4",
-  "author": "Marc Lambrichs <marc@monitorista.com>",
+  "author": "Marc Lambrichs <marc.lambrichs@gmail.com>",
   "license": "Apache-2.0",
   "summary": "A module installing and configuring Neo4j community or enterprise editions.",
   "source": "https://github.com/mlambrichs/puppet-neo4j",
@@ -16,7 +16,8 @@
   ],
    "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" },
-    { "name": "puppetlabs/concat", "version_requirement": ">=2.2.0 <5.0.0" }
+    { "name": "puppetlabs/concat", "version_requirement": ">=2.2.0 <5.0.0" },
+    { "name": "puppet/archive", "version_requirement": ">=0.5.1 <1.0.0" }
   ],
   "requirements": [
     {

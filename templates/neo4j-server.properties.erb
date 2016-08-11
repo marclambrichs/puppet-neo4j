@@ -1,6 +1,6 @@
 ################################################################
-# Neo4j configuration
-#
+# Neo4j configuration.
+# Managed by Puppet.
 ################################################################
 
 #***************************************************************
@@ -8,33 +8,31 @@
 #***************************************************************
 
 # location of the database directory
-org.neo4j.server.database.location=<%= @install_prefix -%>/data/graph.db
+org.neo4j.server.database.location=<%= scope.lookupvar("neo4j::data_dir") -%>/graph.db
 
 # Let the webserver only listen on the specified IP. Default is localhost (only
 # accept local connections). Uncomment to allow any connection. Please see the
 # security section in the neo4j manual before modifying this.
-<% if @allow_remote_connections -%>
-org.neo4j.server.webserver.address=<%= @ipaddress %>
+<% if scope.lookupvar("neo4j::allow_remote_connections") -%>
+org.neo4j.server.webserver.address=<%= scope.lookupvar("neo4j::address") %>
 <% end -%>
 
 # http port (for all data, administrative, and UI access)
-org.neo4j.server.webserver.port=7474
-org.neo4j.server.webserver.https.enabled=true
-org.neo4j.server.webserver.https.port=7473
-org.neo4j.server.webserver.https.cert.location=conf/ssl/snakeoil.cert
-org.neo4j.server.webserver.https.key.location=conf/ssl/snakeoil.key
-
-org.neo4j.server.webserver.https.keystore.location=<%= @install_prefix -%>/data/keystore
+org.neo4j.server.webserver.port=<%= scope.lookupvar("neo4j::http_port") %>
+org.neo4j.server.webserver.https.enabled=<%= scope.lookupvar("neo4j::https_enabled") %>
+org.neo4j.server.webserver.https.port=<%= scope.lookupvar("neo4j::https_port") %>
+org.neo4j.server.webserver.https.cert.location=<%= scope.lookupvar("neo4j::tls_certificate_file") %>
+org.neo4j.server.webserver.https.key.location=<%= scope.lookupvar("neo4j::tls_key_file") %>
+org.neo4j.server.webserver.https.keystore.location=<%= scope.lookupvar("neo4j::data_dir") -%>/keystore
 
 #*****************************************************************
 # Administration client configuration
 #*****************************************************************
-
 # location of the servers round-robin database directory. possible values:
 # - absolute path like /var/rrd
 # - path relative to the server working directory like data/rrd
 # - commented out, will default to the database data directory.
-org.neo4j.server.webadmin.rrdb.location=<%= @install_prefix -%>/data/rrd
+org.neo4j.server.webadmin.rrdb.location=<%= scope.lookupvar("neo4j::data_dir") -%>/rrd
 
 # REST endpoint for the data API
 # Note the / in the end is mandatory
@@ -54,9 +52,7 @@ org.neo4j.server.manage.console_engines=shell
 # SINGLE - Single mode, default.
 # To run in High Availability mode, configure the
 # neo4j.properties config file, then uncomment this line:
-<% if @ha_ensure != "absent" -%>
-org.neo4j.server.database.mode=HA
-<% end -%>
+org.neo4j.server.database.mode=<% if @ha_enabled %>HA<% else %>SINGLE<% end %>
 #ha_ensure: <%= @ha_ensure %>
 
 # Comma separated list of JAX-RS packages containing JAX-RS resources, one
@@ -71,21 +67,12 @@ org.neo4j.server.database.mode=HA
 #*****************************************************************
 # HTTP logging configuration
 #*****************************************************************
-
 # HTTP logging is disabled. HTTP logging can be enabled by setting this
 # property to 'true'.
-org.neo4j.server.http.log.enabled=false
+org.neo4j.server.http.log.enabled=<%= scope.lookupvar("neo4j::http_log_enabled") -%>
 
 # Logging policy file that governs how HTTP log output is presented and
 # archived. Note: changing the rollover and retention policy is sensible, but
 # changing the output format is less so, since it is configured to use the
 # ubiquitous common log format
 org.neo4j.server.http.log.config=conf/neo4j-http-logging.xml
-
-#*****************************************************************
-# AUTH section
-#*****************************************************************
-<% if @auth_ensure != "absent" -%>
-org.neo4j.server.credentials=<%= @auth_admin_user %>:<%= @auth_admin_password %>
-org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.server.extension.auth=/auth
-<% end -%>

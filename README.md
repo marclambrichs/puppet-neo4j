@@ -1,5 +1,9 @@
 # neo4j puppet module
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/mlambrichs/neo4j.svg)](https://forge.puppetlabs.com/mlambrichs/neo4j) [![Build Status](https://travis-ci.org/mlambrichs/puppet-neo4j.svg?branch=master)](https://travis-ci.org/mlambrichs/puppet-neo4j)
+
+=====================
+
 ####Table of Contents
 
 1. [Overview](#overview)
@@ -127,6 +131,8 @@ Manages the server.
 **Default:** */opt/neo4j*
 - `allow_remote_connections` -- Whether to allow remote connections to Neo4j instead of only from localhost.
 **Default:** *true*
+- `address` -- Specify the address to listen at if `allow_remote_connections` is set to *true*.
+**Default:** *ipaddress* (from puppet facts)
 
 ######Custom Memory Attributes
 - `jvm_init_memory`\* -- Initial memory size of the jvm. Equates to java option "-Xms=XXX". Specified in MBs.
