@@ -207,7 +207,7 @@ class neo4j (
   $jvm_init_memory                   = $neo4j::params::jvm_init_memory,
   $jvm_max_memory                    = $neo4j::params::jvm_max_memory,
   $keep_logical_logs                 = $neo4j::params::keep_logical_logs,
-  $keystore_location                 = $undef,
+  $keystore_location                 = undef,
   $newrelic_jar_path                 = $neo4j::params::newrelic_jar_path,
   $node_cache_array_fraction         = $neo4j::params::node_cache_array_fraction,
   $node_cache_size                   = $neo4j::params::node_cache_size,

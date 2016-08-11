@@ -45,7 +45,7 @@ class neo4j::params {
   $tls_certificate_file              = 'conf/ssl/snakeoil.cert'
   $tls_key_file                      = 'conf/ssl/snakeoil.key'
   $user                              = 'neo4j'
-  $version                           = '2.1.2'
+  $version                           = '2.3.6'
 
   if ! member( ['community','enterprise'], $edition ){
     fail('$edition should be one of [\'community\',\'enterprise\']')

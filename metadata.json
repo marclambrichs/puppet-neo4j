@@ -16,7 +16,8 @@
   ],
    "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" },
-    { "name": "puppetlabs/concat", "version_requirement": ">=2.2.0 <5.0.0" }
+    { "name": "puppetlabs/concat", "version_requirement": ">=2.2.0 <5.0.0" },
+    { "name": "puppet/archive", "version_requirement": ">=0.5.1 <1.0.0" }
   ],
   "requirements": [
     {
