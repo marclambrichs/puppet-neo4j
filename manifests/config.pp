@@ -32,13 +32,6 @@ class neo4j::config ()
     content => template('neo4j/neo4j-http-logging.xml.erb'),
   }
 
-  if ( $neo4j::http_log_dir ) {
-    file { $neo4j::http_log_dir:
-      ensure => directory,
-      mode   => '0744'
-    }
-  }
-
   $properties_file = "${neo4j::neo4j_home}/conf/neo4j.properties"
 
   concat { $properties_file :

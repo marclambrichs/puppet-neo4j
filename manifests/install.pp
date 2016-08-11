@@ -28,6 +28,7 @@ class neo4j::install ()
   if ( $neo4j::http_log_dir ){
     file { $neo4j::http_log_dir:
       ensure => directory,
+      mode   => '0644'
     }
   }
 
