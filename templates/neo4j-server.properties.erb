@@ -53,7 +53,6 @@ org.neo4j.server.manage.console_engines=shell
 # To run in High Availability mode, configure the
 # neo4j.properties config file, then uncomment this line:
 org.neo4j.server.database.mode=<% if @ha_enabled %>HA<% else %>SINGLE<% end %>
-#ha_ensure: <%= @ha_ensure %>
 
 # Comma separated list of JAX-RS packages containing JAX-RS resources, one
 # package name for each mountpoint. The listed package names will be loaded

@@ -55,7 +55,7 @@ allow_store_upgrade=true
 keep_logical_logs=<%= @keep_logical_logs %>
 
 #HA settings
-<% if @ha_ensure == "present" -%>
+<% if @ha_enabled -%>
 ha.server_id=<%= @ha_server_id %>
 ha.cluster_server=<%= @ipaddress %>:<%= @ha_cluster_port %>
 ha.server=<%= @ipaddress %>:<%= @ha_data_port %>

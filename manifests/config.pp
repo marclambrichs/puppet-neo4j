@@ -47,7 +47,7 @@ class neo4j::config ()
   $ha_allow_init_cluster             = $neo4j::ha_allow_init_cluster
   $ha_cluster_port                   = $neo4j::ha_cluster_port
   $ha_data_port                      = $neo4j::ha_data_port
-  $ha_ensure                         = $neo4j::ha_ensure
+  $ha_enabled                        = $neo4j::ha_enabled
   $ha_server_id                      = $neo4j::ha_server_id
   $ha_pull_interval                  = $neo4j::ha_pull_interval
   $ha_slave_only                     = $neo4j::ha_slave_only
@@ -63,7 +63,6 @@ class neo4j::config ()
   $propertystore_strings_memory      = $neo4j::propertystore_strings_memory
   $relationship_cache_array_fraction = $neo4j::relationship_cache_array_fraction
   $relationship_cache_size           = $neo4j::relationship_cache_size
-  $relationship_memory               = $neo4j::relationship_memory
   $version                           = $neo4j::version
 
   concat::fragment{ 'neo4j properties header':
