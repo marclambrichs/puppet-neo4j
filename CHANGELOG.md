@@ -1,3 +1,7 @@
+##2016-08-12 - Release 1.1.0
+### Summary
+This is a minor release, targeted at neo4j 2.x users. We're not going to put any more effort in supporting this version, as most users (should) be migrating to 3.x anyway.
+
 ##2016-02-02 - Release 1.0.3
 ### Summary
 Taken over module from Amos Wood
