@@ -14,6 +14,10 @@
 #
 class neo4j::install ()
 {
+  ## package lsof is needed for init script
+  if ! defined(Package['lsof']) {
+    package { 'lsof' : }
+  }
 
   file { $neo4j::install_prefix:
     ensure => directory,
