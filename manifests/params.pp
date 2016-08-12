@@ -42,6 +42,7 @@ class neo4j::params {
   $rrdb_location                     = 'rrd'
   $service_enable                    = true
   $service_ensure                    = running
+  $service_provider                  = 'init'
   $tls_certificate_file              = 'conf/ssl/snakeoil.cert'
   $tls_key_file                      = 'conf/ssl/snakeoil.key'
   $user                              = 'neo4j'
