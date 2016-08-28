@@ -1,0 +1,53 @@
+
+#*****************************************************************
+# Miscellaneous configuration
+#*****************************************************************
+# Enable this to specify a parser other than the default one.
+cypher.default_language_version=<%= @cypher_default_language_version %>
+
+# Determines if Cypher will allow using file URLs when loading data using
+# `LOAD CSV`. Setting this value to `false` will cause Neo4j to fail `LOAD CSV`
+# clauses that load data from the file system.
+dbms.security.allow_csv_import_from_file_urls=<%= @dbms_security_allow_csv_import_from_file_urls %>
+
+# Retention policy for transaction logs needed to perform recovery and backups.
+dbms.tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy %>
+
+# Limit the number of IOs the background checkpoint process will consume per second.
+# This setting is advisory, is ignored in Neo4j Community Edition, and is followed to
+# best effort in Enterprise Edition.
+# An IO is in this case a 8 KiB (mostly sequential) write. Limiting the write IO in
+# this way will leave more bandwidth in the IO subsystem to service random-read IOs,
+# which is important for the response time of queries when the database cannot fit
+# entirely in memory. The only drawback of this setting is that longer checkpoint times
+# may lead to slightly longer recovery times in case of a database or system crash.
+# A lower number means lower IO pressure, and consequently longer checkpoint times.
+# The configuration can also be commented out to remove the limitation entirely, and
+# let the checkpointer flush data as fast as the hardware will go.
+# Set this to -1 to disable the IOPS limit.
+dbms.checkpoint.iops.limit=<%= @dbms_checkpoint_iops_limit %>
+
+# Enable a remote shell server which Neo4j Shell clients can log in to.
+dbms.shell.enabled=<%= @dbms_shell_enabled %>
+# The network interface IP the shell will listen on (use 0.0.0.0 for all interfaces).
+dbms.shell.host=<%= @dbms_shell_host %>
+# The port the shell will listen on, default is 1337.
+dbms.shell.port=<%= @dbms_shell_port %>
+
+# Only allow read operations from this Neo4j instance. This mode still requires
+# write access to the directory for lock purposes.
+dbms.read_only=<%= @dbms_read_only %>
+
+# Comma separated list of JAX-RS packages containing JAX-RS resources, one
+# package name for each mountpoint. The listed package names will be loaded
+# under the mountpoints specified. Uncomment this line to mount the
+# org.neo4j.examples.server.unmanaged.HelloWorldResource.java from
+# neo4j-server-examples under /examples/unmanaged, resulting in a final URL of
+# http://localhost:7474/examples/unmanaged/helloworld/{nodeId}
+#dbms.unmanaged_extension_classes=<% @dbms_unmanaged_extension_classes.each do |key,value| %><%= key %>=<%= value %><% end %>
+
+# Specified comma separated list of id types (like node or relationship) that should be reused.
+# When some type is specified database will try to reuse corresponding ids as soon as it will be safe to do so.
+# Currently only 'node' and 'relationship' types are supported.
+# This settings is ignored in Neo4j Community Edition.
+dbms.ids.reuse.types.override=<%= @dbms_ids_reuse_types_override.join(',') %>

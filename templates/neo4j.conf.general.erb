@@ -1,0 +1,45 @@
+#*****************************************************************
+# Neo4j configuration: Managed by Puppet
+#*****************************************************************
+
+# The name of the database to mount
+dbms.active_database=<%= @dbms_active_database %>
+
+# Paths of directories in the installation.
+dbms.directories.data=<%= @dbms_directories_data %>
+dbms.directories.plugins=<%= @dbms_directories_plugins %>
+dbms.directories.certificates=<%= @dbms_directories_certificates %>
+<% if @allow_load_csv -%>
+
+# This setting constrains all `LOAD CSV` import files to be under the `import` directory. Remove or uncomment it to
+# allow files to be loaded from anywhere in filesystem; this introduces possible security problems. See the `LOAD CSV`
+# section of the manual for details.
+dbms.directories.import=<%= @dbms_directories_import %>
+<% end -%>
+
+# Whether requests to Neo4j are authenticated.
+# To disable authentication, uncomment this line
+dbms.security.auth_enabled=<%= @dbms_security_auth_enabled -%>
+
+# Enable this to be able to upgrade a store from an older version.
+dbms.allow_format_migration=<%= @dbms_allow_format_migration %>
+
+# The amount of memory to use for mapping the store files, in bytes (or
+# kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
+# If Neo4j is running on a dedicated server, then it is generally recommended
+# to leave about 2-4 gigabytes for the operating system, give the JVM enough
+# heap to hold all your transaction state and query context, and then leave the
+# rest for the page cache.
+# The default page cache memory assumes the machine is dedicated to running
+# Neo4j, and is heuristically set to 50% of RAM minus the max Java heap size.
+dbms.memory.pagecache.size=<%= @dbms_memory_pagecache_size %>
+
+# Enable online backups to be taken from this database.
+dbms.backup.enabled=<%= @dbms_backup_enabled %>
+
+# To allow remote backups, uncomment this line:
+<% if @dbms_backup_enabled -%>
+dbms.backup.address=<%= @dbms_backup_address %>
+<% else -%>
+#dbms.backup.address=0.0.0.0:6362
+<% end -%>

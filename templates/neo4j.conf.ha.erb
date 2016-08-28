@@ -1,0 +1,70 @@
+
+#*****************************************************************
+# HA configuration
+#*****************************************************************
+# Uncomment and specify these lines for running Neo4j in High Availability mode.
+# See the High availability setup tutorial for more details on these settings
+# http://neo4j.com/docs/operations-manual/current/#tutorials
+
+# Database mode
+# Allowed values:
+# HA - High Availability
+# SINGLE - Single mode, default.
+# To run in High Availability mode uncomment this line:
+dbms.mode=<%= @dbms_mode %>
+
+<% if @dbms_mode ==  'HA' -%>
+# ha.server_id is the number of each instance in the HA cluster. It should be
+# an integer (e.g. 1), and should be unique for each cluster instance.
+ha.server_id=<%= @ha_server_id %>
+
+# ha.initial_hosts is a comma-separated list (without spaces) of the host:port
+# where the ha.host.coordination of all instances will be listening. Typically
+# this will be the same for all cluster instances.
+ha.initial_hosts=<%= @ha_initial_hosts.join(',') %>
+
+# IP and port for this instance to listen on, for communicating cluster status
+# information iwth other instances (also see ha.initial_hosts). The IP
+# must be the configured IP address for one of the local interfaces.
+ha.host.coordination=<%= @ha_host_coordination %>
+
+# IP and port for this instance to listen on, for communicating transaction
+# data with other instances (also see ha.initial_hosts). The IP
+# must be the configured IP address for one of the local interfaces.
+ha.host.data=<%= @ha_host_data %>
+
+# The interval at which slaves will pull updates from the master. Comment out
+# the option to disable periodic pulling of updates. Unit is seconds.
+ha.pull_interval=<%= @ha_pull_interval %>
+
+# Amount of slaves the master will try to push a transaction to upon commit
+# (default is 1). The master will optimistically continue and not fail the
+# transaction even if it fails to reach the push factor. Setting this to 0 will
+# increase write performance when writing through master but could potentially
+# lead to branched data (or loss of transaction) if the master goes down.
+ha.tx_push_factor=<%= @ha_tx_push_factor %>
+
+# Strategy the master will use when pushing data to slaves (if the push factor
+# is greater than 0). There are three options available "fixed_ascending" (default),
+# "fixed_descending" or "round_robin". Fixed strategies will start by pushing to
+# slaves ordered by server id (accordingly with qualifier) and are useful when
+# planning for a stable fail-over based on ids.
+ha.tx_push_strategy=<%= @ha_tx_push_strategy %>
+
+# Policy for how to handle branched data.
+ha.branched_data_policy=<%= @ha_branched_data_policy %>
+
+# How often heartbeat messages should be sent. Defaults to ha.default_timeout.
+ha.heartbeat_interval=<% if @ha_heartbeat_interval %><%= @ha_heartbeat_interval %>s<% else %><%= @ha_default_timeout %>s<% end %>
+
+# Timeout for heartbeats between cluster members. Should be at least twice that of ha.heartbeat_interval.
+ha.heartbeat_timeout=<%= @ha_heartbeat_timeout %>s
+
+# If you are using a load-balancer that doesn't support HTTP Auth, you may need to turn off authentication for the
+# HA HTTP status endpoint by uncommenting the following line.
+dbms.security.ha_status_auth_enabled=<%= @dbms_security_ha_status_auth_enabled %>
+
+# Whether this instance should only participate as slave in cluster. If set to
+# true, it will never be elected as master.
+ha.slave_only=<%= @ha_slave_only %>
+<% end -%>

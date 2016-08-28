@@ -1,0 +1,52 @@
+
+#*****************************************************************
+# Logging configuration
+#*****************************************************************
+# To enable/disable HTTP logging
+dbms.logs.http.enabled=<%= @dbms_logs_http_enabled %>
+
+# Number of HTTP logs to keep.
+dbms.logs.http.rotation.keep_number=<%= @dbms_logs_http_rotation_keep_number %>
+
+# Size of each HTTP log that is kept.
+dbms.logs.http.rotation.size=<%= @dbms_logs_http_rotation_size %>
+
+# To enable/disable GC Logging
+dbms.logs.gc.enabled=<%= @dbms_logs_gc_enabled %>
+
+# GC Logging Options
+# see http://docs.oracle.com/cd/E19957-01/819-0084-10/pt_tuningjava.html#wp57013 for more information.
+dbms.logs.gc.options=<% @dbms_logs_gc_options.each do |option| -%>-XX:+<%= option %> <% end %>
+
+<% if @dbms_logs_gc_rotation_keep_number -%>
+# Number of GC logs to keep.
+dbms.logs.gc.rotation.keep_number=<%= @dbms_logs_gc_rotation_keep_number %>
+<% end -%>
+
+<% if @dbms_logs_gc_rotation_size -%>
+# Size of each GC log that is kept.
+dbms.logs.gc.rotation.size=<%= @dbms_logs_gc_rotation_size %>
+<% end -%>
+
+# Size threshold for rotation of the debug log. If set to zero then no rotation will occur. Accepts a binary suffix "k",
+# "m" or "g".
+dbms.logs.debug.rotation.size=<%= @dbms_logs_debug_rotation_size %>
+
+# Maximum number of history files for the internal log.
+dbms.logs.debug.rotation.keep_number=<%= @dbms_logs_debug_rotation_keep_number %>
+
+<% if @dbms_logs_query_enabled -%>
+# Log executed queries that takes longer than the configured threshold. Enable by uncommenting this line.
+dbms.logs.query.enabled=<%= @dbms_logs_query_enabled %>
+<% end -%>
+
+# If the execution of query takes more time than this threshold, the query is logged. If set to zero then all queries
+# are logged.
+dbms.logs.query.threshold=<%= @dbms_logs_query_threshold %>
+
+# The file size in bytes at which the query log will auto-rotate. If set to zero then no rotation will occur. Accepts a
+# binary suffix "k", "m" or "g".
+dbms.logs.query.rotation.size=<%= @dbms_logs_query_rotation_size %>
+
+# Maximum number of history files for the query log.
+dbms.logs.query.rotation.keep_number=<%= @dbms_logs_query_rotation_keep_number %>

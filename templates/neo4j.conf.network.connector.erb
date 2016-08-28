@@ -1,0 +1,36 @@
+
+#*****************************************************************
+# Network connector configuration
+#*****************************************************************
+# Bolt connector
+dbms.connector.bolt.type=BOLT
+dbms.connector.bolt.enabled=<%= @dbms_connector_bolt_enabled %>
+dbms.connector.bolt.tls_level=<%= @dbms_connector_bolt_tls_level %>
+<% if @dbms_connector_bolt_accept_non_local_connections -%>
+# To have Bolt accept non-local connections, uncomment this line
+dbms.connector.bolt.address=0.0.0.0:<%= @dbms_connector_bolt_port %>
+<% end -%>
+
+# HTTP Connector
+dbms.connector.http.type=HTTP
+dbms.connector.http.enabled=<%= @dbms_connector_http_enabled %>
+<% if @dbms_connector_http_accept_non_local_connections -%>
+# To accept non-local HTTP connections, uncomment this line
+dbms.connector.http.address=0.0.0.0:<%= @dbms_connector_http_port %>
+<% end -%>
+
+# HTTPS Connector
+dbms.connector.https.type=HTTP
+dbms.connector.https.enabled=<%= @dbms_connector_https_enabled %>
+dbms.connector.https.encryption=<%= @dbms_connector_https_encryption %>
+# To accept non-local HTTPS connection, change 'localhost' to '0.0.0.0'
+<% if @dbms_connector_https_accept_non_local_connections -%>
+dbms.connector.https.address=0.0.0.0:<%= @dbms_connector_https_port %>
+<% else -%>
+dbms.connector.https.address=localhost:<%= @dbms_connector_https_port %>
+<% end -%>
+
+<% if @dbms_threads_worker_count %>
+# Number of Neo4j worker threads.
+dbms.threads.worker_count=<%= @dbms_threads_worker_count %>
+<% end -%>

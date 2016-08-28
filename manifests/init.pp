@@ -5,167 +5,100 @@
 #
 # === Parameters
 #
-# [*address*]
-#   Default: $::ipaddress
-#
-# [*allow_remote_connections*]
-#   Boolean.
-#   Default: true
-#
-# [*auth_enabled*]
-#   Boolean. Allow or disallow authentication to access neo4j
-#   Default: true
-#
-# [*auth_admin_user*]
-#   Default: undef
-#
-# [*auth_admin_password*]
-#   Default: undef
-#
-# [*auth_users*]
-#   Default: undef
-#
-# [*cache_memory_ratio*]
-#   Available starting version 2.1.5
-#   Default: undef
-#
-# [*cache_type*]
-#   Default: undef
-#
+# [*allow_load_csv*]
+# [*cypher_default_language_version*]
 # [*data_prefix*]
-#   Prefix, indicating the directory where neo4j will write data.
-#   Default: '/opt/neo4j'
-#
-# [*data_rrdb*]
-#   Indicates the location of the servers round-robin database directory. Can be
-#   - absolute path
-#   - relative path
-#   - undef: default ot the database data directory
-#
+# [*dbms_active_database*]
+# [*dbms_allow_format_migration*]
+# [*dbms_backup_address*]
+# [*dbms_backup_enabled*]
+# [*dbms_checkpoint_iops_limit*]
+# [*dbms_connector_bolt_accept_non_local_connections*]
+# [*dbms_connector_bolt_port*]
+# [*dbms_connector_bolt_tls_level*]
+# [*dbms_connector_http_accept_non_local_connections*]
+# [*dbms_connector_http_enabled*]
+# [*dbms_connector_http_port*]
+# [*dbms_connector_https_accept_non_local_connections*]
+# [*dbms_connector_https_enabled*]
+# [*dbms_connector_https_encryption*]
+# [*dbms_connector_https_port*]
+# [*dbms_directories_certificates*]
+# [*dbms_directories_data*]
+# [*dbms_directories_import*]
+# [*dbms_directories_plugins*]
+# [*dbms_ids_reuse_types_override*]
+# [*dbms_jvm_additional_commit_memory_to_process*]
+# [*dbms_jvm_additional_disable_explicit_gc*]
+# [*dbms_jvm_additional_hashcode*]
+# [*dbms_jvm_additional_jmxremote.port*]
+# [*dbms_jvm_additional_jmxremote_access_file*]
+# [*dbms_jvm_additional_jmxremote_authenticate*]
+# [*dbms_jvm_additional_jmxremote_password_file*]
+# [*dbms_jvm_additional_jmxremote_ssl*]
+# [*dbms_jvm_additional_omit_stacktrace_in_fast_throw*]
+# [*dbms_jvm_additional_trust_final_non_static_fields*]
+# [*dbms_jvm_additional_unlock_experimental_vm_options*]
+# [*dbms_jvm_additional_use_g1gc*]
+# [*dbms_logs_debug_rotation_keep_number*]
+# [*dbms_logs_debug_rotation_size*]
+# [*dbms_logs_gc_enabled*]
+# [*dbms_logs_gc_options.each*]
+# [*dbms_logs_gc_rotation_keep_number*]
+# [*dbms_logs_gc_rotation_size*]
+# [*dbms_logs_http_enabled*]
+# [*dbms_logs_http_rotation_keep_number*]
+# [*dbms_logs_http_rotation_size*]
+# [*dbms_logs_query_enabled*]
+# [*dbms_logs_query_rotation_keep_number*]
+# [*dbms_logs_query_rotation_size*]
+# [*dbms_logs_query_threshold*]
+# [*dbms_memory_heap_initial_size*]
+# [*dbms_memory_heap_max_size*]
+# [*dbms_memory_pagecache_size*]
+# [*dbms_mode*]
+# [*dbms_read_only*]
+# [*dbms_security_allow_csv_import_from_file_urls*]
+# [*dbms_security_auth_enabled*]
+# [*dbms_security_ha_status_auth_enabled*]
+# [*dbms_shell_enabled*]
+# [*dbms_shell_host*]
+# [*dbms_shell_port*]
+# [*dbms_threads_worker_count*]
+# [*dbms_tx_log_rotation_retention_policy*]
+# [*dbms_unmanaged_extension_classes*]
 # [*edition*]
-#   String. One of ['community', 'enterprise']
-#   Default: 'community'
-#
 # [*group*]
-#   Indicates the group the neo4j user belongs to.
-#   Default: neo4j
-#
-# [*ha_enabled*]
-#   Boolean
-#   Default: false
-#
-# [*ha_server_id*]
-#   Default: undef
-#
-# [*ha_cluster_port*]
-#   Default: '5001'
-#
-# [*ha_data_port*]
-#   Default: '6001'
-#
+# [*ha_branched_data_policy*]
+# [*ha_default_timeout*]
+# [*ha_heartbeat_interval*]
+# [*ha_heartbeat_timeout*]
+# [*ha_host_coordination*]
+# [*ha_host_data*]
+# [*ha_initial_hosts*]
 # [*ha_pull_interval*]
-#   Default: undef
-#
-# [*ha_tx_push_factor*]
-#   Default: undef
-#
-# [*ha_tx_push_strategy*]
-#   Default: undef
-#
-# [*ha_allow_init_cluster*]
-#   Default: true
-#
+# [*ha_server_id*]
 # [*ha_slave_only*]
-#   Default: false
-#
-# [*http_log_enabled*]
-#   Boolean. Enable/disable HTTP logging.
-#   Default: false
-#
+# [*ha_tx_push_factor*]
+# [*ha_tx_push_strategy*]
 # [*http_log_dir*]
-#   Indicates the http logging directory. When given, should be absolute path.
-#   Default: 'data/log'
-#
+# [*install_java*]
 # [*install_prefix*]
-#   Prefix, indicating the directory where neo4j will be installed.
-#   Default: '/opt/neo4j/data/'
-#
-# [*jvm_init_memory*]
-#   String.
-#   Default: '1024'
-#
-# [*jvm_max_memory*]
-#   String.
-#   Default: '1024'
-#
-# [*keep_logical_logs*]
-#   Default: '7 days'
-#
-# [*keystore_location*]
-#   Indicates location of internally generated keystore.
-#   Default: 'data/keystore'
-#
-# [*newrelic_jar_path*]
-#   Default: undef
-#
-# [*node_cache_array_fraction*]
-#   Default: undef
-#
-# [*node_cache_size*]
-#   Default: undef
-#
-# [*nodestore_memory*]
-#   Default: undef
-#
-# [*propertystore_memory*]
-#   Default: undef
-#
-# [*propertystore_strings_memory*]
-#   Default: undef
-#
-# [*propertystore_arrays_memory*]
-#   Default: undef
-#
-# [*relationship_cache_array_fraction*]
-#   Default: undef
-#
-# [*relationship_cache_size*]
-#   Default: undef
-#
-# [*relationshipstore_memory*]
-#   Default: undef
-#
-# [*service_ensure*]
-#   Default: running
-#
+# [*package_name*]
+# [*package_tarball*]
+# [*run_dir*]
 # [*service_enable*]
-#   Default: true
-#
-# [*service_provider*]
-#   Default: init
-#
-# [*tls_certificate_file*]
-#   Indicates certificate location. Will be autogenerated if file does not exist.
-#   Default: 'conf/ssl/snakeoil.cert'
-#
-# [*tls_private_key*]$
-#   Indicates private key location. Will be autogenerated if file does not exist.
-#   Default: 'conf/ssl/snakeoil.key'
-#
+# [*service_ensure*]
+# [*service_start*]
+# [*service_status*]
+# [*service_stop*]
 # [*user*]
-#   Indicates the user under which the neo4j service is running.
-#   Default: neo4j
-#
 # [*version*]
-#   String, indicating the neo4j version
-#
-# [*webserver_port*]
-#   Integer, indicating the port on which the neo4j server will listen.
 #
 # === Examples
 #
 #  class { 'neo4j' :
-#    version => '2.0.3',
+#    version => '3.0.4',
 #    edition => 'enterprise',
 #  }
 #
@@ -180,90 +113,176 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j (
-  $address                           = $neo4j::params::address,
-  $allow_remote_connections          = $neo4j::params::allow_remote_connections,
-  $auth_admin_password               = $neo4j::params::auth_admin_password,
-  $auth_admin_user                   = $neo4j::params::auth_admin_user,
-  $auth_enabled                      = $neo4j::params::auth_enabled,
-  $auth_users                        = $neo4j::params::auth_users,
-  $cache_memory_ratio                = $neo4j::params::cache_memory_ratio,
-  $cache_type                        = $neo4j::params::cache_type,
-  $data_prefix                       = undef,
-  $data_rrdb                         = undef,
-  $edition                           = $neo4j::params::edition,
-  $group                             = $neo4j::params::group,
-  $ha_allow_init_cluster             = $neo4j::params::ha_allow_init_cluster,
-  $ha_enabled                        = $neo4j::params::ha_enabled,
-  $ha_server_id                      = $neo4j::params::ha_server_id,
-  $ha_cluster_port                   = $neo4j::params::ha_cluster_port,
-  $ha_data_port                      = $neo4j::params::ha_data_port,
-  $ha_pull_interval                  = $neo4j::params::ha_pull_interval,
-  $ha_slave_only                     = $neo4j::params::ha_slave_only,
-  $ha_tx_push_factor                 = $neo4j::params::ha_tx_push_factor,
-  $ha_tx_push_strategy               = $neo4j::params::ha_tx_push_strategy,
-  $http_port                         = $neo4j::params::http_port,
-  $http_log_enabled                  = $neo4j::params::http_log_enabled,
-  $http_log_dir                      = undef,
-  $https_enabled                     = $neo4j::params::https_enabled,
-  $https_port                        = $neo4j::params::https_port,
-  $install_prefix                    = $neo4j::params::install_prefix,
-  $jvm_init_memory                   = $neo4j::params::jvm_init_memory,
-  $jvm_max_memory                    = $neo4j::params::jvm_max_memory,
-  $keep_logical_logs                 = $neo4j::params::keep_logical_logs,
-  $keystore_location                 = undef,
-  $newrelic_jar_path                 = $neo4j::params::newrelic_jar_path,
-  $node_cache_array_fraction         = $neo4j::params::node_cache_array_fraction,
-  $node_cache_size                   = $neo4j::params::node_cache_size,
-  $nodestore_memory                  = $neo4j::params::nodestore_memory,
-  $propertystore_arrays_memory       = $neo4j::params::propertystore_arrays_memory,
-  $propertystore_memory              = $neo4j::params::propertystore_memory,
-  $propertystore_strings_memory      = $neo4j::params::propertystore_strings_memory,
-  $relationship_cache_array_fraction = $neo4j::params::relationship_cache_array_fraction,
-  $relationship_cache_size           = $neo4j::params::relationship_cache_size,
-  $relationshipstore_memory          = $neo4j::params::relationshipstore_memory,
-  $rrdb_location                     = $neo4j::params::rrdb_location,
-  $service_enable                    = $neo4j::params::service_enable,
-  $service_ensure                    = $neo4j::params::service_ensure,
-  $service_provider                  = $neo4j::params::service_provider,
-  $tls_certificate_file              = $neo4j::params::tls_certificate_file,
-  $tls_key_file                      = $neo4j::params::tls_key_file,
-  $user                              = $neo4j::params::user,
-  $version                           = $neo4j::params::version,
+
+  $edition                                            = $neo4j::params::edition,
+  $install_java                                       = $neo4j::params::install_java,
+  $run_dir                                            = $neo4j::params::run_dir,
+  $version                                            = $neo4j::params::version,
+
+  ### variables install.pp
+  $data_prefix                                        = $neo4j::params::data_prefix,
+  $group                                              = $neo4j::params::group,
+  $http_log_dir                                       = $neo4j::params::http_log_dir,
+  $install_prefix                                     = $neo4j::params::install_prefix,
+  $user                                               = $neo4j::params::user,
+
+  ### variables service.pp
+  $service_enable                                     = $neo4j::params::service_enable,
+  $service_ensure                                     = $neo4j::params::service_ensure,
+  $service_start                                      = $neo4j::params::service_start,
+  $service_status                                     = $neo4j::params::service_status,
+  $service_stop                                       = $neo4j::params::service_stop,
+
+  ### variables neo4j.conf - general
+  $allow_load_csv                                     = $neo4j::params::allow_load_csv,
+  $dbms_active_database                               = $neo4j::params::dbms_active_database,
+  $dbms_allow_format_migration                        = $neo4j::params::dbms_allow_format_migration,
+  $dbms_backup_address                                = $neo4j::params::dbms_backup_address,
+  $dbms_backup_enabled                                = $neo4j::params::dbms_backup_enabled,
+  $dbms_directories_certificates                      = $neo4j::params::dbms_directories_certificates,
+  $dbms_directories_data                              = $neo4j::params::dbms_directories_data,
+  $dbms_directories_import                            = $neo4j::params::dbms_directories_import,
+  $dbms_directories_plugins                           = $neo4j::params::dbms_directories_plugins,
+  $dbms_memory_pagecache_size                         = $neo4j::params::dbms_memory_pagecache_size,
+  $dbms_security_auth_enabled                         = $neo4j::params::dbms_security_auth_enabled,
+
+  ### variables neo4j.conf - network
+  $dbms_connector_bolt_accept_non_local_connections   = $neo4j::params::dbms_connector_bolt_accept_non_local_connections,
+  $dbms_connector_bolt_enabled                        = $neo4j::params::dbms_connector_bolt_enabled,
+  $dbms_connector_bolt_port                           = $neo4j::params::dbms_connector_bolt_port,
+  $dbms_connector_bolt_tls_level                      = $neo4j::params::dbms_connector_bolt_tls_level,
+  $dbms_connector_http_accept_non_local_connections   = $neo4j::params::dbms_connector_http_accept_non_local_connections,
+  $dbms_connector_http_enabled                        = $neo4j::params::dbms_connector_http_enabled,
+  $dbms_connector_http_port                           = $neo4j::params::dbms_connector_http_port,
+  $dbms_connector_https_accept_non_local_connections  = $neo4j::params::dbms_connector_https_accept_non_local_connections,
+  $dbms_connector_https_enabled                       = $neo4j::params::dbms_connector_https_enabled,
+  $dbms_connector_https_encryption                    = $neo4j::params::dbms_connector_https_encryption,
+  $dbms_connector_https_port                          = $neo4j::params::dbms_connector_https_port,
+  $dbms_threads_worker_count                          = $neo4j::params::dbms_threads_worker_count,
+
+  ### variables neo4j.conf - HA
+  $dbms_mode                                          = $neo4j::params::dbms_mode,
+  $dbms_security_ha_status_auth_enabled               = $neo4j::params::dbms_security_ha_status_auth_enabled,
+  $ha_branched_data_policy                            = $neo4j::params::ha_branched_data_policy,
+  $ha_default_timeout                                 = $neo4j::params::ha_default_timeout,
+  $ha_heartbeat_interval                              = $neo4j::params::ha_heartbeat_interval,
+  $ha_heartbeat_timeout                               = $neo4j::params::ha_heartbeat_timeout,
+  $ha_host_coordination                               = $neo4j::params::ha_host_coordination,
+  $ha_host_data                                       = $neo4j::params::ha_host_data,
+  $ha_initial_hosts                                   = $neo4j::params::ha_initial_hosts,
+  $ha_pull_interval                                   = $neo4j::params::ha_pull_interval,
+  $ha_server_id                                       = $neo4j::params::ha_server_id,
+  $ha_slave_only                                      = $neo4j::params::ha_slave_only,
+  $ha_tx_push_factor                                  = $neo4j::params::ha_tx_push_factor,
+  $ha_tx_push_strategy                                = $neo4j::params::ha_tx_push_strategy,
+
+  ### variables neo4j.conf - logging
+  $dbms_logs_debug_rotation_keep_number               = $neo4j::params::dbms_logs_debug_rotation_keep_number,
+  $dbms_logs_debug_rotation_size                      = $neo4j::params::dbms_logs_debug_rotation_size,
+  $dbms_logs_gc_enabled                               = $neo4j::params::dbms_logs_gc_enabled,
+  $dbms_logs_gc_options                               = $neo4j::params::dbms_logs_gc_options,
+  $dbms_logs_gc_rotation_keep_number                  = $neo4j::params::dbms_logs_gc_rotation_keep_number,
+  $dbms_logs_gc_rotation_size                         = $neo4j::params::dbms_logs_gc_rotation_size,
+  $dbms_logs_http_enabled                             = $neo4j::params::dbms_logs_http_enabled,
+  $dbms_logs_http_rotation_keep_number                = $neo4j::params::dbms_logs_http_rotation_keep_number,
+  $dbms_logs_http_rotation_size                       = $neo4j::params::dbms_logs_http_rotation_size,
+  $dbms_logs_query_enabled                            = $neo4j::params::dbms_logs_query_enabled,
+  $dbms_logs_query_rotation_keep_number               = $neo4j::params::dbms_logs_query_rotation_keep_number,
+  $dbms_logs_query_rotation_size                      = $neo4j::params::dbms_logs_query_rotation_size,
+  $dbms_logs_query_threshold                          = $neo4j::params::dbms_logs_query_threshold,
+
+  ### variables neo4j.conf - miscellaneous
+  $cypher_default_language_version                    = $neo4j::params::cypher_default_language_version,
+  $dbms_checkpoint_iops_limit                         = $neo4j::params::dbms_checkpoint_iops_limit,
+  $dbms_ids_reuse_types_override                      = $neo4j::params::dbms_ids_reuse_types_override,
+  $dbms_read_only                                     = $neo4j::params::dbms_read_only,
+  $dbms_security_allow_csv_import_from_file_urls      = $neo4j::params::dbms_security_allow_csv_import_from_file_urls,
+  $dbms_shell_enabled                                 = $neo4j::params::dbms_shell_enabled,
+  $dbms_shell_host                                    = $neo4j::params::dbms_shell_host,
+  $dbms_shell_port                                    = $neo4j::params::dbms_shell_port,
+  $dbms_tx_log_rotation_retention_policy              = $neo4j::params::dbms_tx_log_rotation_retention_policy,
+  $dbms_unmanaged_extension_classes                   = $neo4j::params::dbms_unmanaged_extension_classes,
+
+  ### variables neo4j-wrapper.conf
+  $dbms_jvm_additional_commit_memory_to_process       = $neo4j::params::dbms_jvm_additional_commit_memory_to_process,
+  $dbms_jvm_additional_disable_explicit_gc            = $neo4j::params::dbms_jvm_additional_disable_explicit_gc,
+  $dbms_jvm_additional_hashcode                       = $neo4j::params::dbms_jvm_additional_hashcode,
+  $dbms_jvm_additional_jmxremote_port                 = $neo4j::params::dbms_jvm_additional_jmxremote_port,
+  $dbms_jvm_additional_jmxremote_access_file          = $neo4j::params::dbms_jvm_additional_jmxremote_access_file,
+  $dbms_jvm_additional_jmxremote_authenticate         = $neo4j::params::dbms_jvm_additional_jmxremote_authenticate,
+  $dbms_jvm_additional_jmxremote_password_file        = $neo4j::params::dbms_jvm_additional_jmxremote_password_file,
+  $dbms_jvm_additional_jmxremote_ssl                  = $neo4j::params::dbms_jvm_additional_jmxremote_ssl,
+  $dbms_jvm_additional_omit_stacktrace_in_fast_throw  = $neo4j::params::dbms_jvm_additional_omit_stacktrace_in_fast_throw,
+  $dbms_jvm_additional_rmi_server_hostname            = $neo4j::params::dbms_jvm_additional_rmi_server_hostname,
+  $dbms_jvm_additional_trust_final_non_static_fields  = $neo4j::params::dbms_jvm_additional_trust_final_non_static_fields,
+  $dbms_jvm_additional_unlock_experimental_vm_options = $neo4j::params::dbms_jvm_additional_unlock_experimental_vm_options,
+  $dbms_jvm_additional_unsupported_dbms_udc_source    = $neo4j::params::dbms_jvm_additional_unsupported_dbms_udc_source,
+  $dbms_jvm_additional_use_g1gc                       = $neo4j::params::dbms_jvm_additional_use_g1gc,
+  $dbms_memory_heap_initial_size                      = $neo4j::params::dbms_memory_heap_initial_size,
+  $dbms_memory_heap_max_size                          = $neo4j::params::dbms_memory_heap_max_size,
+
 ) inherits neo4j::params {
 
   validate_absolute_path(
-    $install_prefix
-  )
-
-  validate_ip_address(
-    $address
+    $install_prefix,
+    $http_log_dir,
+    $run_dir
   )
 
   validate_bool(
-    $allow_remote_connections,
-    $auth_enabled,
-    $ha_allow_init_cluster,
-    $ha_enabled,
+    $allow_load_csv,
+    $dbms_allow_format_migration,
+    $dbms_backup_enabled,
+    $dbms_connector_bolt_accept_non_local_connections,
+    $dbms_connector_bolt_enabled,
+    $dbms_connector_http_accept_non_local_connections,
+    $dbms_connector_http_enabled,
+    $dbms_connector_https_accept_non_local_connections,
+    $dbms_connector_https_enabled,
+    $dbms_jvm_additional_jmxremote_ssl,
+    $dbms_logs_gc_enabled,
+    $dbms_logs_http_enabled,
+    $dbms_logs_query_enabled,
+    $dbms_read_only,
+    $dbms_security_allow_csv_import_from_file_urls,
+    $dbms_security_auth_enabled,
+    $dbms_security_ha_status_auth_enabled,
+    $dbms_shell_enabled,
     $ha_slave_only,
-    $http_log_enabled,
-    $https_enabled,
-    $service_enable
+    $install_java,
+    $service_enable,
   )
 
   validate_integer([
-    $ha_cluster_port,
-    $ha_data_port,
-    $http_port,
-    $https_port,
-    $jvm_init_memory,
-    $jvm_max_memory
+    $dbms_checkpoint_iops_limit,
+    $dbms_connector_bolt_port,
+    $dbms_connector_http_port,
+    $dbms_connector_https_port,
+    $dbms_jvm_additional_jmxremote_port,
+    $dbms_logs_debug_rotation_keep_number,
+    $dbms_logs_gc_rotation_keep_number,
+    $dbms_logs_http_rotation_keep_number,
+    $dbms_logs_query_rotation_keep_number,
+    $dbms_logs_query_threshold,
+    $dbms_memory_heap_initial_size,
+    $dbms_memory_heap_max_size,
+    $dbms_shell_port,
+    $ha_pull_interval,
   ])
 
   validate_string(
-    $auth_admin_user,
-    $auth_admin_password,
+    $dbms_active_database,
+    $dbms_connector_bolt_tls_level,
+    $dbms_connector_https_encryption,
+    $dbms_directories_certificates,
+    $dbms_directories_data,
+    $dbms_directories_import,
+    $dbms_directories_plugins,
+    $dbms_mode,
+    $dbms_tx_log_rotation_retention_policy,
     $group,
-    $rrdb_location,
+    $ha_branched_data_policy,
+    $ha_tx_push_strategy,
     $user
   )
 
@@ -271,13 +290,14 @@ class neo4j (
   $package_name    = "neo4j-${edition}-${version}"
   $package_tarball = "${package_name}.tgz"
   $neo4j_home      = "${install_prefix}/${package_name}"
+  $neo4j_bin       = "${neo4j_home}/bin"
 
   if ( $::kernel != 'Linux' ) {
     fail('Only Linux is supported at this time.')
   }
 
-  if ( versioncmp( $version, '2.0.0' ) < 0 ) {
-    fail('Only versions >= 2.0.0 are supported at this time.')
+  if ( versioncmp( $version, '3.0.0' ) < 0 ) {
+    fail('Only versions >= 3.0.0 are supported at this time.')
   }
 
   if !( $edition in ['community', 'enterprise'] ){
@@ -302,33 +322,27 @@ class neo4j (
     $http_logfile = "${data_dir}/log/http.log"
   }
 
-  if ( $keystore_location ) {
-    $keystore = "${data_dir}/${keystore_location}"
-  } else {
-    $keystore = "${data_dir}/${neo4j::params::keystore_location}"
-  }
-
-  if ( $data_rrdb ) {
-    $rrdb = "${data_dir}/${data_rrdb}"
-  } else {
-    $rrdb = "${data_dir}/${neo4j::params::rrdb_location}"
-  }
-
-  if ( $ha_enabled ) {
+  if ( $dbms_mode == 'HA' ) {
     if ( !is_numeric( $ha_server_id ) ) {
       fail('The Server Id value must be specified and must numeric.')
     }
   }
 
-  if ( $cache_memory_ratio ) {
-    if ( versioncmp($version, '2.1.5') < 0 ) {
-      warning("Ignoring the cache_memory_ratio value due to version being '${version}'.")
-    } elsif ( ! is_numeric($cache_memory_ratio) or
-              $cache_memory_ratio < 0.0 or
-              $cache_memory_ratio > 100.0) {
-        fail("Invalid cache_memory_ratio value of '${cache_memory_ratio}'. It must be in the range of 0.0 to 100.0.")
+  if ( $install_java ) {
+    class { '::java':
+      distribution => 'jdk',
     }
   }
+
+#  if ( $cache_memory_ratio ) {
+#    if ( versioncmp($version, '2.1.5') < 0 ) {
+#      warning("Ignoring the cache_memory_ratio value due to version being '${version}'.")
+#    } elsif ( ! is_numeric($cache_memory_ratio) or
+#              $cache_memory_ratio < 0.0 or
+#              $cache_memory_ratio > 100.0) {
+#        fail("Invalid cache_memory_ratio value of '${cache_memory_ratio}'. It must be in the range of 0.0 to 100.0.")
+#    }
+#  }
 
   ## define the user and group the neo4j service will be running.
   group { $group:
@@ -338,17 +352,7 @@ class neo4j (
     ensure => present,
     gid    => $group,
     shell  => '/bin/bash',
-    home   => $install_prefix
-  }
-
-  ## define the default file settings
-  File {
-    owner => $user,
-    group => $group,
-  }
-
-  Exec {
-    path => ['/usr/bin', '/usr/local/bin', '/bin', '/sbin']
+    home   => $neo4j_home
   }
 
   anchor { 'neo4j::begin': } ->
