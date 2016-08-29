@@ -45,10 +45,10 @@ class neo4j::install (
   }
 
   file { $neo4j_home:
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '0755',
+    ensure  => directory,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
     require => [User[$user], Group[$group]]
   }
 
@@ -64,6 +64,6 @@ class neo4j::install (
     group        => $group,
     creates      => "${neo4j::neo4j_home}/bin",
     require      => File[$neo4j_home],
-  } 
+  }
 
 }

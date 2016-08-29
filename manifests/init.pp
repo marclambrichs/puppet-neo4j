@@ -331,7 +331,14 @@ class neo4j (
   if ( $install_java ) {
     class { '::java':
       distribution => 'jdk',
+#      package      => 'openjdk-8-jdk', # debian
+      package      => 'java-1.8.0-openjdk'
     }
+  }
+
+  case $facts['java_version'] {
+    /1\.7/: { notice("You should upgrade your java version to 1.8") }
+    default: { notice("java version OK") }
   }
 
 #  if ( $cache_memory_ratio ) {
