@@ -337,19 +337,9 @@ class neo4j (
   }
 
   case $facts['java_version'] {
-    /1\.7/: { notice("You should upgrade your java version to 1.8") }
-    default: { notice("java version OK") }
+    /1\.7/: { notice('You should upgrade your java version to 1.8') }
+    default: { notice('java version OK') }
   }
-
-#  if ( $cache_memory_ratio ) {
-#    if ( versioncmp($version, '2.1.5') < 0 ) {
-#      warning("Ignoring the cache_memory_ratio value due to version being '${version}'.")
-#    } elsif ( ! is_numeric($cache_memory_ratio) or
-#              $cache_memory_ratio < 0.0 or
-#              $cache_memory_ratio > 100.0) {
-#        fail("Invalid cache_memory_ratio value of '${cache_memory_ratio}'. It must be in the range of 0.0 to 100.0.")
-#    }
-#  }
 
   ## define the user and group the neo4j service will be running.
   group { $group:
