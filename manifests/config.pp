@@ -101,6 +101,7 @@ class neo4j::config (
   $ha_host_coordination                 = $neo4j::ha_host_coordination
   $ha_host_data                         = $neo4j::ha_host_data
   $ha_initial_hosts                     = $neo4j::ha_initial_hosts
+  $ha_join_timeout                      = $neo4j::ha_join_timeout
   $ha_pull_interval                     = $neo4j::ha_pull_interval
   $ha_server_id                         = $neo4j::ha_server_id
   $ha_slave_only                        = $neo4j::ha_slave_only
