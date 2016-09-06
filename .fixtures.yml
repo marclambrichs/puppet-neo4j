@@ -2,6 +2,7 @@ fixtures:
   repositories:
     archive: "git://github.com/voxpupuli/puppet-archive.git"
     concat: "git://github.com/puppetlabs/puppetlabs-concat.git"
+    java: "git://github.com/puppetlabs/puppetlabs-java.git"
     stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
   symlinks:
     "neo4j": "#{source_dir}"

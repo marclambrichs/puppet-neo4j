@@ -76,6 +76,7 @@
 # [*ha_host_coordination*]
 # [*ha_host_data*]
 # [*ha_initial_hosts*]
+# [*ha_join_timeout*]
 # [*ha_pull_interval*]
 # [*ha_server_id*]
 # [*ha_slave_only*]
@@ -170,6 +171,7 @@ class neo4j (
   $ha_host_coordination                               = $neo4j::params::ha_host_coordination,
   $ha_host_data                                       = $neo4j::params::ha_host_data,
   $ha_initial_hosts                                   = $neo4j::params::ha_initial_hosts,
+  $ha_join_timeout                                    = $neo4j::params::ha_join_timeout,
   $ha_pull_interval                                   = $neo4j::params::ha_pull_interval,
   $ha_server_id                                       = $neo4j::params::ha_server_id,
   $ha_slave_only                                      = $neo4j::params::ha_slave_only,
@@ -270,6 +272,8 @@ class neo4j (
     $ha_pull_interval,
   ])
 
+  validate_re( $ha_join_timeout, '[1-9][0-9]*(ms|s|m)?' )
+
   validate_string(
     $dbms_active_database,
     $dbms_connector_bolt_tls_level,
@@ -314,9 +318,6 @@ class neo4j (
   }
 
   if ( $http_log_dir ) {
-    if (validate_absolute_path($http_log_dir) ) {
-      fail('$htp_log_dir should contain an absolute path')
-    }
     $http_logfile = "${http_log_dir}/http.log"
   } else {
     $http_logfile = "${data_dir}/log/http.log"
@@ -331,18 +332,9 @@ class neo4j (
   if ( $install_java ) {
     class { '::java':
       distribution => 'jdk',
+      package      => 'java-1.8.0-openjdk'
     }
   }
-
-#  if ( $cache_memory_ratio ) {
-#    if ( versioncmp($version, '2.1.5') < 0 ) {
-#      warning("Ignoring the cache_memory_ratio value due to version being '${version}'.")
-#    } elsif ( ! is_numeric($cache_memory_ratio) or
-#              $cache_memory_ratio < 0.0 or
-#              $cache_memory_ratio > 100.0) {
-#        fail("Invalid cache_memory_ratio value of '${cache_memory_ratio}'. It must be in the range of 0.0 to 100.0.")
-#    }
-#  }
 
   ## define the user and group the neo4j service will be running.
   group { $group:

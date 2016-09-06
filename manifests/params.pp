@@ -36,7 +36,7 @@ class neo4j::params {
   $dbms_jvm_additional_jmxremote_port                 = 3637
   $dbms_jvm_additional_jmxremote_ssl                  = false
   $dbms_jvm_additional_omit_stacktrace_in_fast_throw  = '-XX:-OmitStackTraceInFastThrow'
-  $dbms_jvm_additional_rmi_server_hostname            = $hostname
+  $dbms_jvm_additional_rmi_server_hostname            = $::fqdn
   $dbms_jvm_additional_trust_final_non_static_fields  = '-XX:+TrustFinalNonStaticFields'
   $dbms_jvm_additional_unlock_experimental_vm_options = '-XX:+UnlockExperimentalVMOptions'
   $dbms_jvm_additional_unsupported_dbms_udc_source    = 'tarball'
@@ -86,6 +86,7 @@ class neo4j::params {
   $ha_host_data                                       = '127.0.0.1:6001'
   $ha_initial_hosts                                   = [ '127.0.0.1:5001',
                                                         ]
+  $ha_join_timeout                                    = '30000'
   $ha_pull_interval                                   = 10
   $ha_server_id                                       = 1
   $ha_slave_only                                      = false
@@ -99,7 +100,7 @@ class neo4j::params {
   $service_ensure                                     = 'running'
   $service_start                                      = 'neo4j start'
   $service_status                                     = 'neo4j status'
-  $service_stop                                       = 'neoj4 stop'
+  $service_stop                                       = 'neo4j stop'
   $user                                               = 'neo4j'
   $version                                            = '3.0.4'
 }

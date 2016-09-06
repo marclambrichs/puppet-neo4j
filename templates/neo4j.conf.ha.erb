@@ -33,6 +33,11 @@ ha.host.coordination=<%= @ha_host_coordination %>
 # must be the configured IP address for one of the local interfaces.
 ha.host.data=<%= @ha_host_data %>
 
+<% if @ha_join_timeout -%>
+# Timeout for joining a cluster. Defaults to <<config_ha.broadcast_timeout,ha.broadcast_timeout>>
+ha.join_timeout=<%= @ha_join_timeout %>
+<% end -%>
+
 # The interval at which slaves will pull updates from the master. Comment out
 # the option to disable periodic pulling of updates. Unit is seconds.
 ha.pull_interval=<%= @ha_pull_interval %>
