@@ -272,7 +272,7 @@ class neo4j (
     $ha_pull_interval,
   ])
 
-  validate_re( $ha_join_timeout, '[1-9][1-9]*(ms|s|m)?' )
+  validate_re( $ha_join_timeout, '[1-9][0-9]*(ms|s|m)?' )
 
   validate_string(
     $dbms_active_database,
