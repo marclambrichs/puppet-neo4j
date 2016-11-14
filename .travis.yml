@@ -1,7 +1,8 @@
 ---
 sudo: false
 language: ruby
-cache: bundler
+before_install:
+  - echo "yes" | gem install json -v 1.8.3
 bundler_args: --without system_tests development
 script: "bundle exec rake validate lint spec SPEC_OPTS='--color --format documentation'"
 matrix:

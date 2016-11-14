@@ -11,32 +11,32 @@ def location_for(place, fake_version = nil)
 end
 
 group :test do
-  gem 'rspec-core',              :require => false
-  gem 'puppetlabs_spec_helper',  :require => false
-  gem 'simplecov',               :require => false
-  gem 'puppet_facts',            :require => false
-  gem 'metadata-json-lint',      :require => false
+  gem 'json', '1.8.3',		:require => false
+  gem 'json_pure', '2.0.1',	:require => false
+  gem 'metadata-json-lint',	:require => false
+  gem 'rspec-core',		:require => false
+  gem 'puppetlabs_spec_helper',	:require => false
+  gem 'simplecov',		:require => false
+  gem 'puppet_facts',		:require => false
 end
 
 group :development do
   gem 'travis',       :require => false
   gem 'travis-lint',  :require => false
   gem 'guard-rake',   :require => false
-  gem 'json',         '1.8.3'
-  gem 'json_pure',    '1.8.3'
 end
 
 group :system_tests do
-  gem 'beaker',                        :require => false
+  gem 'beaker',				:require => false
   if beaker_version = ENV['BEAKER_VERSION']
     gem 'beaker', *location_for(beaker_version)
   end
   if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
     gem 'beaker-rspec', *location_for(beaker_rspec_version)
   else
-    gem 'beaker-rspec',  :require => false
+    gem 'beaker-rspec',			:require => false
   end
-  gem 'beaker-puppet_install_helper',  :require => false
+  gem 'beaker-puppet_install_helper',	:require => false
 end
 
 
