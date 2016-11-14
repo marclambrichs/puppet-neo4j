@@ -35,7 +35,7 @@ class { 'neo4j' :
 
 See [usage](#usage) scenarios below for further usages.
 
-##Usage
+## Usage
 
 Currently, all of the configurations are done through the class `neo4j` including clustered Neo4j server.
 
