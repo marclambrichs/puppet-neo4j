@@ -84,8 +84,10 @@
 # [*ha_tx_push_strategy*]
 # [*http_log_dir*]
 # [*install_java*]
+# [*install_method*]
 # [*install_prefix*]
 # [*package_name*]
+# [*package_version*]
 # [*package_tarball*]
 # [*run_dir*]
 # [*service_enable*]
@@ -94,13 +96,12 @@
 # [*service_status*]
 # [*service_stop*]
 # [*user*]
-# [*version*]
 #
 # === Examples
 #
 #  class { 'neo4j' :
-#    version => '3.0.4',
-#    edition => 'enterprise',
+#    package_version => '3.0.4',
+#    edition         => 'enterprise',
 #  }
 #
 # See additional examples in the Readme.md file.
@@ -118,7 +119,7 @@ class neo4j (
   $edition                                            = $neo4j::params::edition,
   $install_java                                       = $neo4j::params::install_java,
   $run_dir                                            = $neo4j::params::run_dir,
-  $version                                            = $neo4j::params::version,
+  $package_version                                    = $neo4j::params::package_version,
 
   ### variables install.pp
   $data_prefix                                        = $neo4j::params::data_prefix,
@@ -291,7 +292,7 @@ class neo4j (
   )
 
   #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
-  $package_name    = "neo4j-${edition}-${version}"
+  $package_name    = "neo4j-${edition}-${package_version}"
   $package_tarball = "${package_name}.tgz"
   $neo4j_home      = "${install_prefix}/${package_name}"
   $neo4j_bin       = "${neo4j_home}/bin"
@@ -300,7 +301,7 @@ class neo4j (
     fail('Only Linux is supported at this time.')
   }
 
-  if ( versioncmp( $version, '3.0.0' ) < 0 ) {
+  if ( versioncmp( $package_version, '3.0.0' ) < 0 ) {
     fail('Only versions >= 3.0.0 are supported at this time.')
   }
 

@@ -16,9 +16,12 @@ class neo4j::install (
   $data_dir        = $neo4j::data_dir,
   $group           = $neo4j::group,
   $http_log_dir    = $neo4j::http_log_dir,
+  $install_method  = $neo4j::install_method,
   $install_prefix  = $neo4j::install_prefix,
   $neo4j_home      = $neo4j::neo4j_home,
+  $package_name    = $neo4j::package_name,
   $package_tarball = $neo4j::package_tarball,
+  $package_version = $neo4j::package_version,
   $user            = $neo4j::user,
 )
 {
@@ -52,18 +55,29 @@ class neo4j::install (
     require => [User[$user], Group[$group]]
   }
 
-  archive { $package_tarball :
-    ensure       => present,
-    cleanup      => false,
-    extract      => true,
-    extract_path => $install_prefix,
-    path         => "/tmp/${neo4j::package_tarball}",
-    filename     => $package_tarball,
-    source       => "https://neo4j.com/artifact.php?name=${neo4j::package_name}-unix.tar.gz",
-    user         => $user,
-    group        => $group,
-    creates      => "${neo4j::neo4j_home}/bin",
-    require      => File[$neo4j_home],
+  case $install_method {
+    'package': {
+      package { $package_name:
+        ensure => $package_version,
+      }
+    }
+    'archive': {
+      archive { $package_tarball :
+        ensure       => present,
+        cleanup      => false,
+        extract      => true,
+        extract_path => $install_prefix,
+        path         => "/tmp/${package_tarball}",
+        filename     => $package_tarball,
+        source       => "https://neo4j.com/artifact.php?name=${neo4j::package_name}-unix.tar.gz",
+        user         => $user,
+        group        => $group,
+        creates      => "${neo4j_home}/bin",
+        require      => File[$neo4j_home],
+      }
+    }
+    default: {
+      fail("Installation method ${install_method} not supported.")
+    }
   }
-
 }

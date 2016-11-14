@@ -94,7 +94,10 @@ class neo4j::params {
   $ha_tx_push_strategy                                = 'fixed_ascending'
   $http_log_dir                                       = '/var/log/neo4j'
   $install_java                                       = true
+  $install_method                                     = 'package'
   $install_prefix                                     = '/opt'
+  $package_name                                       = 'neo4j'
+  $package_version                                    = '3.0.4'
   $run_dir                                            = '/var/run'
   $service_enable                                     = true
   $service_ensure                                     = 'running'
@@ -102,5 +105,4 @@ class neo4j::params {
   $service_status                                     = 'neo4j status'
   $service_stop                                       = 'neo4j stop'
   $user                                               = 'neo4j'
-  $version                                            = '3.0.4'
 }
