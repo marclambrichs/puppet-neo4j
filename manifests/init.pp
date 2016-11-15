@@ -118,6 +118,7 @@ class neo4j (
 
   $edition                                            = $neo4j::params::edition,
   $install_java                                       = $neo4j::params::install_java,
+  $install_method                                     = $neo4j::params::install_method,
   $run_dir                                            = $neo4j::params::run_dir,
   $package_version                                    = $neo4j::params::package_version,
 

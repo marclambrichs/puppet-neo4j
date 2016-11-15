@@ -1,4 +1,4 @@
-## 2016-11-14 - Release 1.2.2
+## 2016-11-14 - Release 1.2.3
 ### Summary
 Rewrite, targeted at neo4j 3.x users. Getting rid of existing shell scripts and jars. Although it is still possible to install neo4j using a tar.gz release, a packaged version is preferred.
 

@@ -97,7 +97,7 @@ class neo4j::params {
   $install_method                                     = 'package'
   $install_prefix                                     = '/opt'
   $package_name                                       = 'neo4j'
-  $package_version                                    = '3.0.4'
+  $package_version                                    = '3.0.7'
   $run_dir                                            = '/var/run'
   $service_enable                                     = true
   $service_ensure                                     = 'running'
