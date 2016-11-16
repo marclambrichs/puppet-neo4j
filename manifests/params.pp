@@ -95,7 +95,7 @@ class neo4j::params {
   $http_log_dir                                       = '/var/log/neo4j'
   $install_java                                       = true
   $install_method                                     = 'package'
-  $install_prefix                                     = '/opt'
+  $install_prefix                                     = '/usr/share'
   $package_name                                       = 'neo4j'
   $source_release                                     = '3.0.7'
   $run_dir                                            = '/var/run'

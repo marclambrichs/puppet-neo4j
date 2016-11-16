@@ -311,7 +311,7 @@ class neo4j (
       if ( versioncmp( $version, '3.0.0' ) < 0 ) {
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
-      $neo4j_home = "${install_prefix}/${package_name}"
+      $neo4j_home = "${install_prefix}/neo4j"
     }
     'archive': {
       if ( versioncmp( $source_release, '3.0.0' ) < 0 ) {
