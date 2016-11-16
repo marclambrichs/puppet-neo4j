@@ -20,9 +20,10 @@ class neo4j::install (
   $install_prefix  = $neo4j::install_prefix,
   $neo4j_home      = $neo4j::neo4j_home,
   $package_name    = $neo4j::package_name,
-  $package_tarball = $neo4j::package_tarball,
-  $package_version = $neo4j::package_version,
+  $source_tarball  = $neo4j::source_tarball,
+  $source_name     = $neo4j::source_name,
   $user            = $neo4j::user,
+  $version         = $neo4j::version,
 )
 {
   ## package lsof is needed for init script
@@ -58,18 +59,18 @@ class neo4j::install (
   case $install_method {
     'package': {
       package { $package_name:
-        ensure => $package_version,
+        ensure => $version,
       }
     }
     'archive': {
-      archive { $package_tarball :
+      archive { $source_tarball:
         ensure       => present,
         cleanup      => false,
         extract      => true,
         extract_path => $install_prefix,
-        path         => "/tmp/${package_tarball}",
-        filename     => $package_tarball,
-        source       => "https://neo4j.com/artifact.php?name=${neo4j::package_name}-unix.tar.gz",
+        path         => "/tmp/${source_tarball}",
+        filename     => $source_tarball,
+        source       => "https://neo4j.com/artifact.php?name=${source_name}-unix.tar.gz",
         user         => $user,
         group        => $group,
         creates      => "${neo4j_home}/bin",

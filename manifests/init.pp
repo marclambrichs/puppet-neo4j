@@ -87,20 +87,20 @@
 # [*install_method*]
 # [*install_prefix*]
 # [*package_name*]
-# [*package_version*]
-# [*package_tarball*]
 # [*run_dir*]
 # [*service_enable*]
 # [*service_ensure*]
 # [*service_start*]
 # [*service_status*]
 # [*service_stop*]
+# [*source_release*]
 # [*user*]
+# [*version*]
 #
 # === Examples
 #
 #  class { 'neo4j' :
-#    package_version => '3.0.4',
+#    source_release  => '3.0.4',
 #    edition         => 'enterprise',
 #  }
 #
@@ -120,7 +120,9 @@ class neo4j (
   $install_java                                       = $neo4j::params::install_java,
   $install_method                                     = $neo4j::params::install_method,
   $run_dir                                            = $neo4j::params::run_dir,
-  $package_version                                    = $neo4j::params::package_version,
+  $package_name                                       = $neo4j::params::package_name,
+  $source_release                                     = $neo4j::params::source_release,
+  $version                                            = $neo4j::params::version,
 
   ### variables install.pp
   $data_prefix                                        = $neo4j::params::data_prefix,
@@ -293,22 +295,35 @@ class neo4j (
   )
 
   #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
-  $package_name    = "neo4j-${edition}-${package_version}"
-  $package_tarball = "${package_name}.tgz"
-  $neo4j_home      = "${install_prefix}/${package_name}"
-  $neo4j_bin       = "${neo4j_home}/bin"
+  $source_name     = "neo4j-${edition}-${source_release}"
+  $source_tarball = "${source_name}.tgz"
 
   if ( $::kernel != 'Linux' ) {
     fail('Only Linux is supported at this time.')
   }
 
-  if ( versioncmp( $package_version, '3.0.0' ) < 0 ) {
-    fail('Only versions >= 3.0.0 are supported at this time.')
-  }
-
   if !( $edition in ['community', 'enterprise'] ){
     fail('Only edtions \'community\' and \'enterprise\' are present.')
   }
+
+  case $install_method {
+    'package': {
+      if ( versioncmp( $version, '3.0.0' ) < 0 ) {
+        fail('Only versions >= 3.0.0 are supported at this time.')
+      }
+      $neo4j_home = "${install_prefix}/${package_name}"
+    }
+    'archive': {
+      if ( versioncmp( $source_release, '3.0.0' ) < 0 ) {
+        fail('Only versions >= 3.0.0 are supported at this time.')
+      }
+      $neo4j_home = "${install_prefix}/${source_name}"
+    }
+    default: {
+      fail("Installation method ${install_method} not supported.")
+    }
+  }
+  $neo4j_bin = "${neo4j_home}/bin"
 
   if ( $data_prefix ) {
     if ( validate_absolute_path($data_prefix) ) {

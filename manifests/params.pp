@@ -76,7 +76,7 @@ class neo4j::params {
   $dbms_unmanaged_extension_classes                   = {
                                                           'org.neo4j.examples.server.unmanaged' => '/examples/managed'
                                                         }
-  $edition                                            = 'enterprise'
+  $edition                                            = 'community'
   $group                                              = 'neo4j'
   $ha_branched_data_policy                            = 'keep_all'
   $ha_default_timeout                                 = 5
@@ -97,7 +97,7 @@ class neo4j::params {
   $install_method                                     = 'package'
   $install_prefix                                     = '/opt'
   $package_name                                       = 'neo4j'
-  $package_version                                    = '3.0.7'
+  $source_release                                     = '3.0.7'
   $run_dir                                            = '/var/run'
   $service_enable                                     = true
   $service_ensure                                     = 'running'
@@ -105,4 +105,5 @@ class neo4j::params {
   $service_status                                     = 'neo4j status'
   $service_stop                                       = 'neo4j stop'
   $user                                               = 'neo4j'
+  $version                                            = '3.0.0'
 }
