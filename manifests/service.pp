@@ -12,9 +12,10 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::service (
+  $install_java     = $neo4j::install_java,
+  $neo4j_bin        = $neo4j::neo4j_bin,
   $service_enable   = $neo4j::service_enable,
   $service_ensure   = $neo4j::service_ensure,
-  $neo4j_bin        = $neo4j::neo4j_bin,
   $service_start    = $neo4j::service_start,
   $service_status   = $neo4j::service_status,
   $service_stop     = $neo4j::service_stop,
@@ -28,5 +29,7 @@ class neo4j::service (
     stop     => "${neo4j_bin}/${service_stop}",
   }
 
-  Class['java'] -> Service['neo4j']
+  if ($install_java) {
+    Class['java'] -> Service['neo4j']
+  }
 }
