@@ -26,10 +26,6 @@ class neo4j::install (
   $version         = $neo4j::version,
 )
 {
-  ## package lsof is needed for init script
-  if ! defined(Package['lsof']) {
-    package { 'lsof' : }
-  }
 
   file { $install_prefix:
     ensure => directory,
@@ -63,6 +59,9 @@ class neo4j::install (
       }
     }
     'archive': {
+      if (! defined(Package['lsof'])) and ( versioncmp( $version, '3.1.0' ) < 0 )  {
+        package { 'lsof' : }
+      }
       archive { $source_tarball:
         ensure       => present,
         cleanup      => false,
