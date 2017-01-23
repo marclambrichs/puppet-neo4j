@@ -96,6 +96,7 @@ class neo4j::params {
   $install_java                                       = false
   $install_method                                     = 'package'
   $install_prefix                                     = '/usr/share'
+  $manage_repo                                        = false
   $package_name                                       = 'neo4j'
   $source_release                                     = '3.0.7'
   $run_dir                                            = '/var/run'
@@ -105,5 +106,17 @@ class neo4j::params {
   $service_status                                     = 'neo4j status'
   $service_stop                                       = 'neo4j stop'
   $user                                               = 'neo4j'
-  $version                                            = '3.0.0'
+  case $::osfamily {
+    'RedHat': {
+      $service_provider = 'redhat'
+      $version          = '3.0.0'
+    }
+    'Debian': {
+      $service_provider = 'debian'
+      $version          = 'installed'
+    }
+    default: {
+      fail( "Unsupported OS family: ${::osfamily}" )
+    }
+  }
 }
