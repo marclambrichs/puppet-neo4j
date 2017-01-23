@@ -86,10 +86,12 @@
 # [*install_java*]
 # [*install_method*]
 # [*install_prefix*]
+# [*manage_repo*]
 # [*package_name*]
 # [*run_dir*]
 # [*service_enable*]
 # [*service_ensure*]
+# [*service_provider]
 # [*service_start*]
 # [*service_status*]
 # [*service_stop*]
@@ -120,6 +122,7 @@ class neo4j (
   $install_java                                       = $neo4j::params::install_java,
   $install_method                                     = $neo4j::params::install_method,
   $run_dir                                            = $neo4j::params::run_dir,
+  $manage_repo                                        = $neo4j::params::manage_repo,
   $package_name                                       = $neo4j::params::package_name,
   $source_release                                     = $neo4j::params::source_release,
   $version                                            = $neo4j::params::version,
@@ -134,6 +137,7 @@ class neo4j (
   ### variables service.pp
   $service_enable                                     = $neo4j::params::service_enable,
   $service_ensure                                     = $neo4j::params::service_ensure,
+  $service_provider                                   = $neo4j::params::service_provider,
   $service_start                                      = $neo4j::params::service_start,
   $service_status                                     = $neo4j::params::service_status,
   $service_stop                                       = $neo4j::params::service_stop,

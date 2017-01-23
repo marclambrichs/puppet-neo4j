@@ -18,6 +18,7 @@ class neo4j::install (
   $http_log_dir    = $neo4j::http_log_dir,
   $install_method  = $neo4j::install_method,
   $install_prefix  = $neo4j::install_prefix,
+  $manage_repo     = $neo4j::manage_repo,
   $neo4j_home      = $neo4j::neo4j_home,
   $package_name    = $neo4j::package_name,
   $source_tarball  = $neo4j::source_tarball,
@@ -58,8 +59,39 @@ class neo4j::install (
 
   case $install_method {
     'package': {
-      package { $package_name:
+      if $manage_repo {
+        case $::osfamily {
+          'RedHat': {
+            yumrepo {'neo4j':
+              descr    => 'Neo4j Yum Repo',
+              baseurl  => 'http://yum.neo4j.org',
+              gpgcheck => 1,
+              gpgkey   => 'http://debian.neo4j.org/neotechnology.gpg.key',
+              enabled  => 1,
+            }
+            Yumrepo['neo4j'] -> Package['neo4j']
+          }
+          'Debian': {
+            apt::source { 'neo4j':
+              location => 'http://debian.neo4j.org/repo',
+              release  => 'stable/',
+              repos    => '',
+              key      => {
+                'id'     => '66D34E951A8C53D90242132B26C95CF201182252',
+                'server' => 'pgp.mit.edu',
+                'source' => 'http://debian.neo4j.org/neotechnology.gpg.key',
+              },
+            }
+            Apt::Source['neo4j'] -> Package['neo4j']
+          }
+          default: {
+            fail( "Unsupported OS family: ${::osfamily}" )
+          }
+        }
+      }
+      package { 'neo4j':
         ensure => $version,
+        name   => $package_name,
       }
     }
     'archive': {
