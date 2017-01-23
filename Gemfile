@@ -11,32 +11,31 @@ def location_for(place, fake_version = nil)
 end
 
 group :test do
-  gem 'json', '1.8.3',		:require => false
-  gem 'json_pure', '2.0.1',	:require => false
-  gem 'metadata-json-lint',	:require => false
-  gem 'rspec-core',		:require => false
-  gem 'puppetlabs_spec_helper',	:require => false
-  gem 'simplecov',		:require => false
-  gem 'puppet_facts',		:require => false
+  gem 'json', '< 2.0.0',         :require => false if RUBY_VERSION < '2.0.0'
+  gem 'json_pure', '<= 2.0.1',   :require => false if RUBY_VERSION < '2.0.0'
+  gem 'metadata-json-lint',      :require => false
+  gem 'puppet-strings',          :require => false
+  gem 'puppet_facts',            :require => false
+  gem 'puppetlabs_spec_helper',  :require => false
+  gem 'rspec-core',              :require => false
+  gem 'rspec-puppet-facts',      :require => false
+  gem 'simplecov',               :require => false
 end
 
 group :development do
+  gem 'guard-rake',   :require => false
+  gem 'redcarpet',    :require => false
   gem 'travis',       :require => false
   gem 'travis-lint',  :require => false
-  gem 'guard-rake',   :require => false
 end
 
-group :system_tests do
-  gem 'beaker',				:require => false
-  if beaker_version = ENV['BEAKER_VERSION']
-    gem 'beaker', *location_for(beaker_version)
-  end
-  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-  else
-    gem 'beaker-rspec',			:require => false
-  end
-  gem 'beaker-puppet_install_helper',	:require => false
+group :integration do
+  gem 'concurrent-ruby', '~> 0.9',  :require => false
+  gem 'kitchen-inspec',             :require => false
+  gem 'kitchen-puppet',             :require => false
+  gem 'kitchen-vagrant',            :require => false
+  gem 'librarian-puppet',           :require => false
+  gem 'test-kitchen', '~> 1.4',     :require => false
 end
 
 
