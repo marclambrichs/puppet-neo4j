@@ -93,7 +93,7 @@ class neo4j::params {
   $ha_tx_push_factor                                  = 1
   $ha_tx_push_strategy                                = 'fixed_ascending'
   $http_log_dir                                       = '/var/log/neo4j'
-  $install_java                                       = true
+  $install_java                                       = false
   $install_method                                     = 'package'
   $install_prefix                                     = '/usr/share'
   $package_name                                       = 'neo4j'
