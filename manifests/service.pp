@@ -17,17 +17,11 @@ class neo4j::service (
   $service_enable   = $neo4j::service_enable,
   $service_ensure   = $neo4j::service_ensure,
   $service_provider = $neo4j::service_provider,
-  $service_start    = $neo4j::service_start,
-  $service_status   = $neo4j::service_status,
-  $service_stop     = $neo4j::service_stop,
 ){
   service { 'neo4j':
     ensure   => $service_ensure,
     enable   => $service_enable,
     provider => $service_provider,
-    start    => "${neo4j_bin}/${service_start}",
-    status   => "${neo4j_bin}/${service_status}",
-    stop     => "${neo4j_bin}/${service_stop}",
   }
 
   if ($install_java) {

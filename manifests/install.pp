@@ -27,32 +27,6 @@ class neo4j::install (
   $version         = $neo4j::version,
 )
 {
-
-  file { $install_prefix:
-    ensure => directory,
-  }
-
-  file { $data_dir:
-    ensure => directory,
-  }
-
-  File[$install_prefix] -> File[$data_dir]
-
-  if ( $http_log_dir ){
-    file { $http_log_dir:
-      ensure => directory,
-      mode   => '0644'
-    }
-  }
-
-  file { $neo4j_home:
-    ensure  => directory,
-    owner   => $user,
-    group   => $group,
-    mode    => '0755',
-    require => [User[$user], Group[$group]]
-  }
-
   case $install_method {
     'package': {
       if $manage_repo {
@@ -92,8 +66,36 @@ class neo4j::install (
     }
     'archive': {
       if (! defined(Package['lsof'])) and ( versioncmp( $version, '3.1.0' ) < 0 )  {
-        package { 'lsof' : }
+        package { 'lsof' :
+          before => Service['neo4j']
+        }
       }
+
+      file { $install_prefix:
+        ensure => directory,
+      }
+
+      file { $data_dir:
+        ensure => directory,
+      }
+
+      File[$install_prefix] -> File[$data_dir]
+
+      if ( $http_log_dir ){
+        file { $http_log_dir:
+          ensure => directory,
+          mode   => '0644'
+        }
+      }
+
+      file { $neo4j_home:
+        ensure  => directory,
+        owner   => $user,
+        group   => $group,
+        mode    => '0755',
+        require => [User[$user], Group[$group]]
+      }
+
       archive { $source_tarball:
         ensure       => present,
         cleanup      => false,

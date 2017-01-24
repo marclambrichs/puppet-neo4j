@@ -12,7 +12,7 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::config (
-  $config_dir = "${neo4j::neo4j_home}/conf"
+  $config_dir = $neo4j::neo4j_home,
 )
 {
 
@@ -157,7 +157,7 @@ class neo4j::config (
   $dbms_memory_heap_max_size                          = $neo4j::dbms_memory_heap_max_size
 
   file { 'neo4j-wrapper.conf':
-    path    => "${neo4j::neo4j_home}/conf/neo4j-wrapper.conf",
+    path    => "${neo4j::neo4j_home}/neo4j-wrapper.conf",
     content => template('neo4j/neo4j-wrapper.conf.erb'),
   }
 }

@@ -92,18 +92,14 @@
 # [*service_enable*]
 # [*service_ensure*]
 # [*service_provider]
-# [*service_start*]
-# [*service_status*]
-# [*service_stop*]
-# [*source_release*]
 # [*user*]
 # [*version*]
 #
 # === Examples
 #
 #  class { 'neo4j' :
-#    source_release  => '3.0.4',
-#    edition         => 'enterprise',
+#    version => '3.0.4',
+#    edition => 'enterprise',
 #  }
 #
 # See additional examples in the Readme.md file.
@@ -124,7 +120,6 @@ class neo4j (
   $run_dir                                            = $neo4j::params::run_dir,
   $manage_repo                                        = $neo4j::params::manage_repo,
   $package_name                                       = $neo4j::params::package_name,
-  $source_release                                     = $neo4j::params::source_release,
   $version                                            = $neo4j::params::version,
 
   ### variables install.pp
@@ -138,9 +133,6 @@ class neo4j (
   $service_enable                                     = $neo4j::params::service_enable,
   $service_ensure                                     = $neo4j::params::service_ensure,
   $service_provider                                   = $neo4j::params::service_provider,
-  $service_start                                      = $neo4j::params::service_start,
-  $service_status                                     = $neo4j::params::service_status,
-  $service_stop                                       = $neo4j::params::service_stop,
 
   ### variables neo4j.conf - general
   $allow_load_csv                                     = $neo4j::params::allow_load_csv,
@@ -299,7 +291,7 @@ class neo4j (
   )
 
   #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
-  $source_name     = "neo4j-${edition}-${source_release}"
+  $source_name     = "neo4j-${edition}-${version}"
   $source_tarball = "${source_name}.tgz"
 
   if ( $::kernel != 'Linux' ) {
@@ -318,7 +310,7 @@ class neo4j (
       $neo4j_home = "${install_prefix}/neo4j"
     }
     'archive': {
-      if ( versioncmp( $source_release, '3.0.0' ) < 0 ) {
+      if ( versioncmp( $version, '3.0.0' ) < 0 ) {
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
       $neo4j_home = "${install_prefix}/${source_name}"
