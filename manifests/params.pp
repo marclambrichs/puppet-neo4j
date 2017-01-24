@@ -98,18 +98,14 @@ class neo4j::params {
   $install_prefix                                     = '/usr/share'
   $manage_repo                                        = false
   $package_name                                       = 'neo4j'
-  $source_release                                     = '3.0.7'
   $run_dir                                            = '/var/run'
   $service_enable                                     = true
   $service_ensure                                     = 'running'
-  $service_start                                      = 'neo4j start'
-  $service_status                                     = 'neo4j status'
-  $service_stop                                       = 'neo4j stop'
   $user                                               = 'neo4j'
   case $::osfamily {
     'RedHat': {
       $service_provider = 'redhat'
-      $version          = '3.0.0'
+      $version          = 'installed'
     }
     'Debian': {
       $service_provider = 'debian'
