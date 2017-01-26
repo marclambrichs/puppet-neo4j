@@ -48,7 +48,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config general':
     target  => $config_file,
-    content => template('neo4j/neo4j.conf.general.erb'),
+    content => template('neo4j/config/neo4j.conf.general.erb'),
     order   => 01,
   }
 
@@ -67,7 +67,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j network connector config':
     target  => $config_file,
-    content => template('neo4j/neo4j.conf.network.connector.erb'),
+    content => template('neo4j/config/neo4j.conf.network.connector.erb'),
     order   => 02,
   }
 
@@ -88,7 +88,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j logging config':
     target  => $config_file,
-    content => template('neo4j/neo4j.conf.logging.erb'),
+    content => template('neo4j/config/neo4j.conf.logging.erb'),
     order   => 03,
   }
 
@@ -110,7 +110,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j HA config':
     target  => $config_file,
-    content => template('neo4j/neo4j.conf.ha.erb'),
+    content => template('neo4j/config/neo4j.conf.ha.erb'),
     order   => 04,
   }
 
@@ -128,7 +128,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j miscellaneous config':
     target  => $config_file,
-    content => template('neo4j/neo4j.conf.misc.erb'),
+    content => template('neo4j/config/neo4j.conf.misc.erb'),
     order   => 05,
   }
 
@@ -158,6 +158,6 @@ class neo4j::config (
 
   file { 'neo4j-wrapper.conf':
     path    => "${neo4j::neo4j_home}/neo4j-wrapper.conf",
-    content => template('neo4j/neo4j-wrapper.conf.erb'),
+    content => template('neo4j/config/neo4j-wrapper.conf.erb'),
   }
 }

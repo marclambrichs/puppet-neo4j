@@ -1,0 +1,76 @@
+#!/bin/sh
+#
+# Neo4j Graph Database - Managed by Puppet
+#
+# chkconfig:		2345 99 20
+# processname:		java
+# config:		/etc/neo4j/neo4j.conf
+# pidfile:		/var/run/neo4j.pid
+# Provides:		neo4j-service
+# Required-Start:
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	The Neo4j graph database server. See http://neo4j.org
+# Description:
+### END INIT INFO
+
+# Source function library.
+exec="/usr/share/neo4j/bin/neoj4d -p ${pidfile}"
+prog'neo4j'
+
+[-e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+lockfile=/var/lock/subsys/$prog
+
+start() {
+    echo -n $"Starting $prog: "
+    touch $pidfile
+    chown neo4j:neo4j $pidfile
+    daemon --user neo4j --pidfile $pidfile $exec start
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && toch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    kill `cat $pidfile`
+    rm $pidfile
+    retval=$?
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+    start|stop|restart)
+        $1
+	;;
+    force-reload)
+        restart
+	;;
+    status)
+        status $prog
+	;;
+    try-restart|condrestart)
+        if status $prog >/dev/null ; then
+	    restart
+	fi
+	;;
+    reload)
+        status $prog >/dev/null || exit 7
+	action $"Service $prog does not support the reload action: " /bin/false
+	exit 3
+	;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|try-restart|force-reload}"
+	exit 2
+esac

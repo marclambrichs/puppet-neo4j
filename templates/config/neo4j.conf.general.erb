@@ -1,0 +1,456 @@
+#*****************************************************************
+# Neo4j configuration: Managed by Puppet
+#*****************************************************************
+
+# The name of the database to mount
+dbms.active_database=<%= @dbms_active_database %>
+
+# Paths of directories in the installation.
+dbms.directories.data=<%= @dbms_directories_data %>
+dbms.directories.plugins=<%= @dbms_directories_plugins %>
+dbms.directories.certificates=<%= @dbms_directories_certificates %>
+
+dbms.directories.import=<%= @dbms_directories_import %>
+
+# Whether requests to Neo4j are authenticated.
+# To disable authentication, uncomment this line
+dbms.security.auth_enabled=<%= @dbms_security_auth_enabled -%>
+
+# Enable this to be able to upgrade a store from an older version.
+dbms.allow_format_migration=<%= @dbms_allow_format_migration %>
+
+# The amount of memory to use for mapping the store files, in bytes (or
+# kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
+# If Neo4j is running on a dedicated server, then it is generally recommended
+# to leave about 2-4 gigabytes for the operating system, give the JVM enough
+# heap to hold all your transaction state and query context, and then leave the
+# rest for the page cache.
+# The default page cache memory assumes the machine is dedicated to running
+# Neo4j, and is heuristically set to 50% of RAM minus the max Java heap size.
+dbms.memory.pagecache.size=<%= @dbms_memory_pagecache_size %>
+
+# Enable online backups to be taken from this database.
+dbms.backup.enabled=<%= @dbms_backup_enabled %>
+
+# To allow remote backups, uncomment this line:
+<% if @dbms_backup_enabled -%>
+dbms.backup.address=<%= @dbms_backup_address %>
+<% else -%>
+#dbms.backup.address=0.0.0.0:6362
+<% end -%>
+
+# browser.allow_outgoing_connections
+# Configure the policy for outgoing Neo4j Browser connections.
+# browser.credential_timeout
+# Configure the Neo4j Browser to time out logged in users after this idle period.
+# browser.remote_content_hostname_whitelist
+# Whitelist of hosts for the Neo4j Browser to be allowed to fetch content from.
+# browser.retain_connection_credentials
+# Configure the Neo4j Browser to store or not store user credentials.
+# causal_clustering.array_block_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of ARRAY_BLOCK IDs.
+# causal_clustering.catchup_batch_size
+# The maximum batch size when catching up (in unit of entries).
+# causal_clustering.cluster_allow_reads_on_followers
+# Configure if the dbms.cluster.routing.getServers() procedure should include followers as read endpoints or return only read replicas.
+# causal_clustering.cluster_routing_ttl
+# How long drivers should cache the data from the dbms.cluster.routing.getServers() procedure.
+# causal_clustering.cluster_topology_refresh
+# Time between scanning the cluster to refresh current server’s view of topology.
+# causal_clustering.disable_middleware_logging
+# Prevents the network middleware from dumping its own logs.
+# causal_clustering.discovery_advertised_address
+# Advertised cluster member discovery management communication.
+# causal_clustering.discovery_listen_address
+# Host and port to bind the cluster member discovery management communication.
+# causal_clustering.expected_core_cluster_size
+# Expected number of Core machines in the cluster.
+# causal_clustering.global_session_tracker_state_size
+# The maximum file size before the global session tracker state file is rotated (in unit of entries).
+# causal_clustering.id_alloc_state_size
+# The maximum file size before the ID allocation file is rotated (in unit of entries).
+# causal_clustering.initial_discovery_members
+# A comma-separated list of other members of the cluster to join.
+# causal_clustering.join_catch_up_timeout
+# Time out for a new member to catch up.
+# causal_clustering.label_token_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of LABEL_TOKEN IDs.
+# causal_clustering.label_token_name_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of LABEL_TOKEN_NAME IDs.
+# causal_clustering.last_applied_state_size
+# The maximum file size before the storage file is rotated (in unit of entries).
+# causal_clustering.leader_election_timeout
+# The time limit within which a new leader election will occur if no messages are received.
+# causal_clustering.log_shipping_max_lag
+# The maximum lag allowed before log shipping pauses (in unit of entries).
+# causal_clustering.neostore_block_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of NEOSTORE_BLOCK IDs.
+# causal_clustering.node_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of NODE IDs.
+# causal_clustering.node_labels_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of NODE_LABELS IDs.
+# causal_clustering.outgoing_queue_size
+# The number of messages waiting to be sent to other servers in the cluster.
+# causal_clustering.property_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of PROPERTY IDs.
+# causal_clustering.property_key_token_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of PROPERTY_KEY_TOKEN IDs.
+# causal_clustering.property_key_token_name_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of PROPERTY_KEY_TOKEN_NAME IDs.
+# causal_clustering.pull_interval
+# Interval of pulling updates from cores.
+# causal_clustering.raft_advertised_address
+# Advertised hostname/IP address and port for the RAFT server.
+# causal_clustering.raft_listen_address
+# Network interface and port for the RAFT server to listen on.
+# causal_clustering.raft_log_implementation
+# RAFT log implementation.
+# causal_clustering.raft_log_prune_strategy
+# RAFT log pruning strategy.
+# causal_clustering.raft_log_pruning_frequency
+# RAFT log pruning frequency.
+# causal_clustering.raft_log_reader_pool_size
+# RAFT log reader pool size.
+# causal_clustering.raft_log_rotation_size
+# RAFT log rotation size.
+# causal_clustering.raft_membership_state_size
+# The maximum file size before the membership state file is rotated (in unit of entries).
+# causal_clustering.raft_messages_log_enable
+# Enable or disable the dump of all network messages pertaining to the RAFT protocol.
+# causal_clustering.raft_term_state_size
+# The maximum file size before the term state file is rotated (in unit of entries).
+# causal_clustering.raft_vote_state_size
+# The maximum file size before the vote state file is rotated (in unit of entries).
+# causal_clustering.read_replica_refresh_rate
+# Read replica 'call home' frequency.
+# causal_clustering.read_replica_time_to_live
+# Time To Live before read replica is considered unavailable.
+# causal_clustering.relationship_group_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of RELATIONSHIP_GROUP IDs.
+# causal_clustering.relationship_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of RELATIONSHIP IDs.
+# causal_clustering.relationship_type_token_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of RELATIONSHIP_TYPE_TOKEN IDs.
+# causal_clustering.relationship_type_token_name_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of RELATIONSHIP_TYPE_TOKEN_NAME IDs.
+# causal_clustering.replicated_lock_token_state_size
+# The maximum file size before the replicated lock token state file is rotated (in unit of entries).
+# causal_clustering.schema_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of SCHEMA IDs.
+# causal_clustering.state_machine_apply_max_batch_size
+# The maximum number of operations to be batched during applications of operations in the state machines.
+# causal_clustering.state_machine_flush_window_size
+# The number of operations to be processed before the state machines flush to disk.
+# causal_clustering.string_block_id_allocation_size
+# The size of the ID allocation requests Core servers will make when they run out of STRING_BLOCK IDs.
+# causal_clustering.transaction_advertised_address
+# Advertised hostname/IP address and port for the transaction shipping server.
+# causal_clustering.transaction_listen_address
+# Network interface and port for the transaction shipping server to listen on.
+# causal_clustering.unknown_address_logging_throttle
+# Throttle limit for logging unknown cluster member address.
+
+cypher.default_language_version
+Set this to specify the default parser (language version).
+cypher.forbid_exhaustive_shortestpath
+This setting is associated with performance optimization.#
+cypher.hints_error
+Set this to specify the behavior when Cypher planner or runtime hints cannot be fulfilled.
+cypher.min_replan_interval
+The minimum lifetime of a query plan before a query is considered for replanning.
+cypher.planner
+Set this to specify the default planner for the default language version.
+cypher.statistics_divergence_threshold
+The threshold when a plan is considered stale.
+dbms.active_database
+Name of the database to load.
+dbms.allow_format_migration
+Whether to allow a store upgrade in case the current version of the database starts against an older store version.
+dbms.backup.address
+Listening server for online backups.
+dbms.backup.enabled
+Enable support for running online backups.
+dbms.checkpoint.interval.time
+Configures the time interval between check-points.
+dbms.checkpoint.interval.tx
+Configures the transaction interval between check-points.
+dbms.checkpoint.iops.limit
+Limit the number of IOs the background checkpoint process will consume per second.
+dbms.connectors.default_advertised_address
+Default hostname or IP address the server uses to advertise itself to its connectors.
+dbms.connectors.default_listen_address
+Default network interface to listen for incoming connections.
+dbms.directories.certificates
+Directory for storing certificates to be used by Neo4j for TLS connections.
+dbms.directories.data
+Path of the data directory.
+dbms.directories.import
+Sets the root directory for file URLs used with the Cypher LOAD CSV clause.
+dbms.directories.lib
+Path of the lib directory.
+dbms.directories.logs
+Path of the logs directory.
+dbms.directories.metrics
+The target location of the CSV files: a path to a directory wherein a CSV file per reported field will be written.
+dbms.directories.plugins
+Location of the database plugin directory.
+dbms.directories.run
+Path of the run directory.
+dbms.ids.reuse.types.override
+Specified names of id types (comma separated) that should be reused.
+dbms.index_sampling.background_enabled
+Enable or disable background index sampling.
+dbms.index_sampling.sample_size_limit
+Index sampling chunk size limit.
+dbms.index_sampling.update_percentage
+Percentage of index updates of total index size required before sampling of a given index is triggered.
+dbms.index_searcher_cache_size
+The maximum number of open Lucene index searchers.
+dbms.logs.debug.level
+Debug log level threshold.
+dbms.logs.debug.rotation.delay
+Minimum time interval after last rotation of the debug log before it may be rotated again.
+dbms.logs.debug.rotation.keep_number
+Maximum number of history files for the debug log.
+dbms.logs.debug.rotation.size
+Threshold for rotation of the debug log.
+dbms.logs.gc.enabled
+Enable GC Logging.
+dbms.logs.gc.options
+GC Logging Options.
+dbms.logs.gc.rotation.keep_number
+Number of GC logs to keep.
+dbms.logs.gc.rotation.size
+Size of each GC log that is kept.
+dbms.logs.http.enabled
+Enable HTTP request logging.
+dbms.logs.http.rotation.keep_number
+Number of HTTP logs to keep.
+dbms.logs.http.rotation.size
+Size of each HTTP log that is kept.
+dbms.logs.query.enabled
+Log executed queries that take longer than the configured threshold, dbms.logs.query.threshold.
+dbms.logs.query.parameter_logging_enabled
+Log parameters for executed queries that took longer than the configured threshold.
+dbms.logs.query.rotation.keep_number
+Maximum number of history files for the query log.
+dbms.logs.query.rotation.size
+The file size in bytes at which the query log will auto-rotate.
+dbms.logs.query.threshold
+If the execution of query takes more time than this threshold, the query is logged - provided query logging is enabled.
+dbms.logs.security.level
+Security log level threshold.
+dbms.logs.security.rotation.delay
+Minimum time interval after last rotation of the security log before it may be rotated again.
+dbms.logs.security.rotation.keep_number
+Maximum number of history files for the security log.
+dbms.logs.security.rotation.size
+Threshold for rotation of the security log.
+dbms.memory.pagecache.size
+The amount of memory to use for mapping the store files, in bytes (or kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
+dbms.memory.pagecache.swapper
+Specify which page swapper to use for doing paged IO.
+dbms.mode
+Configure the operating mode of the database — 'SINGLE' for stand-alone operation, 'HA' for operating as a member in a cluster, 'ARBITER' for an HA-only cluster member with no database, CORE for a core member of a Causal Clustering cluster, or READ_REPLICA for read replica.
+dbms.query_cache_size
+The number of Cypher query execution plans that are cached.
+dbms.read_only
+Only allow read operations from this Neo4j instance.
+dbms.record_format
+Database record format.
+dbms.relationship_grouping_threshold
+Relationship count threshold for considering a node to be dense.
+dbms.rest.transaction.idle_timeout
+Timeout for idle transactions in the REST endpoint.
+dbms.security.allow_csv_import_from_file_urls
+Determines if Cypher will allow using file URLs when loading data using LOAD CSV.
+dbms.security.auth_cache_max_capacity
+The maximum capacity for authentication and authorization caches (respectively).
+dbms.security.auth_cache_ttl
+The time to live (TTL) for cached authentication and authorization info when using external auth providers (LDAP or plugin).
+dbms.security.auth_enabled
+Enable auth requirement to access Neo4j.
+dbms.security.auth_provider
+The authentication and authorization provider that contains both the users and roles.
+dbms.security.ha_status_auth_enabled
+Require authorization for access to the HA status endpoints.
+dbms.security.http_authorization_classes
+Comma-seperated list of custom security rules for Neo4j to use.
+dbms.security.ldap.authentication.cache_enabled
+Determines if the result of authentication via the LDAP server should be cached or not.
+dbms.security.ldap.authentication.mechanism
+LDAP authentication mechanism.
+dbms.security.ldap.authentication.user_dn_template
+LDAP user DN template.
+dbms.security.ldap.authorization.group_membership_attributes
+A list of attribute names on a user object that contains groups to be used for mapping to roles when LDAP authorization is enabled.
+dbms.security.ldap.authorization.group_to_role_mapping
+An authorization mapping from LDAP group names to Neo4j role names.
+dbms.security.ldap.authorization.system_password
+An LDAP system account password to use for authorization searches when dbms.security.ldap.authorization.use_system_account is true.
+dbms.security.ldap.authorization.system_username
+An LDAP system account username to use for authorization searches when dbms.security.ldap.authorization.use_system_account is true.
+dbms.security.ldap.authorization.use_system_account
+Perform LDAP search for authorization info using a system account instead of the user’s own account.
+
+If this is set to false (default), the search for group membership will be performed directly after authentication using the LDAP context bound with the user’s own account.
+dbms.security.ldap.authorization.user_search_base
+The name of the base object or named context to search for user objects when LDAP authorization is enabled.
+dbms.security.ldap.authorization.user_search_filter
+The LDAP search filter to search for a user principal when LDAP authorization is enabled.
+dbms.security.ldap.connection_timeout
+The timeout for establishing an LDAP connection.
+dbms.security.ldap.host
+URL of LDAP server to use for authentication and authorization.
+dbms.security.ldap.read_timeout
+The timeout for an LDAP read request (i.e.
+dbms.security.ldap.referral
+The LDAP referral behavior when creating a connection.
+dbms.security.ldap.use_starttls
+Use secure communication with the LDAP server using opportunistic TLS.
+dbms.security.log_successful_authentication
+Set to log successful authentication events to the security log.
+dbms.security.procedures.default_allowed
+The default role that can execute all procedures and user-defined functions that are not covered by the dbms.security.procedures.roles setting.
+dbms.security.procedures.roles
+This provides a finer level of control over which roles can execute procedures than the dbms.security.procedures.default_allowed setting.
+dbms.shell.enabled
+Enable a remote shell server which Neo4j Shell clients can log in to.
+dbms.shell.host
+Remote host for shell.
+dbms.shell.port
+The port the shell will listen on.
+dbms.shell.read_only
+Read only mode.
+dbms.shell.rmi_name
+The name of the shell.
+dbms.threads.worker_count
+Number of Neo4j worker threads, your OS might enforce a lower limit than the maximum value specified here.
+dbms.transaction.timeout
+The maximum time interval of a transaction within which it should be completed.
+dbms.tx_log.rotation.retention_policy
+Make Neo4j keep the logical transaction logs for being able to backup the database.
+dbms.tx_log.rotation.size
+Specifies at which file size the logical log will auto-rotate.
+dbms.udc.enabled
+Enable the UDC extension.
+dbms.unmanaged_extension_classes
+Comma-separated list of <classname>=<mount point> for unmanaged extensions.
+ha.allow_init_cluster
+Whether to allow this instance to create a cluster if unable to join.
+ha.branched_data_copying_strategy
+Strategy for how to order handling of branched data on slaves and copying of the store from the master.
+ha.branched_data_policy
+Policy for how to handle branched data.
+ha.broadcast_timeout
+Timeout for broadcasting values in cluster.
+ha.configuration_timeout
+Timeout for waiting for configuration from an existing cluster member during cluster join.
+ha.data_chunk_size
+Max size of the data chunks that flows between master and slaves in HA.
+ha.default_timeout
+Default timeout used for clustering timeouts.
+ha.election_timeout
+Timeout for waiting for other members to finish a role election.
+ha.heartbeat_interval
+How often heartbeat messages should be sent.
+ha.heartbeat_timeout
+How long to wait for heartbeats from other instances before marking them as suspects for failure.
+ha.host.coordination
+Host and port to bind the cluster management communication.
+ha.host.data
+Hostname and port to bind the HA server.
+ha.initial_hosts
+A comma-separated list of other members of the cluster to join.
+ha.internal_role_switch_timeout
+Timeout for waiting for internal conditions during state switch, like for transactions to complete, before switching to master or slave.
+ha.join_timeout
+Timeout for joining a cluster.
+ha.learn_timeout
+Timeout for learning values.
+ha.leave_timeout
+Timeout for waiting for cluster leave to finish.
+ha.max_acceptors
+Maximum number of servers to involve when agreeing to membership changes.
+ha.max_channels_per_slave
+Maximum number of connections a slave can have to the master.
+ha.paxos_timeout
+Default value for all Paxos timeouts.
+ha.phase1_timeout
+Timeout for Paxos phase 1.
+ha.phase2_timeout
+Timeout for Paxos phase 2.
+ha.pull_batch_size
+Size of batches of transactions applied on slaves when pulling from master.
+ha.pull_interval
+Interval of pulling updates from master.
+ha.role_switch_timeout
+Timeout for request threads waiting for instance to become master or slave.
+ha.server_id
+Id for a cluster instance.
+ha.slave_lock_timeout
+Timeout for taking remote (write) locks on slaves.
+ha.slave_only
+Whether this instance should only participate as slave in cluster.
+ha.slave_read_timeout
+How long a slave will wait for response from master before giving up.
+ha.tx_push_factor
+The amount of slaves the master will ask to replicate a committed transaction.
+ha.tx_push_strategy
+Push strategy of a transaction to a slave during commit.
+metrics.bolt.messages.enabled
+Enable reporting metrics about Bolt Protocol message processing.
+metrics.csv.enabled
+Set to true to enable exporting metrics to CSV files.
+metrics.csv.interval
+The reporting interval for the CSV files.
+metrics.cypher.replanning.enabled
+Enable reporting metrics about number of occurred replanning events.
+metrics.enabled
+The default enablement value for all the supported metrics.
+metrics.graphite.enabled
+Set to true to enable exporting metrics to Graphite.
+metrics.graphite.interval
+The reporting interval for Graphite.
+metrics.graphite.server
+The hostname or IP address of the Graphite server.
+metrics.jvm.buffers.enabled
+Enable reporting metrics about the buffer pools.
+metrics.jvm.gc.enabled
+Enable reporting metrics about the duration of garbage collections.
+metrics.jvm.memory.enabled
+Enable reporting metrics about the memory usage.
+metrics.jvm.threads.enabled
+Enable reporting metrics about the current number of threads running.
+metrics.neo4j.causal_clustering.enabled
+Enable reporting metrics about Causal Clustering mode.
+metrics.neo4j.checkpointing.enabled
+Enable reporting metrics about Neo4j check pointing.
+metrics.neo4j.cluster.enabled
+Enable reporting metrics about HA cluster info.
+metrics.neo4j.counts.enabled
+Enable reporting metrics about approximately how many entities are in the database.
+metrics.neo4j.enabled
+The default enablement value for all Neo4j specific support metrics.
+metrics.neo4j.logrotation.enabled
+Enable reporting metrics about the Neo4j log rotation.
+metrics.neo4j.network.enabled
+Enable reporting metrics about the network usage.
+metrics.neo4j.pagecache.enabled
+Enable reporting metrics about the Neo4j page cache.
+metrics.neo4j.server.enabled
+Enable reporting metrics about Server threading info.
+metrics.neo4j.tx.enabled
+Enable reporting metrics about transactions.
+metrics.prefix
+A common prefix for the reported metrics field names.
+tools.consistency_checker.check_graph
+Perform checks between nodes, relationships, properties, types and tokens.
+tools.consistency_checker.check_indexes
+Perform checks on indexes.
+tools.consistency_checker.check_label_scan_store
+Perform checks on the label scan store.
+tools.consistency_checker.check_property_owners
+Perform optional additional checking on property ownership.
+unsupported.dbms.security.ldap.authorization.connection_pooling
+Set to true if connection pooling should be used for authorization searches using the system account.

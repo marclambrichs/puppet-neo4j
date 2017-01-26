@@ -26,7 +26,7 @@ class neo4j::service (
     case $service_provider {
       'debian','init','redhat': {
         file { "/etc/init.d/${neo4j::service_name}":
-          content => template('neo4j/neo4j.init.erb'),
+          content => template('neo4j/service/neo4j.init.erb'),
           group   => $group,
           mode    => '0755',
           notify  => Service[$service_name],
@@ -35,7 +35,7 @@ class neo4j::service (
       }
       'systemd': {
         ::systemd::unit_file { "${service_name}.service":
-          content => template('neo4j/neo4j.service.erb'),
+          content => template('neo4j/service/neo4j.service.erb'),
           before  => Service[$service_name],
         }
       }

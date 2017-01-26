@@ -2,6 +2,9 @@
 #*****************************************************************
 # Network connector configuration
 #*****************************************************************
+org.neo4j.server.webserver.address=<%= @server_webserver_address %>
+org.neo4j.server.webserver.port=<%= @server_webserver_port %>
+
 # Bolt connector
 dbms.connector.bolt.type=BOLT
 dbms.connector.bolt.enabled=<%= @dbms_connector_bolt_enabled %>
