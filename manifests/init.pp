@@ -85,7 +85,6 @@
 # [*ha_tx_push_factor*]
 # [*ha_tx_push_strategy*]
 # [*log_dir*]
-# [*install_java*]
 # [*install_method*]
 # [*install_prefix*]
 # [*manage_repo*]
@@ -120,7 +119,6 @@ class neo4j (
 
   $default_file                                       = $neo4j::params::default_file,
   $edition                                            = $neo4j::params::edition,
-  $install_java                                       = $neo4j::params::install_java,
   $install_method                                     = $neo4j::params::install_method,
   $run_dir                                            = $neo4j::params::run_dir,
   $manage_repo                                        = $neo4j::params::manage_repo,
@@ -263,7 +261,6 @@ class neo4j (
     $dbms_shell_enabled,
     $jmx_monitoring,
     $ha_slave_only,
-    $install_java,
     $service_enable,
   )
 
@@ -352,13 +349,6 @@ class neo4j (
   if ( $dbms_mode == 'HA' ) {
     if ( !is_numeric( $ha_server_id ) ) {
       fail('The Server Id value must be specified and must numeric.')
-    }
-  }
-
-  if ( $install_java ) {
-    class { '::java':
-      distribution => 'jdk',
-      package      => 'java-1.8.0-openjdk'
     }
   }
 
