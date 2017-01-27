@@ -31,6 +31,7 @@
 # [*dbms_jvm_additional_commit_memory_to_process*]
 # [*dbms_jvm_additional_disable_explicit_gc*]
 # [*dbms_jvm_additional_hashcode*]
+# [*jmx_monitoring*]
 # [*dbms_jvm_additional_jmxremote.port*]
 # [*dbms_jvm_additional_jmxremote_access_file*]
 # [*dbms_jvm_additional_jmxremote_authenticate*]
@@ -82,7 +83,7 @@
 # [*ha_slave_only*]
 # [*ha_tx_push_factor*]
 # [*ha_tx_push_strategy*]
-# [*http_log_dir*]
+# [*log_dir*]
 # [*install_java*]
 # [*install_method*]
 # [*install_prefix*]
@@ -125,7 +126,7 @@ class neo4j (
   ### variables install.pp
   $data_prefix                                        = $neo4j::params::data_prefix,
   $group                                              = $neo4j::params::group,
-  $http_log_dir                                       = $neo4j::params::http_log_dir,
+  $log_dir                                       = $neo4j::params::log_dir,
   $install_prefix                                     = $neo4j::params::install_prefix,
   $user                                               = $neo4j::params::user,
 
@@ -206,6 +207,7 @@ class neo4j (
   $dbms_unmanaged_extension_classes                   = $neo4j::params::dbms_unmanaged_extension_classes,
 
   ### variables neo4j-wrapper.conf
+  $jmx_monitoring                                     = $neo4j::params::jmx_monitoring,
   $dbms_jvm_additional_commit_memory_to_process       = $neo4j::params::dbms_jvm_additional_commit_memory_to_process,
   $dbms_jvm_additional_disable_explicit_gc            = $neo4j::params::dbms_jvm_additional_disable_explicit_gc,
   $dbms_jvm_additional_hashcode                       = $neo4j::params::dbms_jvm_additional_hashcode,
@@ -227,7 +229,7 @@ class neo4j (
 
   validate_absolute_path(
     $install_prefix,
-    $http_log_dir,
+    $log_dir,
     $run_dir
   )
 
@@ -250,6 +252,7 @@ class neo4j (
     $dbms_security_auth_enabled,
     $dbms_security_ha_status_auth_enabled,
     $dbms_shell_enabled,
+    $jmx_monitoring,
     $ha_slave_only,
     $install_java,
     $service_enable,
@@ -319,7 +322,6 @@ class neo4j (
       fail("Installation method ${install_method} not supported.")
     }
   }
-  $neo4j_bin = "${neo4j_home}/bin"
 
   if ( $data_prefix ) {
     if ( validate_absolute_path($data_prefix) ) {
@@ -330,10 +332,10 @@ class neo4j (
     $data_dir = "${install_prefix}/data"
   }
 
-  if ( $http_log_dir ) {
-    $http_logfile = "${http_log_dir}/http.log"
+  if ( $log_dir ) {
+    $logfile = "${log_dir}/neo4j.log"
   } else {
-    $http_logfile = "${data_dir}/log/http.log"
+    $logfile = "${data_dir}/log/neo4j.log"
   }
 
   if ( $dbms_mode == 'HA' ) {
@@ -347,17 +349,6 @@ class neo4j (
       distribution => 'jdk',
       package      => 'java-1.8.0-openjdk'
     }
-  }
-
-  ## define the user and group the neo4j service will be running.
-  group { $group:
-    ensure => present
-  } ->
-  user { $user:
-    ensure => present,
-    gid    => $group,
-    shell  => '/bin/bash',
-    home   => $neo4j_home
   }
 
   anchor { 'neo4j::begin': } ->

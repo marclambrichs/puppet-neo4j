@@ -52,11 +52,13 @@ dbms.jvm.additional=<%= @dbms_jvm_additional_disable_explicit_gc %>
 # and have permissions set to 0600.
 # For details on setting these file permissions on Windows see:
 #     http://docs.oracle.com/javase/8/docs/technotes/guides/management/security-windows.html
+<% if @jmx_monitoring -%>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.port=<%= @dbms_jvm_additional_jmxremote_port %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.authenticate=<%= @dbms_jvm_additional_jmxremote_authenticate %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.ssl=<%= @dbms_jvm_additional_jmxremote_ssl %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.password.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_password_file %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.access.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_access_file %>
+<% end -%>
 
 # Some systems cannot discover host name automatically, and need this line configured:
 dbms.jvm.additional=-Djava.rmi.server.hostname=<%= @dbms_jvm_additional_rmi_server_hostname %>

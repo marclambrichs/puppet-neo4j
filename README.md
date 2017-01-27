@@ -233,3 +233,17 @@ These parameters configure the [Neo4j HA options](http://docs.neo4j.org/chunked/
 ######Logging Parameters
 - `keep_logical_logs` -- Specifies the [logical logs property](http://docs.neo4j.org/chunked/stable/configuration-logical-logs.html).
 **Default:** *'7 days'*
+
+## Development
+
+### Running tests
+
+This project contains tests for both rspec-puppet and test kitchen to verify functionality. For detailed information on using these tools, please see their respective documentation.
+
+#### Testing quickstart:
+
+```
+gem install bundler
+bundle install
+bundle exec rake {validate,lint,spec,strings:generate,guard}
+bundle exec kitchen {list,converge,verify,test}
