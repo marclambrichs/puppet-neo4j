@@ -6,9 +6,9 @@ describe 'neo4j' do
       context "install" do
 
         context 'with defaults for all parameters' do
-          it { should_not contain_file('/usr/share/data') }
-          it { should_not contain_file('/usr/share/neo4j') }
-          it { should_not contain_file('/usr/share') }
+          it { should_not contain_file('/etc/data') }
+          it { should_not contain_file('/etc/neo4j') }
+          it { should_not contain_file('/etc') }
           it { should_not contain_file('/var/log/neo4j') }
           it { should_not contain_archive('neo4j-community-3.1.1.tgz') }
           it { should contain_package('neo4j') }
@@ -21,10 +21,12 @@ describe 'neo4j' do
                 :version        => '3.0.8'
             }
           }
-          it { should contain_file('/usr/share/data') }
-          it { should contain_file('/usr/share/neo4j-community-3.0.8') }
-          it { should contain_file('/usr/share') }
+          it { should contain_file('/etc/data') }
+          it { should contain_file('/etc/neo4j-community-3.0.8') }
+          it { should contain_file('/etc') }
           it { should contain_file('/var/log/neo4j') }
+          it { should contain_group('neo4j') }
+          it { should contain_user('neo4j') }
           it { should contain_archive('neo4j-community-3.0.8.tgz') }
           it { should_not contain_package('neo4j') }
         end
@@ -36,10 +38,12 @@ describe 'neo4j' do
                 :version        => '3.1.1'
             }
           }
-          it { should contain_file('/usr/share/data') }
-          it { should contain_file('/usr/share/neo4j-community-3.1.1') }
-          it { should contain_file('/usr/share') }
+          it { should contain_file('/etc/data') }
+          it { should contain_file('/etc/neo4j-community-3.1.1') }
+          it { should contain_file('/etc') }
           it { should contain_file('/var/log/neo4j') }
+          it { should contain_group('neo4j') }
+          it { should contain_user('neo4j') }
           it { should contain_archive('neo4j-community-3.1.1.tgz') }
           it { should_not contain_package('neo4j') }
         end
