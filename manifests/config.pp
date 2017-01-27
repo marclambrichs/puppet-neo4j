@@ -12,9 +12,18 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::config (
-  $config_dir = $neo4j::neo4j_home,
+  $default_file = $neo4j::default_file,
+  $config_dir   = $neo4j::neo4j_home,
 )
 {
+  ### variables default/sysconfig
+  $service_shutdown_timeout = $neo4j::service_shutdown_timeout
+  $service_ulimit           = $neo4j::service_ulimit
+
+  file { 'neo4j-default':
+    path    => $default_file,
+    content => template('neo4j/default.erb'),
+  }
 
   File {
     ensure  => file,
