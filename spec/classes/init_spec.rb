@@ -13,8 +13,6 @@ describe 'neo4j', :type => :class do
         it { should contain_class('neo4j::config').that_notifies('Class[neo4j::Service]') }
         it { should contain_class('neo4j::service').that_comes_before('Anchor[neo4j::end]') }
         it { should contain_anchor('neo4j::end') }
-        it { should contain_group('neo4j') }
-        it { should contain_user('neo4j') }
       end
     end
   end

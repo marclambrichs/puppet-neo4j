@@ -30,6 +30,7 @@ class neo4j::params {
   $dbms_jvm_additional_commit_memory_to_process       = '-XX:+AlwaysPreTouch'
   $dbms_jvm_additional_disable_explicit_gc            = '-XX:+DisableExplicitGC'
   $dbms_jvm_additional_hashcode                       = '-XX:hashCode=5'
+  $jmx_monitoring                                     = false
   $dbms_jvm_additional_jmxremote_access_file          = 'jmx.access'
   $dbms_jvm_additional_jmxremote_authenticate         = true
   $dbms_jvm_additional_jmxremote_password_file        = 'jmx.password'
@@ -92,10 +93,10 @@ class neo4j::params {
   $ha_slave_only                                      = false
   $ha_tx_push_factor                                  = 1
   $ha_tx_push_strategy                                = 'fixed_ascending'
-  $http_log_dir                                       = '/var/log/neo4j'
+  $log_dir                                       = '/var/log/neo4j'
   $install_java                                       = false
   $install_method                                     = 'package'
-  $install_prefix                                     = '/usr/share'
+  $install_prefix                                     = '/etc'
   $manage_repo                                        = false
   $package_name                                       = 'neo4j'
   $run_dir                                            = '/var/run'

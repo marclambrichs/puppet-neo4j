@@ -13,7 +13,7 @@ describe 'neo4j' do
           it { should contain_concat__fragment('neo4j logging config') }
           it { should contain_concat__fragment('neo4j miscellaneous config') }
           it { should contain_concat__fragment('neo4j network connector config') }
-          it { should contain_concat('/usr/share/neo4j/neo4j.conf') }
+          it { should contain_concat('/etc/neo4j/neo4j.conf') }
         end
 
         context 'with install_method set to archive and version to 3.0.8' do
@@ -23,7 +23,7 @@ describe 'neo4j' do
                 :version        => '3.0.8'
             }
           }
-          it { should contain_concat('/usr/share/neo4j-community-3.0.8/neo4j.conf') }
+          it { should contain_concat('/etc/neo4j-community-3.0.8/neo4j.conf') }
         end
 
         context 'with install_method set to archive and version to 3.1.1' do
@@ -33,7 +33,7 @@ describe 'neo4j' do
                 :version        => '3.1.1'
             }
           }
-          it { should contain_concat('/usr/share/neo4j-community-3.1.1/neo4j.conf') }
+          it { should contain_concat('/etc/neo4j-community-3.1.1/neo4j.conf') }
         end
       end
     end

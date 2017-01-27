@@ -27,7 +27,6 @@ class neo4j::config (
 
   concat { $config_file :
     owner  => $neo4j::user,
-    group  => $neo4j::group,
     mode   => '0644',
     before => Service['neo4j'],
     notify => Service['neo4j'],
@@ -139,6 +138,7 @@ class neo4j::config (
   }
 
   ### Filling up neo4j-wrapper.conf
+  $jmx_monitoring                                     = $neo4j::jmx_monitoring
   $dbms_jvm_additional_commit_memory_to_process       = $neo4j::dbms_jvm_additional_commit_memory_to_process
   $dbms_jvm_additional_disable_explicit_gc            = $neo4j::dbms_jvm_additional_disable_explicit_gc
   $dbms_jvm_additional_hashcode                       = $neo4j::dbms_jvm_additional_hashcode

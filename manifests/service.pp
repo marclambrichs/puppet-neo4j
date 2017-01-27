@@ -13,7 +13,6 @@
 #
 class neo4j::service (
   $install_java     = $neo4j::install_java,
-  $neo4j_bin        = $neo4j::neo4j_bin,
   $service_enable   = $neo4j::service_enable,
   $service_ensure   = $neo4j::service_ensure,
   $service_provider = $neo4j::service_provider,
