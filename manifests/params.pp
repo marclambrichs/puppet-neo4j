@@ -93,7 +93,7 @@ class neo4j::params {
   $ha_slave_only                                      = false
   $ha_tx_push_factor                                  = 1
   $ha_tx_push_strategy                                = 'fixed_ascending'
-  $log_dir                                       = '/var/log/neo4j'
+  $log_dir                                            = '/var/log/neo4j'
   $install_java                                       = false
   $install_method                                     = 'package'
   $install_prefix                                     = '/etc'
@@ -102,13 +102,17 @@ class neo4j::params {
   $run_dir                                            = '/var/run'
   $service_enable                                     = true
   $service_ensure                                     = 'running'
+  $service_shutdown_timeout                           = 120
+  $service_ulimit                                     = 40000
   $user                                               = 'neo4j'
   case $::osfamily {
     'RedHat': {
+      $default_file     = '/etc/sysconfig/neo4j'
       $service_provider = 'redhat'
       $version          = 'installed'
     }
     'Debian': {
+      $default_file     = '/etc/default/neo4j'
       $service_provider = 'debian'
       $version          = 'installed'
     }

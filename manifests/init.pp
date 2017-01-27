@@ -7,6 +7,7 @@
 #
 # [*allow_load_csv*]
 # [*cypher_default_language_version*]
+# [*default_file*]
 # [*data_prefix*]
 # [*dbms_active_database*]
 # [*dbms_allow_format_migration*]
@@ -92,7 +93,9 @@
 # [*run_dir*]
 # [*service_enable*]
 # [*service_ensure*]
-# [*service_provider]
+# [*service_provider*]
+# [*service_shutdown_timeout*]
+# [*service_ulimit*]
 # [*user*]
 # [*version*]
 #
@@ -115,6 +118,7 @@
 #
 class neo4j (
 
+  $default_file                                       = $neo4j::params::default_file,
   $edition                                            = $neo4j::params::edition,
   $install_java                                       = $neo4j::params::install_java,
   $install_method                                     = $neo4j::params::install_method,
@@ -134,6 +138,10 @@ class neo4j (
   $service_enable                                     = $neo4j::params::service_enable,
   $service_ensure                                     = $neo4j::params::service_ensure,
   $service_provider                                   = $neo4j::params::service_provider,
+
+  ### variables default/sysconfig
+  $service_shutdown_timeout                           = $neo4j::params::service_shutdown_timeout,
+  $service_ulimit                                     = $neo4j::params::service_ulimit,
 
   ### variables neo4j.conf - general
   $allow_load_csv                                     = $neo4j::params::allow_load_csv,
@@ -228,6 +236,7 @@ class neo4j (
 ) inherits neo4j::params {
 
   validate_absolute_path(
+    $default_file,
     $install_prefix,
     $log_dir,
     $run_dir
@@ -273,6 +282,8 @@ class neo4j (
     $dbms_memory_heap_max_size,
     $dbms_shell_port,
     $ha_pull_interval,
+    $service_shutdown_timeout,
+    $service_ulimit,
   ])
 
   validate_re( $ha_join_timeout, '[1-9][0-9]*(ms|s|m)?' )
