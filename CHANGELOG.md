@@ -1,3 +1,6 @@
+## 2017-??-?? - Release ?.?.?
+- Removed option to install java from within module
+
 ## 2016-11-15 - Release 1.2.4
 Adaptations needed for install with rpm.
 

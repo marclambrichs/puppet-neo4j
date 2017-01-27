@@ -12,7 +12,6 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::service (
-  $install_java     = $neo4j::install_java,
   $service_enable   = $neo4j::service_enable,
   $service_ensure   = $neo4j::service_ensure,
   $service_provider = $neo4j::service_provider,
@@ -21,9 +20,5 @@ class neo4j::service (
     ensure   => $service_ensure,
     enable   => $service_enable,
     provider => $service_provider,
-  }
-
-  if ($install_java) {
-    Class['java'] -> Service['neo4j']
   }
 }
