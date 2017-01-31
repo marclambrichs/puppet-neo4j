@@ -1,0 +1,45 @@
+
+#*****************************************************************
+# 8.2 Logging
+#*****************************************************************
+
+#-----------------------------------------------------------------
+# 8.2.1. Query logging
+#-----------------------------------------------------------------
+
+#-----------------------------------------------------------------
+# 8.2.1.1. Log configuration
+#-----------------------------------------------------------------
+# Enabled query logging
+dbms.logs.query.enabled=<% @dbms_logs_query_enabled %>
+
+# Set number of historical log files kept.
+dms.logs.query.rotation.keep_number=<%= @dbms_logs_query_rotation_keep_number %>
+
+# Set the file size at which the query log will auto-rotate.
+dbms.logs.query.rotation.size=<%= @dbms_logs_query_rotation_size %>
+
+# Log executed queries that take longer than the configured threshold
+dbms.logs.query.threshold=<%= @dbms_logs_query_threshold %>
+
+#-----------------------------------------------------------------
+# 8.2.2. Security events logging
+#-----------------------------------------------------------------
+
+#-----------------------------------------------------------------
+# 8.2.2.1. Log configuration
+#-----------------------------------------------------------------
+
+# Set the file size at which the security event log will auto-rotate
+dbms.logs.security.rotation.size=<%= @dbms_logs_security_rotation_size %>
+
+# Set the minimum time interval after the last log rotation occurred, before the
+# log may be rotated again
+dbms.logs.security.rotation.delay=<%= @dbms_logs_security_rotation_delay %>
+
+# Set the number of historical log files kept.
+dbms.logs.security.rotation.keep_number=<%= @dbms_logs_security_rotation_keep_number %>
+
+# If many programmatic interactions are expected, for example using REST, it is
+# advised to disable the logging of successful logins
+dbms.security.log_successful_authentication=<%= @dbms_security_log_successful_authentication %>
