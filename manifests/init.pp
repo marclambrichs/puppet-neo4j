@@ -27,7 +27,11 @@
 # [*dbms_directories_certificates*]
 # [*dbms_directories_data*]
 # [*dbms_directories_import*]
+# [*dbms_directories_lib*]
+# [*dbms_directories_logs*]
+# [*dbms_directories_metrics*]
 # [*dbms_directories_plugins*]
+# [*dbms_directories_run*]
 # [*dbms_ids_reuse_types_override*]
 # [*dbms_jvm_additional_commit_memory_to_process*]
 # [*dbms_jvm_additional_disable_explicit_gc*]
@@ -150,7 +154,11 @@ class neo4j (
   $dbms_directories_certificates                      = $neo4j::params::dbms_directories_certificates,
   $dbms_directories_data                              = $neo4j::params::dbms_directories_data,
   $dbms_directories_import                            = $neo4j::params::dbms_directories_import,
+  $dbms_directories_lib                               = $neo4j::params::dbms_directories_lib,
+  $dbms_directories_logs                              = $neo4j::params::dbms_directories_logs,
+  $dbms_directories_metrics                           = $neo4j::params::dbms_directories_metrics,
   $dbms_directories_plugins                           = $neo4j::params::dbms_directories_plugins,
+  $dbms_directories_run                               = $neo4j::params::dbms_directories_run,
   $dbms_memory_pagecache_size                         = $neo4j::params::dbms_memory_pagecache_size,
   $dbms_security_auth_enabled                         = $neo4j::params::dbms_security_auth_enabled,
 
@@ -275,13 +283,14 @@ class neo4j (
     $dbms_logs_http_rotation_keep_number,
     $dbms_logs_query_rotation_keep_number,
     $dbms_logs_query_threshold,
-    $dbms_memory_heap_initial_size,
-    $dbms_memory_heap_max_size,
     $dbms_shell_port,
     $ha_pull_interval,
     $service_shutdown_timeout,
     $service_ulimit,
   ])
+
+  validate_re( $dbms_memory_heap_initial_size, '[1-9][0-9]*(k|m|g|K|M|G)?', 'size should be an integer followed by a scalar (k|m|g|K|M|G)' )
+  validate_re( $dbms_memory_heap_max_size, '[1-9][0-9]*(k|m|g|K|M|G)?', 'size should be an integer followed by a scalar (k|m|g|K|M|G)' )
 
   validate_re( $ha_join_timeout, '[1-9][0-9]*(ms|s|m)?' )
 
@@ -292,7 +301,11 @@ class neo4j (
     $dbms_directories_certificates,
     $dbms_directories_data,
     $dbms_directories_import,
+    $dbms_directories_lib,
+    $dbms_directories_logs,
+    $dbms_directories_metrics,
     $dbms_directories_plugins,
+    $dbms_directories_run,
     $dbms_mode,
     $dbms_tx_log_rotation_retention_policy,
     $group,
