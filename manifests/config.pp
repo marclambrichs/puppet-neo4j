@@ -50,7 +50,11 @@ class neo4j::config (
   $dbms_directories_certificates = $neo4j::dbms_directories_certificates
   $dbms_directories_data         = $neo4j::dbms_directories_data
   $dbms_directories_import       = $neo4j::dbms_directories_import
+  $dbms_directories_lib          = $neo4j::dbms_directories_lib
+  $dbms_directories_logs         = $neo4j::dbms_directories_logs
+  $dbms_directories_metrics      = $neo4j::dbms_directories_metrics
   $dbms_directories_plugins      = $neo4j::dbms_directories_plugins
+  $dbms_directories_run          = $neo4j::dbms_directories_run
   $dbms_memory_pagecache_size    = $neo4j::dbms_memory_pagecache_size
   $dbms_security_auth_enabled    = $neo4j::dbms_security_auth_enabled
 
