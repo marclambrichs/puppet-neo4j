@@ -1,0 +1,269 @@
+#=================================================================
+# Neo4j configuration - Managed by Puppet
+#=================================================================
+
+# Name of the database to load.
+dbms.active_database=<%= @dbms_active_database %>
+
+# Whether to allow a store upgrade in case the current version of the database
+# starts against an older store version.
+dbms.allow_format_migration=<% @dbms_allow_format_migration %>
+
+# Configure the operating mode of the database — 
+#   'SINGLE' for stand-alone operation,
+#   'HA' for operating as a member in a cluster,
+#   'ARBITER' for an HA-only cluster member with no database,
+#   'CORE' for a core member of a Causal Clustering cluster,
+#   or 'READ_REPLICA' for read replica.
+dbms.mode=<%= @dbms_mode %>
+
+# Only allow read operations from this Neo4j instance.
+dbms.read_only=<%= @dbms_read_only %>
+
+#-----------------------------------------------------------------
+# Paths of directories
+#-----------------------------------------------------------------
+# Directory for storing certificates to be used by Neo4j for TLS connections.
+dbms_directories_certificates=<%= @dbms_directories_certificates %>
+
+# Path of the data directory.
+dbms_directories_data=<%= @dbms_directories_data %>
+
+# Sets the root directory for file URLs used with the Cypher LOAD CSV clause.
+dbms_directories_import=<%= @dbms_directories_import %>
+
+# Path of the lib directory.
+dbms_directories_lib=<%= @dbms_directories_lib %>
+
+# Path of the logs directory.
+dbms_directories_logs=<%= @dbms_directories_logs %>
+
+# The target location of the CSV files: a path to a directory wherein a CSV file
+dbms_directories_metrics=<%= @dbms_directories_metrics %>
+
+# Location of the database plugin directory.
+dbms_directories_plugins=<%= @dbms_directories_plugins %>
+
+# Path of the run directory.
+dbms_directories_run=<%= @dbms_directories_run %>
+
+#-----------------------------------------------------------------
+# Browser
+#-----------------------------------------------------------------
+# Configure the policy for outgoing Neo4j Browser connections
+browser.allow_outgoing_connections=<%= @browser_allow_outgoing_connections %>
+
+# Configure the Neo4j Browser to time out logged in users after this idle period.
+# Setting this to 0 indicates no limit.
+browser.credential_timeout=<%= @browser_credential_timeout %>
+
+# Whitelist of hosts for the Neo4j Browser to be allowed to fetch content from.
+browser.remote_content_hostname_whitelist=<%= @browser_remote_content_hostname_whitelist %>
+
+# Configure the Neo4j Browser to store or not to store user credentials.
+browser.retain_connection_credentials=<%= @browser_retain_connection_credentials %>
+
+#-----------------------------------------------------------------
+# Checkpointing
+#-----------------------------------------------------------------
+# Configures the time interval between check-points.
+dbms.checkpoint_interval_time=<%= @dbms_checkpoint_interval_time %>
+
+# Configures the transaction interval between check-points.
+dbms.checkpoint_interval_tx=<%= @dbms_checkpoint_interval_tx %>
+
+# Limit the number of IOs the background checkpoint process will consume per
+# second.
+dbms.checkpoint_iops_limit=<%= @dbms_checkpoint_iops_limit %>
+
+#-----------------------------------------------------------------
+# Cypher configuration
+#-----------------------------------------------------------------
+# Determines if Cypher will allow using file URLs when loading data using
+# LOAD CSV.
+dbms.security.allow_csv_import_from_file_urls=<%= @dbms_security_allow_csv_import_from_file_urls %>
+
+# Set this to specify the default parser (language version).
+cypher.default_language_version=<%= @cypher_default_language_version %>
+
+# This setting is associated with performance optimization.
+cypher.forbid_exhaustive_shortestpath=<%= @cypher_forbid_exhaustive_shortestpath %>
+
+# Set this to specify the behavior when Cypher planner or runtime hints cannot be
+# fulfilled.
+cypher.hints_error=<%= @cypher_hints_error %>
+
+# The minimum lifetime of a query plan before a query is considered for
+# replanning.
+cypher.min_replan_interval=<%= @cypher_min_replan_interval %>
+
+# Set this to specify the default planner for the default language version.
+cypher.planner=<%= @cypher_planner %>
+
+dbms.query_cache.size=<%= @dbms_query_cache_size %>
+
+# The threshold when a plan is considered stale.
+cypher.statistics_divergence_threshold=<%= @cypher_statistics_divergence_threshold %>
+
+#-----------------------------------------------------------------
+# Lucene index handling
+#-----------------------------------------------------------------
+# Enable or disable background index sampling.
+dbms.index_sampling_background_enabled=<%= @dbms_index_sampling_background_enabled %>
+
+# Size of buffer used by index sampling
+dbms.index_sampling_buffer_size=<%= @dbms_index_sampling_buffer_size %>
+
+# Index sampling chunk size limit.
+dbms.index_sampling_sample_size_limit=<%= @dbms_index_sampling_sample_size_limit %>
+
+# Percentage of index updates of total index size required before sampling of a
+# given index is triggered.
+dbms.index_sampling_update_percentage=<%= @dbms_index_sampling_update_percentage %>
+
+# The maximum number of open Lucene index searchers.
+dbms.index_searcher_cache_size=<%= @dbms_index_searcher_cache_size %>
+
+#-----------------------------------------------------------------
+# JVM Parameters
+#-----------------------------------------------------------------
+
+#-----------------------------------------------------------------
+# JMX Parameters
+#-----------------------------------------------------------------
+# These settings are used for exposing the JMX.
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.access_file=<%= @dbms_jvm_additional_jmxremote_access_file %>
+
+dbms_jvm_additional=-Dcom.sun.management.jmxremote.authenticate=<%= @dbms_jvm_additional_jmxremote_authenticate %>
+
+dbms_jvm_additional=-Dcom.sun.management.jmxremote.password_file=<%= @dbms_jvm_additional_jmxremote_password_file %>
+
+dbms_jvm_additional=-Dcom.sun.management.jmxremote.port=<%= @dbms_jvm_additional_jmxremote_port %>
+
+dbms_jvm_additional=-Dcom.sun.management.jmxremote.ssl=<%= @dbms_jvm_additional_jmxremote_ssl %>
+
+#-----------------------------------------------------------------
+# Logging
+#-----------------------------------------------------------------
+# Debug log level threshold.
+dbms.logs.debug.level=<%= @dbms_logs_debug_level %>
+
+# Minimum time interval after last rotation of the debug log before it may be
+# rotated again.
+dbms.logs.debug.rotation.delay=<%= @dbms_logs_debug_rotation_delay %>
+
+# Maximum number of history files for the debug log.
+dbms.logs.debug.rotation.keep_number=<%= @dbms_logs_debug_rotation_keep_number %>
+
+# Threshold for rotation of the debug log.
+dbms.logs.debug.rotation.size=<%= @dbms_logs_debug_rotation_size %>
+
+# Enable GC Logging.
+dbms.logs.gc.enabled=<%= @dbms_logs_gc_enabled %>
+
+# GC Logging Options.
+dbms.logs.gc.options=<%= @dbms_logs_gc_options.join(' ') %>
+
+# Number of GC logs to keep.
+dbms.logs.gc.rotation.keep_number=<%= @dbms_logs_gc_rotation_keep_number %>
+
+# Size of each GC log that is kept.
+dbms.logs.gc.rotation.size=<%= @dbms_logs_gc_rotation_size %>
+
+# Enable HTTP request logging.
+dbms.logs.http.enabled=<%= @dbms_logs_http_enabled %>
+
+# Number of HTTP logs to keep.
+dbms.logs.http.rotation.keep_number=<%= @dbms_logs_http_rotation_keep_number %>
+
+# Size of each HTTP log that is kept.
+dbms.logs.http.rotation.size=<%= @dbms_logs_http_rotation_size %>
+
+# Security log level threshold.
+dbms.logs.security.level=<%= @dbms_logs_security_level %>
+
+# Minimum time interval after last rotation of the security log before it may be
+# rotated again.
+dbms.logs.security.rotation.delay=<%= @dbms_logs_security_rotation_delay %>
+
+# Maximum number of history files for the security log.
+dbms.logs.security.rotation.keep_number=<%= @dbms_logs_security_rotation_keep_number %>
+
+# Threshold for rotation of the security log.
+dbms.logs.security.rotation.size=<%= @dbms_logs_security_rotation_size %>
+
+# Make Neo4j keep the logical transaction logs for being able to backup the database.
+dbms_tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy %>
+
+# Specifies at which file size the logical log will auto-rotate.
+dbms.tx_log.rotation.size=<%= @dbms_tx_log_rotation_size %>
+
+#-----------------------------------------------------------------
+# Memory
+#-----------------------------------------------------------------
+# The amount of memory to use for mapping the store files, in bytes (or
+# kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
+dbms.memory.pagecache.size=<%= @dbms_memory_pagecache_size %>
+
+<% if @dbms_memory_pagecache_swapper -%>
+# Specify which page swapper to use for doing paged IO.
+dbms.memory.pagecache.swapper=<%= @dbms_memory_pagecache_swapper %>
+<% end -%>
+
+#-----------------------------------------------------------------
+# Miscellaeneous
+#-----------------------------------------------------------------
+# Specified names of id types (comma separated) that should be reused.
+dbms.ids.reuse.types.override=<%= @dbms_ids_reuse_types_override.join(',') %>
+
+# Database record format.
+dbms.record_format=<%= @dbms_record_format %>
+
+# Relationship count threshold for considering a node to be dense.
+dbms.relationship_grouping_threshold=<%= @dbms_relationship_grouping_threshold %>
+
+# Timeout for idle transactions in the REST endpoint.
+dbms.rest.transaction.idle_timeout=<%= @dbms_rest_transaction_idle_timeout %>
+
+# Comma-separated list of <classname>=<mount point> for unmanaged extensions.
+dbms.unmanaged_extension_classes=<%= @dbms_unmanaged_extension_classes %>
+
+#-----------------------------------------------------------------
+# Shell
+#-----------------------------------------------------------------
+# Enable a remote shell server which Neo4j Shell clients can log in to.
+dbms.shell.enabled=<%= @dbms_shell_enabled %>
+
+# Remote host for shell.
+dbms.shell.host=<%= @dbms_shell_host %>
+
+# The port the shell will listen on.
+dbms_shell_port=<%= @dbms_shell_port %>
+
+# Read only mode.
+dbms.shell.read_only=<%= @dbms_shell_read_only %>
+
+# The name of the shell.
+dbms.shell.rmi_name=<%= @dbms_shell_rmi_name %>
+
+#-----------------------------------------------------------------
+# Tools
+#-----------------------------------------------------------------
+# Perform checks between nodes, relationships, properties, types and tokens.
+tools.consistency_checker.check_graph=<%= @tools_consistency_checker_check_graph %>
+
+# Perform checks on indexes.
+tools.consistency_checker.check_indexes=<%= @tools_consistency_checker_check_indexes %>
+
+# Perform checks on the label scan store.
+tools.consistency_checker.check_label_scan_store=<%= @tools_consistency_checker_check_label_scan_store %>
+
+# Perform optional additional checking on property ownership.
+tools.consistency_checker.check_property_owners=<%= @tools_consistency_checker_check_property_owners %>
+
+#-----------------------------------------------------------------
+# UDC
+#-----------------------------------------------------------------
+# Enable/disable the UDC extension. (http://neo4j.com/docs/stable/usage-data-collector.html)
+dbms.udc.enabled=<%= @dbms_udc_enabled %>
+

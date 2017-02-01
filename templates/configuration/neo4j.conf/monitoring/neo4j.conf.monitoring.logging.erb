@@ -1,6 +1,6 @@
 
 #*****************************************************************
-# 8.2 Logging
+# 8.2. Logging
 #*****************************************************************
 
 #-----------------------------------------------------------------
@@ -11,7 +11,10 @@
 # 8.2.1.1. Log configuration
 #-----------------------------------------------------------------
 # Enabled query logging
-dbms.logs.query.enabled=<% @dbms_logs_query_enabled %>
+dbms.logs.query.enabled=<%= @dbms_logs_query_enabled %>
+
+# Log executed queries that take longer than the configured threshold,
+dbms.logs.query.parameter_logging_enabled=<%= @dbms_logs_query_parameter_logging_enabled %>
 
 # Set number of historical log files kept.
 dms.logs.query.rotation.keep_number=<%= @dbms_logs_query_rotation_keep_number %>

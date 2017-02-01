@@ -4,7 +4,7 @@
 #*****************************************************************
 # The size of the ID allocation requests Core servers will make when they run
 # out of ARRAY_BLOCK IDs.
-causal_clustering.array_block_id_allocation_size=<%= @causal_clustering.array_block_id_allocation_size %>
+causal_clustering.array_block_id_allocation_size=<%= @causal_clustering_array_block_id_allocation_size %>
 
 # The maximum batch size when catching up (in unit of entries).
 causal_clustering.catchup_batch_size=<%= @causal_clustering_catchup_batch_size %>
@@ -98,7 +98,7 @@ causal_clustering.pull_interval=<%= @causal_clustering_pull_interval %>
 causal_clustering.raft_advertised_address=<%= @causal_clustering_raft_advertised_address %>
 
 # Network interface and port for the RAFT server to listen on.
-causal_clustering.raft_listen_address=<%= @--  causal_clustering_raft_listen_address %>
+causal_clustering.raft_listen_address=<%= @causal_clustering_raft_listen_address %>
 
 # RAFT log implementation.
 causal_clustering.raft_log_implementation=<%= @causal_clustering_raft_log_implementation %>

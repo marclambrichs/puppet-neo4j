@@ -18,6 +18,19 @@ dbms.security.auth_enabled=<%= @dbms_security_auth_enabled %>
 # authorization.
 dbms.security.auth_provider=<%= @dbms_security_auth_provider %>
 
+# LDAP authentication mechanism.
+dbms.security.ldap.authentication.mechanism=<%= @dbms_security_ldap_authentication_mechanism %>
+
+# The timeout for establishing an LDAP connection.
+dbms.security.ldap.connection_timeout=<%=  @dbms_security_ldap_connection_timeout %>
+
+# The timeout for an LDAP read request (i.e. search). A value of 0 means wait
+# for a response indefinitely.
+dbms.security.ldap.read_timeout=<%= @dbms_security_ldap_read_timeout %>
+
+# The LDAP referral behavior when creating a connection.
+dbms.security.ldap.referral=<%= @dbms_security_ldap_referral %>
+
 #-----------------------------------------------------------------
 # Configuration for Active Directory/openLDAP
 #-----------------------------------------------------------------
@@ -38,16 +51,24 @@ dbms.security.ldap.authorization.group_to_role_mapping=<%= @dbms_security_ldap_a
 # we can specify credentials for a user with read access to all users and groups:
 # Note that this account only needs read-only access to the relevant parts of the LDAP directory
 # and does not need to have access rights to Neo4j or any other systems.
-dbms.security.ldap.authorization.use_system_account=<%= @dbms_security_ldap_authorization_system_password %>
+dbms.security.ldap.authorization.use_system_account=<%= @dbms_security_ldap_authorization_use_system_account %>
 dbms.security.ldap.authorization.system_username=<%= @dbms_security_ldap_authorization_system_username %>
-dbms.security.ldap.authorization.system_password=<%= @dbms_security_ldap_authorization_system_username %>
+dbms.security.ldap.authorization.system_password=<%= @dbms_security_ldap_authorization_system_password %>
 
 #-----------------------------------------------------------------
 # 7.1.5.3. The auth cache
 #-----------------------------------------------------------------
 # Turn on authentication caching to ensure performance
 dbms.security.ldap.authentication.cache_enabled=<%= @dbms_security_ldap_authentication_cache_enabled %>
+
+# The maximum capacity for authentication and authorization caches
+# (respectively).
+dbms.security.auth_cache_max_capacity=<%= @dbms_security_auth_cache_max_capacity %>
+
+# The time to live (TTL) for cached authentication and authorization info when
+# using external auth providers (LDAP or plugin).
 dbms.security.auth_cache_ttl=<%= @dbms_security_auth_cache_ttl %>
+
 
 #-----------------------------------------------------------------
 # 7.1.5.4. Available methods of encryption
@@ -67,9 +88,35 @@ dbms.jvm.additional=-Djavax.net.ssl.trustStore=<%= @dbms_jvm_additional_ssl_trus
 dbms.jvm.additional=-Djavax.net.ssl.trustStorePassword=<%= @dbms_jvm_additional_ssl_truststore_password %>
 
 #-----------------------------------------------------------------
+# Connection pooling
+#-----------------------------------------------------------------
+# Set to true if connection pooling should be used for authorization searches
+unsupported.dbms.security.ldap.authorization.connection_pooling=<%= @unsupported_dbms_security_ldap_authorization_connection_pooling %>
+
+#-----------------------------------------------------------------
 # HA
 #-----------------------------------------------------------------
 # Require authorization for access to the HA status endpoints.
 dbms.security.ha_status_auth_enabled=<%= @dbms_security_ha_status_auth_enabled %>
+
+#-----------------------------------------------------------------
+# HTTP
+#-----------------------------------------------------------------
+# Comma-seperated list of custom security rules for Neo4j to use.
+dbms.security.http_authorization_classes=<%= @dbms_security_http_authorization_classes %>
+
+#-----------------------------------------------------------------
+# Procedures/Roles
+#----------------------------------------------------------------
+# Set to true if users with role publisher are allowed to create new tokens.
+dbms.security.allow_publisher_create_token=<%= @dbms_security_allow_publisher_create_token %>
+
+# The default role that can execute all procedures and user-defined functions
+# that are not covered by the dbms.security.procedures.roles setting.
+dbms.security.procedures.default_allowed=<%= @dbms_security_procedures_default_allowed %>
+
+# This provides a finer level of control over which roles can execute procedures
+# than the dbms.security.procedures.default_allowed setting.
+dbms.security.procedures.roles=<%= @dbms_security_procedures_roles %>
 
 

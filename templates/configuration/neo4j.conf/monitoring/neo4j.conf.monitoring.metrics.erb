@@ -1,0 +1,107 @@
+#*****************************************************************
+# 8.1. Metrics
+#*****************************************************************
+
+#-----------------------------------------------------------------
+# 8.1.1. Enable metrics logging
+#-----------------------------------------------------------------
+# Setting for enabling all supported metrics
+metrics.enabled=<%= @metrics_enabled %>
+
+# Setting for enabling all Neo4j specific metrics
+metrics.neo4j.enabled=<%= @metrics_neo4j_enabled %>
+
+# Enable reporting metrics about Server threading info.
+metrics.neo4j.server.enabled=<%= @metrics_neo4j_server_enabled %>
+
+# Setting for exposing metrics about transactions; number of transactions
+# started, committed, etc.
+metrics.neo4j.tx.enabled=<%= @metrics_neo4j_tx_enabled %>
+
+# Setting for exposing metrics about the Neo4j page cache; page faults,
+# evictions, flushes and exceptions, etc.
+metrics.neo4j.pagecache.enabled=<%= @metrics_neo4j_pagecache_enabled %>
+
+# Setting for exposing metrics about approximately entities are in the database;
+# nodes, relationships, properties, etc.
+metrics.neo4j.counts.enabled=<%= @metrics_neo4j_counts_enabled %>
+
+# Setting for exposing metrics about the network usage of the HA cluster component.
+metrics.neo4j.network.enabled=<%= @metrics_neo4j_network_enabled %>
+
+#-----------------------------------------------------------------
+# 8.1.1.1. Graphite
+#-----------------------------------------------------------------
+# Enable the Graphite integration. Default is 'false'.
+metrics.graphite.enabled=<%= @metrics_graphite_enabled %>
+
+# The IP and port of the Graphite server with format <hostname or IP>:<port>.
+# The default port number for Graphite is 2003.
+metrics.graphite.server=<%= @metrics_graphite_server %>
+
+# How often to send data. Default is 3 minutes.
+metrics.graphite.interval=<%= @metrics_graphite_interval %>
+
+# Prefix for Neo4j metrics on Graphite server.
+metrics.prefix=<%= @metrics_prefix %>
+
+#-----------------------------------------------------------------
+# 8.1.1.2. CSV files
+#-----------------------------------------------------------------
+# Enable the CSV exporter. Default is 'false'
+metrics.csv.enabled=<%= @metrics_csv_enabled %>
+
+# Directory path for output files.
+# Default is a "metrics" directory under NEO4J_HOME.
+metrics.csv.path=<%= @metrics_csv_path %>
+
+# How often to store data. Default is 3 minutes.
+metrics.csv.interval=<%= @metrics_csv_interval %>
+
+#-----------------------------------------------------------------
+# Bolt
+#-----------------------------------------------------------------
+# Enable reporting metrics about Bolt Protocol message processing.
+metrics.bolt.messages.enabled=<%= @metrics_bolt_messages_enabled %>
+
+#-----------------------------------------------------------------
+# Checkpointing
+#-----------------------------------------------------------------
+# Enable reporting metrics about Neo4j check pointing.
+metrics.neo4j.checkpointing.enabled=<%= @metrics_neo4j_checkpointing_enabled %>
+
+#-----------------------------------------------------------------
+# Clustering
+#-----------------------------------------------------------------
+# Enable reporting metrics about Causal Clustering mode.
+metrics.neo4j.causal_clustering.enabled=<%= @metrics_neo4j_causal_clustering_enabled %>
+
+# Enable reporting metrics about HA cluster info.
+metrics.neo4j.cluster.enabled=<%= @metrics_neo4j_cluster_enabled %>
+
+#-----------------------------------------------------------------
+# Cypher
+#-----------------------------------------------------------------
+# Enable reporting metrics about number of occurred replanning events.
+metrics.cypher.replanning.enabled=<%= @metrics_cypher_replanning_enabled %>
+
+#-----------------------------------------------------------------
+# JVM
+#-----------------------------------------------------------------
+# Enable reporting metrics about the buffer pools.
+metrics.jvm.buffers.enabled=<%= @metrics_jvm_buffers_enabled %>
+
+# Enable reporting metrics about the duration of garbage collections.
+metrics.jvm.gc.enabled=<%= @metrics_jvm_gc_enabled %>
+
+# Enable reporting metrics about the memory usage.
+metrics.jvm.memory.enabled=<%= @metrics_jvm_memory_enabled %>
+
+# Enable reporting metrics about the current number of threads running.
+metrics.jvm.threads.enabled=<%= @metrics_jvm_threads_enabled %>
+
+#-----------------------------------------------------------------
+# Logrotation
+#-----------------------------------------------------------------
+# Enable reporting metrics about the Neo4j log rotation.
+metrics.neo4j.logrotation.enabled=<%= @metrics_neo4j_logrotation_enabled %>
