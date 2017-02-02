@@ -1763,9 +1763,10 @@ class neo4j (
   validate_re( $ha_paxos_timeout,                                    '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_phase1_timeout,                                   '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_phase2_timeout,                                   '[1-9][0-9]*(ms|s|m)?' )
-  validate_re( $ha_pull_interval,                                    '[1-9][0-9]*(ms|s|m)?' )
+  validate_re( $ha_pull_interval,                                    '(0|[1-9][0-9]*)(ms|s|m)?' )
   validate_re( $ha_role_switch_timeout,                              '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_slave_lock_timeout,                               '[1-9][0-9]*(ms|s|m)?' )
+  validate_re( $ha_slave_read_timeout,                               '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $metrics_csv_interval,                                '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $metrics_graphite_interval,                           '[1-9][0-9]*(ms|s|m)?' )
 
@@ -1808,11 +1809,9 @@ class neo4j (
     $dbms_query_cache_size,
     $dbms_relationship_grouping_threshold,
     $dbms_shell_port,
-
     $ha_max_acceptors,
     $ha_max_channels_per_slave,
     $ha_pull_batch_size,
-    $ha_slave_read_timeout,
     $ha_tx_push_factor,
   ])
 

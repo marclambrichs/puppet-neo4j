@@ -91,7 +91,7 @@ class neo4j::params {
   $dbms_ids_reuse_types_override                                     = [ 'RELATIONSHIP', 'NODE']
   $dbms_index_sampling_background_enabled                            = true
   $dbms_index_sampling_buffer_size                                   = '64m'
-  $dbms_index_sampling_sample_size_limit                             = '8m'
+  $dbms_index_sampling_sample_size_limit                             = 8388608
   $dbms_index_sampling_update_percentage                             = 5
   $dbms_index_searcher_cache_size                                    = 2147483647
   $dbms_jvm_additional_commit_memory_to_process                      = '-XX:+AlwaysPreTouch'
@@ -209,7 +209,7 @@ class neo4j::params {
   $ha_paxos_timeout                                                  = '5000'
   $ha_phase1_timeout                                                 = '5000'
   $ha_phase2_timeout                                                 = '5000'
-  $ha_pull_batch_size                                                = 100
+
   $ha_pull_interval                                                  = '0'
   $ha_role_switch_timeout                                            = '120000'
   $ha_server_id                                                      = 1
