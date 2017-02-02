@@ -13,11 +13,11 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::install (
-  $dbms_directories_data = $::neo4j::dbms_directories_data,
-  $dbms_directories_logs = $::neo4j::dbms_directories_logs,
+  $data_dir              = $::neo4j::data_dir,
   $group                 = $::neo4j::group,
   $install_method        = $::neo4j::install_method,
   $install_prefix        = $::neo4j::install_prefix,
+  $logs_dir              = $::neo4j::logs_dir,
   $manage_repo           = $::neo4j::manage_repo,
   $neo4j_home            = $::neo4j::neo4j_home,
   $package_name          = $::neo4j::package_name,
@@ -75,18 +75,16 @@ class neo4j::install (
         ensure => directory,
       }
 
-      file { $dbms_directories_data:
+      file { $data_dir:
         ensure => directory,
       }
 
-      File[$install_prefix] -> File[$dbms_directories_data]
-
-      if ( $dbms_directories_logs ){
-        file { $dbms_directories_logs:
-          ensure => directory,
-          mode   => '0644'
-        }
+      file { $logs_dir:
+        ensure => directory,
+        mode   => '0644'
       }
+
+      File[$install_prefix] -> File[$data_dir, $logs_dir]
 
       file { $neo4j_home:
         ensure  => directory,

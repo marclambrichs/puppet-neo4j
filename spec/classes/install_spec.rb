@@ -9,7 +9,7 @@ describe 'neo4j' do
           it { should_not contain_file('/usr/share/data') }
           it { should_not contain_file('/usr/share/neo4j') }
           it { should_not contain_file('/usr/share') }
-          it { should_not contain_file('/var/log/neo4j') }
+          it { should_not contain_file('/usr/share/logs') }
           it { should_not contain_archive('neo4j-community-3.1.1.tgz') }
           it { should contain_package('neo4j') }
         end
@@ -24,7 +24,7 @@ describe 'neo4j' do
           it { should contain_file('/usr/share/data') }
           it { should contain_file('/usr/share/neo4j-community-3.0.8') }
           it { should contain_file('/usr/share') }
-          it { should contain_file('/var/log/neo4j') }
+          it { should contain_file('/usr/share/logs') }
           it { should contain_archive('neo4j-community-3.0.8.tgz') }
           it { should_not contain_package('neo4j') }
         end
@@ -39,7 +39,7 @@ describe 'neo4j' do
           it { should contain_file('/usr/share/data') }
           it { should contain_file('/usr/share/neo4j-community-3.1.1') }
           it { should contain_file('/usr/share') }
-          it { should contain_file('/var/log/neo4j') }
+          it { should contain_file('/usr/share/logs') }
           it { should contain_archive('neo4j-community-3.1.1.tgz') }
           it { should_not contain_package('neo4j') }
         end

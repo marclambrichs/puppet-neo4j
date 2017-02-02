@@ -12,14 +12,12 @@
 # Copyright 2016 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::service (
-  $group            = $neo4j::group,
-  $install_java     = $neo4j::install_java,
-  $neo4j_bin        = $neo4j::neo4j_bin,
-  $service_enable   = $neo4j::service_enable,
-  $service_ensure   = $neo4j::service_ensure,
-  $service_name     = $neo4j::service_name,
-  $service_provider = $neo4j::service_provider,
-  $user             = $neo4j::user,
+  $group            = $::neo4j::group,
+  $service_enable   = $::neo4j::service_enable,
+  $service_ensure   = $::neo4j::service_ensure,
+  $service_name     = $::neo4j::service_name,
+  $service_provider = $::neo4j::service_provider,
+  $user             = $::neo4j::user,
 ){
 
   if $service_enable {
@@ -49,10 +47,6 @@ class neo4j::service (
       enable   => $service_enable,
       provider => $service_provider,
     }
-  }
-
-  if ($install_java) {
-    Class['java'] -> Service['neo4j']
   }
 
 }

@@ -186,12 +186,6 @@ dbms.logs.security.level=<%= @dbms_logs_security_level %>
 # rotated again.
 dbms.logs.security.rotation.delay=<%= @dbms_logs_security_rotation_delay %>
 
-# Maximum number of history files for the security log.
-dbms.logs.security.rotation.keep_number=<%= @dbms_logs_security_rotation_keep_number %>
-
-# Threshold for rotation of the security log.
-dbms.logs.security.rotation.size=<%= @dbms_logs_security_rotation_size %>
-
 # Make Neo4j keep the logical transaction logs for being able to backup the database.
 dbms_tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy %>
 

@@ -3,7 +3,11 @@
 class neo4j::params {
   $browser_allow_outgoing_connections                                = true
   $browser_credential_timeout                                        = '0'
-  $browser_remote_content_hostname_whitelist                         = [ 'http://guides.neo4j.com', 'https://guides.neo4j.com','http://localhost', 'https://localhost' ]
+  $browser_remote_content_hostname_whitelist                         = ['http://guides.neo4j.com',
+                                                                        'https://guides.neo4j.com',
+                                                                        'http://localhost',
+                                                                        'https://localhost'
+]
   $browser_retain_connection_credentials                             = true
   $causal_clustering_array_block_id_allocation_size                  = 1024
   $causal_clustering_catchup_batch_size                              = 64
@@ -209,13 +213,13 @@ class neo4j::params {
   $ha_paxos_timeout                                                  = '5000'
   $ha_phase1_timeout                                                 = '5000'
   $ha_phase2_timeout                                                 = '5000'
-
+  $ha_pull_batch_size                                                = 100
   $ha_pull_interval                                                  = '0'
   $ha_role_switch_timeout                                            = '120000'
   $ha_server_id                                                      = 1
   $ha_slave_lock_timeout                                             = '20000'
   $ha_slave_only                                                     = false
-  $ha_slave_read_timeout                                             = 20000
+  $ha_slave_read_timeout                                             = '20000'
   $ha_tx_push_factor                                                 = 1
   $ha_tx_push_strategy                                               = 'fixed_ascending'
   $install_method                                                    = 'package'

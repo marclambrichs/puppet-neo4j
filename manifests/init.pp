@@ -1790,6 +1790,9 @@ class neo4j (
   validate_re( $ha_host_data,                         '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
   validate_re( $metrics_graphite_server,              '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
 
+  ### validate arrays
+  validate_array( $browser_remote_content_hostname_whitelist )
+
   ### validate integers
   validate_integer([
     $causal_clustering_catchup_batch_size,
@@ -1817,7 +1820,6 @@ class neo4j (
 
   ### validate strings
   validate_string(
-    $browser_remote_content_hostname_whitelist,
     $causal_clustering_raft_log_implementation,
     $causal_clustering_raft_log_prune_strategy,
     $dbms_active_database,
@@ -1867,6 +1869,10 @@ class neo4j (
     $version,
   )
 
+  #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
+  $source_name     = "neo4j-${edition}-${version}"
+  $source_tarball = "${source_name}.tgz"
+
   if ( $::kernel != 'Linux' ) {
     fail('Only Linux is supported at this time.')
   }
@@ -1886,14 +1892,23 @@ class neo4j (
       if ( versioncmp( $version, '3.0.0' ) < 0 ) {
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
-      #http://www.neo4j.com/customer/download/neo4j-enterprise-2.1.4-unix.tar.gz
-      $source_name     = "neo4j-${edition}-${version}"
-      $source_tarball = "${source_name}.tgz"
       $neo4j_home = "${install_prefix}/${source_name}"
     }
     default: {
       fail("Installation method ${install_method} not supported.")
     }
+  }
+
+  if ( is_absolute_path( $dbms_directories_data )) {
+    $data_dir = $dbms_directories_data
+  } else {
+    $data_dir = "${install_prefix}/${dbms_directories_data}"
+  }
+
+  if ( is_absolute_path( $dbms_directories_logs )) {
+    $logs_dir = $dbms_directories_logs
+  } else {
+    $logs_dir = "${install_prefix}/${dbms_directories_logs}"
   }
 
   if ( $dbms_mode in ['HA', 'ARBITER', 'CORE', 'READ_REPLICA'] ){

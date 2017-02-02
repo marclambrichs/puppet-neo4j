@@ -56,7 +56,6 @@ class neo4j::config (
   $dbms_index_sampling_sample_size_limit            = $::neo4j::dbms_index_sampling_sample_size_limit
   $dbms_index_sampling_update_percentage            = $::neo4j::dbms_index_sampling_update_percentage
   $dbms_index_searcher_cache_size                   = $::neo4j::dbms_index_searcher_cache_size
-  $dbms_jvm_additional                              = $::neo4j::dbms_jvm_additional
   $dbms_logs_debug_level                            = $::neo4j::dbms_logs_debug_level
   $dbms_logs_debug_rotation_delay                   = $::neo4j::dbms_logs_debug_rotation_delay
   $dbms_logs_debug_rotation_keep_number             = $::neo4j::dbms_logs_debug_rotation_keep_number
@@ -70,8 +69,6 @@ class neo4j::config (
   $dbms_logs_http_rotation_size                     = $::neo4j::dbms_logs_http_rotation_size
   $dbms_logs_security_level                         = $::neo4j::dbms_logs_security_level
   $dbms_logs_security_rotation_delay                = $::neo4j::dbms_logs_security_rotation_delay
-  $dbms_logs_security_rotation_keep_number          = $::neo4j::dbms_logs_security_rotation_keep_number
-  $dbms_logs_security_rotation_size                 = $::neo4j::dbms_logs_security_rotation_size
   $dbms_memory_pagecache_size                       = $::neo4j::dbms_memory_pagecache_size
   $dbms_memory_pagecache_swapper                    = $::neo4j::dbms_memory_pagecache_swapper
   $dbms_mode                                        = $::neo4j::dbms_mode
@@ -94,7 +91,6 @@ class neo4j::config (
   $dbms_directories_metrics                         = $::neo4j::dbms_directories_metrics
   $dbms_directories_plugins                         = $::neo4j::dbms_directories_plugins
   $dbms_directories_run                             = $::neo4j::dbms_directories_run
-  $dbms_jvm_additional                              = $::neo4j::dbms_jvm_additional
   $dbms_shell_port                                  = $::neo4j::dbms_shell_port
   $dbms_tx_log_rotation_retention_policy            = $::neo4j::dbms_tx_log_rotation_retention_policy
   $tools_consistency_checker_check_graph            = $::neo4j::tools_consistency_checker_check_graph
@@ -104,7 +100,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config general':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.config/neo4j.conf.general.erb'),
+    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.general.erb'),
     order   => '01',
   }
 
@@ -126,7 +122,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config connectors':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.connector.erb'),
+    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.connectors.erb'),
     order   => '36',
   }
 
@@ -185,7 +181,7 @@ class neo4j::config (
   $causal_clustering_transaction_listen_address                      = $::neo4j::causal_clustering_transaction_listen_address
   $causal_clustering_unknown_address_logging_throttle                = $::neo4j::causal_clustering_unknown_address_logging_throttle
 
-  concat::fragment{ 'configure neo4j causal cluster':
+  concat::fragment{ 'neo4j config causal cluster':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/clustering/neo4j.conf.clustering.causal.erb'),
     order   => '41',
@@ -246,32 +242,32 @@ class neo4j::config (
   #-----------------------------------------------------------------------------
   # 7.1. Authentication and authorization
   #-----------------------------------------------------------------------------
-  $dbms_security_allow_publisher_create_token                   = $::neoj4::dbms_security_allow_publisher_create_token
-  $dbms_security_auth_cache_max_capacity                        = $::neoj4::dbms_security_auth_cache_max_capacity
-  $dbms_security_auth_cache_ttl                                 = $::neoj4::dbms_security_auth_cache_ttl
-  $dbms_security_auth_enabled                                   = $::neoj4::dbms_security_auth_enabled
-  $dbms_security_auth_provider                                  = $::neoj4::dbms_security_auth_provider
-  $dbms_security_ha_status_auth_enabled                         = $::neoj4::dbms_security_ha_status_auth_enabled
-  $dbms_security_http_authorization_classes                     = $::neoj4::dbms_security_http_authorization_classes
-  $dbms_security_ldap_authentication_cache_enabled              = $::neoj4::dbms_security_ldap_authentication_cache_enabled
-  $dbms_security_ldap_authentication_mechanism                  = $::neoj4::dbms_security_ldap_authentication_mechanism
-  $dbms_security_ldap_authentication_user_dn_template           = $::neoj4::dbms_security_ldap_authentication_user_dn_template
-  $dbms_security_ldap_authorization_group_membership_attributes = $::neoj4::dbms_security_ldap_authorization_group_membership_attributes
-  $dbms_security_ldap_authorization_group_to_role_mapping       = $::neoj4::dbms_security_ldap_authorization_group_to_role_mapping
-  $dbms_security_ldap_authorization_system_password             = $::neoj4::dbms_security_ldap_authorization_system_password
-  $dbms_security_ldap_authorization_system_username             = $::neoj4::dbms_security_ldap_authorization_system_username
-  $dbms_security_ldap_authorization_use_system_account          = $::neoj4::dbms_security_ldap_authorization_use_system_account
-  $dbms_security_ldap_authorization_user_search_base            = $::neoj4::dbms_security_ldap_authorization_user_search_base
-  $dbms_security_ldap_authorization_user_search_filter          = $::neoj4::dbms_security_ldap_authorization_user_search_filter
-  $dbms_security_ldap_connection_timeout                        = $::neoj4::dbms_security_ldap_connection_timeout
-  $dbms_security_ldap_host                                      = $::neoj4::dbms_security_ldap_host
-  $dbms_security_ldap_read_timeout                              = $::neoj4::dbms_security_ldap_read_timeout
-  $dbms_security_ldap_referral                                  = $::neoj4::dbms_security_ldap_referral
-  $dbms_security_ldap_use_starttls                              = $::neoj4::dbms_security_ldap_use_starttls
-  $dbms_security_procedures_default_allowed                     = $::neoj4::dbms_security_procedures_default_allowed
-  $dbms_security_procedures_roles                               = $::neoj4::dbms_security_procedures_roles
+  $dbms_security_allow_publisher_create_token                   = $::neo4j::dbms_security_allow_publisher_create_token
+  $dbms_security_auth_cache_max_capacity                        = $::neo4j::dbms_security_auth_cache_max_capacity
+  $dbms_security_auth_cache_ttl                                 = $::neo4j::dbms_security_auth_cache_ttl
+  $dbms_security_auth_enabled                                   = $::neo4j::dbms_security_auth_enabled
+  $dbms_security_auth_provider                                  = $::neo4j::dbms_security_auth_provider
+  $dbms_security_ha_status_auth_enabled                         = $::neo4j::dbms_security_ha_status_auth_enabled
+  $dbms_security_http_authorization_classes                     = $::neo4j::dbms_security_http_authorization_classes
+  $dbms_security_ldap_authentication_cache_enabled              = $::neo4j::dbms_security_ldap_authentication_cache_enabled
+  $dbms_security_ldap_authentication_mechanism                  = $::neo4j::dbms_security_ldap_authentication_mechanism
+  $dbms_security_ldap_authentication_user_dn_template           = $::neo4j::dbms_security_ldap_authentication_user_dn_template
+  $dbms_security_ldap_authorization_group_membership_attributes = $::neo4j::dbms_security_ldap_authorization_group_membership_attributes
+  $dbms_security_ldap_authorization_group_to_role_mapping       = $::neo4j::dbms_security_ldap_authorization_group_to_role_mapping
+  $dbms_security_ldap_authorization_system_password             = $::neo4j::dbms_security_ldap_authorization_system_password
+  $dbms_security_ldap_authorization_system_username             = $::neo4j::dbms_security_ldap_authorization_system_username
+  $dbms_security_ldap_authorization_use_system_account          = $::neo4j::dbms_security_ldap_authorization_use_system_account
+  $dbms_security_ldap_authorization_user_search_base            = $::neo4j::dbms_security_ldap_authorization_user_search_base
+  $dbms_security_ldap_authorization_user_search_filter          = $::neo4j::dbms_security_ldap_authorization_user_search_filter
+  $dbms_security_ldap_connection_timeout                        = $::neo4j::dbms_security_ldap_connection_timeout
+  $dbms_security_ldap_host                                      = $::neo4j::dbms_security_ldap_host
+  $dbms_security_ldap_read_timeout                              = $::neo4j::dbms_security_ldap_read_timeout
+  $dbms_security_ldap_referral                                  = $::neo4j::dbms_security_ldap_referral
+  $dbms_security_ldap_use_starttls                              = $::neo4j::dbms_security_ldap_use_starttls
+  $dbms_security_procedures_default_allowed                     = $::neo4j::dbms_security_procedures_default_allowed
+  $dbms_security_procedures_roles                               = $::neo4j::dbms_security_procedures_roles
 
-  concat::fragment{ 'authentication and authorization':
+  concat::fragment{ 'neo4j config authentication and authorization':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/security/neo4j.conf.enterprise.authentication.erb'),
     order   => '71',
@@ -318,11 +314,10 @@ class neo4j::config (
   $dbms_logs_query_parameter_logging_enabled   = $::neo4j::dbms_logs_query_parameter_logging_enabled
   $dbms_logs_query_rotation_size               = $::neo4j::dbms_logs_query_rotation_size
   $dbms_logs_query_threshold                   = $::neo4j::dbms_logs_query_threshold
-  $dbms_logs_security_rotation_delay           = $::neo4j::dbms_logs_security_rotation_delay
   $dbms_logs_security_rotation_keep_number     = $::neo4j::dbms_logs_security_rotation_keep_number
   $dbms_logs_security_rotation_size            = $::neo4j::dbms_logs_security_rotation_size
   $dbms_security_log_successful_authentication = $::neo4j::dbms_security_log_successful_authentication
-  $dms_logs_query_rotation_keep_number         = $::neo4j::dms_logs_query_rotation_keep_number
+  $dbms_logs_query_rotation_keep_number        = $::neo4j::dbms_logs_query_rotation_keep_number
 
   concat::fragment{ 'neo4j config logging':
     target  => $config_file,
