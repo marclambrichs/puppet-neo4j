@@ -1743,13 +1743,13 @@ class neo4j (
   validate_re( $cypher_min_replan_interval,                          '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_checkpoint_interval_time,                       '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_logs_debug_rotation_delay,                      '[1-9][0-9]*(ms|s|m)?' )
-  validate_re( $dbms_logs_query_threshold,                           '[1-9][0-9]*(ms|s|m)?' )
+  validate_re( $dbms_logs_query_threshold,                           '(0|[1-9][0-9]*)(ms|s|m)?' )
   validate_re( $dbms_logs_security_rotation_delay,                   '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_rest_transaction_idle_timeout,                  '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_security_auth_cache_ttl,                        '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_security_ldap_connection_timeout,               '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $dbms_security_ldap_read_timeout,                     '[1-9][0-9]*(ms|s|m)?' )
-  validate_re( $dbms_transaction_timeout,                            '[1-9][0-9]*(ms|s|m)?' )
+  validate_re( $dbms_transaction_timeout,                            '(0|[1-9][0-9]*)(ms|s|m)?' )
   validate_re( $ha_broadcast_timeout,                                '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_configuration_timeout,                            '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_default_timeout,                                  '[1-9][0-9]*(ms|s|m)?' )
@@ -1759,6 +1759,7 @@ class neo4j (
   validate_re( $ha_internal_role_switch_timeout,                     '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_join_timeout,                                     '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_learn_timeout,                                    '[1-9][0-9]*(ms|s|m)?' )
+  validate_re( $ha_leave_timeout,                                    '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_paxos_timeout,                                    '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_phase1_timeout,                                   '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $ha_phase2_timeout,                                   '[1-9][0-9]*(ms|s|m)?' )
@@ -1768,26 +1769,26 @@ class neo4j (
   validate_re( $metrics_csv_interval,                                '[1-9][0-9]*(ms|s|m)?' )
   validate_re( $metrics_graphite_interval,                           '[1-9][0-9]*(ms|s|m)?' )
 
-#  ### validate filesystem path
-#  validate_re( $dbms_directories_certificates,  '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_data,          '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_import,        '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_lib,           '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_logs,          '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_metrics,       '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_plugins,       '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $dbms_directories_run,           '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#  validate_re( $metrics_csv_path,               '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
-#
-#  ### validate hostname and port
-#  validate_re( $dbms_backup_address,                  '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $dbms_connector_bolt_listen_address,   '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $dbms_connector_http_listen_address,   '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $dbms_connector_https_listen_address,  '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $ha_host_coordination,                 '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $ha_host_data,                         '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#  validate_re( $metrics_graphite_server,              '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
-#
+  ### validate filesystem path
+  validate_re( $dbms_directories_certificates,  '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_data,          '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_import,        '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_lib,           '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_logs,          '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_metrics,       '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_plugins,       '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $dbms_directories_run,           '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+  validate_re( $metrics_csv_path,               '/?[0-9a-z_][0-9a-z_]*(/[0-9a-z_][0-9a-z_]*)*' )
+
+  ### validate hostname and port
+  validate_re( $dbms_backup_address,                  '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $dbms_connector_bolt_listen_address,   '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $dbms_connector_http_listen_address,   '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $dbms_connector_https_listen_address,  '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $ha_host_coordination,                 '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $ha_host_data,                         '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+  validate_re( $metrics_graphite_server,              '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+
   ### validate integers
   validate_integer([
     $causal_clustering_catchup_batch_size,
@@ -1807,7 +1808,7 @@ class neo4j (
     $dbms_query_cache_size,
     $dbms_relationship_grouping_threshold,
     $dbms_shell_port,
-    $ha_leave_timeout,
+
     $ha_max_acceptors,
     $ha_max_channels_per_slave,
     $ha_pull_batch_size,

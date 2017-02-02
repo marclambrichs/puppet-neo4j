@@ -6,14 +6,17 @@ describe 'neo4j' do
       context "config" do
 
         context 'with defaults for all parameters' do
-          it { should contain_file('neo4j-wrapper.conf') }
-          it { should contain_concat__fragment('neo4j HA config') }
-          it { should contain_concat__fragment('neo4j conf footer') }
+          it { should contain_concat('/usr/share/neo4j/neo4j.conf') }          
           it { should contain_concat__fragment('neo4j config general') }
-          it { should contain_concat__fragment('neo4j logging config') }
-          it { should contain_concat__fragment('neo4j miscellaneous config') }
-          it { should contain_concat__fragment('neo4j network connector config') }
-          it { should contain_concat('/usr/share/neo4j/neo4j.conf') }
+          it { should contain_concat__fragment('neo4j config connectors') }
+          it { should contain_concat__fragment('neo4j config causal cluster') }
+          it { should contain_concat__fragment('neo4j config HA cluster') }                    
+          it { should contain_concat__fragment('neo4j config backups') }
+          it { should contain_concat__fragment('neo4j config authentication and authorization') }
+          it { should contain_concat__fragment('neo4j config metrics logging') }                 
+          it { should contain_concat__fragment('neo4j config logging') }
+          it { should contain_concat__fragment('neo4j config query management') }          
+          it { should contain_file('neo4j-wrapper.conf') }
         end
 
         context 'with install_method set to archive and version to 3.0.8' do

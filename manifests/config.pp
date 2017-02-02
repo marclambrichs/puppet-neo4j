@@ -124,7 +124,7 @@ class neo4j::config (
   $dbms_connectors_default_listen_address     = $::neo4j::dbms_connectors_default_listen_address
   $dbms_threads_worker_count                  = $::neo4j::dbms_threads_worker_count
 
-  concat::fragment{ 'configure neo4j connectors':
+  concat::fragment{ 'neo4j config connectors':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/neo4j.conf.connector.erb'),
     order   => '36',
@@ -225,7 +225,7 @@ class neo4j::config (
   $ha_tx_push_factor                 = $::neo4j::ha_tx_push_factor
   $ha_tx_push_strategy               = $::neo4j::ha_tx_push_strategy
 
-  concat::fragment{ 'configure neo4j HA cluster':
+  concat::fragment{ 'neo4j config HA cluster':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/clustering/neo4j.conf.clustering.ha.erb'),
     order   => '42',
@@ -237,7 +237,7 @@ class neo4j::config (
   $dbms_backup_address = $::neo4j::dbms_backup_address
   $dbms_backup_enabled = $::neo4j::dbms_backup_enabled
 
-  concat::fragment{ 'enabling backups':
+  concat::fragment{ 'neo4j config backups':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/neo4j.conf.backup.erb'),
     order   => '61',
@@ -305,7 +305,7 @@ class neo4j::config (
   $metrics_neo4j_tx_enabled                = $::neo4j::metrics_neo4j_tx_enabled
   $metrics_prefix                          = $::neo4j::metrics_prefix
 
-  concat::fragment{ 'enabling metrics logging':
+  concat::fragment{ 'neo4j config metrics logging':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.metrics.erb'),
     order   => '81',
@@ -324,7 +324,7 @@ class neo4j::config (
   $dbms_security_log_successful_authentication = $::neo4j::dbms_security_log_successful_authentication
   $dms_logs_query_rotation_keep_number         = $::neo4j::dms_logs_query_rotation_keep_number
 
-  concat::fragment{ 'enabling logging':
+  concat::fragment{ 'neo4j config logging':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.logging.erb'),
     order   => '82',
@@ -335,7 +335,7 @@ class neo4j::config (
   #-----------------------------------------------------------------------------
   $dbms_transaction_timeout = $::neo4j::dbms_transaction_timeout
 
-  concat::fragment{ 'query management':
+  concat::fragment{ 'neo4j config query management':
     target  => $config_file,
     content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.query_management.erb'),
     order   => '83',
