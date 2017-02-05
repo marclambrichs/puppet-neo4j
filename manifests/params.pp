@@ -225,7 +225,6 @@ class neo4j::params {
   $install_method                                                    = 'package'
   $install_prefix                                                    = '/usr/share'
   $manage_repo                                                       = false
-  $package_name                                                      = 'neo4j'
   $metrics_bolt_messages_enabled                                     = false
   $metrics_csv_enabled                                               = false
   $metrics_csv_interval                                              = '3m'

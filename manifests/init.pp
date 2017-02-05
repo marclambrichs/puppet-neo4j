@@ -1292,11 +1292,6 @@
 # Type: string
 # Default: neo4j
 #
-# @param package_name
-# Name of the package that will be installed.
-# Type: string
-# Default: 'neo4j'
-#
 # @param service_enable
 # Manage neo4j service.
 # Type: boolean
@@ -1372,7 +1367,6 @@ class neo4j (
   $install_prefix                                                    = $::neo4j::params::install_prefix,
   $install_method                                                    = $::neo4j::params::install_method,
   $manage_repo                                                       = $::neo4j::params::manage_repo,
-  $package_name                                                      = $::neo4j::params::package_name,
   $service_enable                                                    = $::neo4j::params::service_enable,
   $service_ensure                                                    = $::neo4j::params::service_ensure,
   $service_name                                                      = $::neo4j::params::service_name,
@@ -1862,7 +1856,6 @@ class neo4j (
     $ha_tx_push_strategy,
     $install_method,
     $metrics_prefix,
-    $package_name,
     $service_ensure,
     $service_name,
     $user,
@@ -1879,6 +1872,12 @@ class neo4j (
 
   if !( $edition in ['community', 'enterprise'] ){
     fail('Only edtions \'community\' and \'enterprise\' are present.')
+  }
+
+  if ( $edition == 'enterprise' ) {
+    $package_name = "neo4j-${edition}"
+  } else {
+    $package_name = 'neo4j'
   }
 
   case $install_method {
