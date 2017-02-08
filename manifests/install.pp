@@ -62,6 +62,12 @@ class neo4j::install (
       package { 'neo4j':
         ensure => $version,
         name   => $package_name,
+      } ->
+
+      file { $data_dir:
+        ensure => directory,
+        owner  => $user,
+        group  => $group,
       }
     }
     'archive': {
@@ -74,17 +80,6 @@ class neo4j::install (
       file { $install_prefix:
         ensure => directory,
       }
-
-      file { $data_dir:
-        ensure => directory,
-      }
-
-      file { $logs_dir:
-        ensure => directory,
-        mode   => '0644'
-      }
-
-      File[$install_prefix] -> File[$data_dir, $logs_dir]
 
       file { $neo4j_home:
         ensure  => directory,
