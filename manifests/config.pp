@@ -23,7 +23,7 @@ class neo4j::config (
 
   file { 'neo4j-default':
     path    => $default_file,
-    content => template('neo4j/default.erb'),
+    content => template('neo4j/configuration/default.erb'),
   }
 
   File {

@@ -84,14 +84,6 @@ class neo4j::params {
   $dbms_connector_https_listen_address                               = '0.0.0.0:7473'
   $dbms_connectors_default_advertised_address                        = 'localhost'
   $dbms_connectors_default_listen_address                            = 'localhost'
-  $dbms_directories_certificates                                     = 'certificates'
-  $dbms_directories_data                                             = 'data'
-  $dbms_directories_import                                           = 'import'
-  $dbms_directories_lib                                              = 'lib'
-  $dbms_directories_logs                                             = 'logs'
-  $dbms_directories_metrics                                          = 'metrics'
-  $dbms_directories_plugins                                          = 'plugins'
-  $dbms_directories_run                                              = 'run'
   $dbms_ids_reuse_types_override                                     = [ 'RELATIONSHIP', 'NODE']
   $dbms_index_sampling_background_enabled                            = true
   $dbms_index_sampling_buffer_size                                   = '64m'
@@ -253,6 +245,8 @@ class neo4j::params {
   $service_enable                                                    = true
   $service_ensure                                                    = 'running'
   $service_name                                                      = 'neo4j'
+  $service_ulimit                                                    = 40000
+  $service_shutdown_timeout                                          = 120
   $tools_consistency_checker_check_graph                             = true
   $tools_consistency_checker_check_indexes                           = true
   $tools_consistency_checker_check_label_scan_store                  = true
@@ -262,22 +256,30 @@ class neo4j::params {
 
   case $::osfamily {
     'RedHat': {
-      $default_file     = '/etc/sysconfig/neo4j'
-      $service_provider = 'redhat'
-      $version          = 'installed'
+      $dbms_directories_certificates = 'certificates'
+      $dbms_directories_data         = 'data'
+      $dbms_directories_import       = 'import'
+      $dbms_directories_lib          = 'lib'
+      $dbms_directories_logs         = 'logs'
+      $dbms_directories_metrics      = 'metrics'
+      $dbms_directories_plugins      = 'plugins'
+      $dbms_directories_run          = 'run'
+      $default_file                  = '/etc/sysconfig/neo4j'
+      $service_provider              = 'redhat'
+      $version                       = 'installed'
     }
     'Debian': {
-      $default_file     = '/etc/default/neo4j'
-      $service_provider = 'debian'
-      $version          = 'installed'
-      $dbms_directories_certificates  = '/var/lib/neo4j/certificates'
-      $dbms_directories_data          = '/var/lib/neo4j/data'
-      $dbms_directories_import        = '/var/lib/neo4j/import'
-      $dbms_directories_lib           = 'lib'
-      $dbms_directories_logs          = '/var/log/neo4j'
-      $dbms_directories_metrics       = '/var/lib/neo4j/metrics'
-      $dbms_directories_plugins       = '/var/lib/neo4j/plugins'
-      $dbms_directories_run           = '/var/run/neo4j'
+      $dbms_directories_certificates = '/var/lib/neo4j/certificates'
+      $dbms_directories_data         = '/var/lib/neo4j/data'
+      $dbms_directories_import       = '/var/lib/neo4j/import'
+      $dbms_directories_lib          = 'lib'
+      $dbms_directories_logs         = '/var/log/neo4j'
+      $dbms_directories_metrics      = '/var/lib/neo4j/metrics'
+      $dbms_directories_plugins      = '/var/lib/neo4j/plugins'
+      $dbms_directories_run          = '/var/run/neo4j'
+      $default_file                  = '/etc/default/neo4j'
+      $service_provider              = 'debian'
+      $version                       = 'installed'
     }
     default: {
       fail( "Unsupported OS family: ${::osfamily}" )

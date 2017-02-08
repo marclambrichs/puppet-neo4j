@@ -1398,6 +1398,16 @@
 # Type: string
 # Default: 'neo4j'
 #
+# @param service_ulimit
+# Maximum number of open file descriptors.
+# Type: integer
+# Default: 40000
+#
+# @param service_shutdown_timeout
+# Number of seconds to wait for shutdown before killing the process.
+# Type: integer
+# Default: 120
+#
 # @param tools_consistency_checker_check_graph
 # Perform checks between nodes, relationships, properties, types and tokens_
 # Type: boolean
@@ -1452,7 +1462,6 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j (
-  $default_file                                                      = $neo4j::params::default_file,
   $edition                                                           = $::neo4j::params::edition,
   $group                                                             = $::neo4j::params::group,
   $install_prefix                                                    = $::neo4j::params::install_prefix,
@@ -1464,6 +1473,11 @@ class neo4j (
   $service_name                                                      = $::neo4j::params::service_name,
   $user                                                              = $::neo4j::params::user,
   $version                                                           = $::neo4j::params::version,
+
+  ### config default settings
+  $default_file                                                      = $::neo4j::params::default_file,
+  $service_shutdown_timeout                                          = $::neo4j::params::service_shutdown_timeout,
+  $service_ulimit                                                    = $::neo4j::params::service_ulimit,
 
   ### config general variables
   $dbms_active_database                                              = $::neo4j::params::dbms_active_database,
@@ -1902,6 +1916,8 @@ class neo4j (
     $ha_max_channels_per_slave,
     $ha_pull_batch_size,
     $ha_tx_push_factor,
+    $service_ulimit,
+    $service_shutdown_timeout
   ])
 
   ### validate strings
@@ -2006,17 +2022,6 @@ class neo4j (
     if ( !is_numeric( $ha_server_id ) ) {
       fail('The Server Id value must be specified and must numeric.')
     }
-  }
-
-  ### define the user and group the neo4j service will be running.
-  group { $group:
-    ensure => present
-  } ->
-  user { $user:
-    ensure => present,
-    gid    => $group,
-    shell  => '/bin/bash',
-    home   => $neo4j_home
   }
 
   anchor { 'neo4j::begin': } ->
