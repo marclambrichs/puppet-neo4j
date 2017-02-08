@@ -1,0 +1,105 @@
+
+#*****************************************************************
+# 4.2. Highly Available Cluster
+#*****************************************************************
+# Whether to allow this instance to create a cluster if unable to join.
+ha.allow_init_cluster=<%= @ha_allow_init_cluster %>
+
+# Strategy for how to order handling of branched data on slaves and copying of
+# the store from the master.
+ha.branched_data_copying_strategy=<%= @ha_branched_data_copying_strategy %>
+
+# Policy for how to handle branched data.
+ha.branched_data_policy=<%= @ha_branched_data_policy %>
+
+# Timeout for broadcasting values in cluster. Must consider end-to-end duration
+# of Paxos algorithm. This value is the default value for the ha.join_timeout
+# and ha.leave_timeout settings.
+ha.broadcast_timeout=<%= @ha_broadcast_timeout %>
+
+# Timeout for waiting for configuration from an existing cluster member during
+# cluster join.
+ha.configuration_timeout=<%= @ha_configuration_timeout %>
+
+# Max size of the data chunks that flows between master and slaves in HA.
+ha.data_chunk_size=<% @ha_data_chunk_size %>
+
+# Default timeout used for clustering timeouts.
+ha.default_timeout=<%= @ha_default_timeout %>
+
+# Timeout for waiting for other members to finish a role election. Defaults to
+# ha.paxos_timeout.
+ha.election_timeout=<%= @ha_election_timeout %>
+  
+# How often heartbeat messages should be sent. Defaults to ha.default_timeout.
+ha.heartbeat_interval=<%= @ha_heartbeat_interval %>
+
+# How long to wait for heartbeats from other instances before marking them as
+# suspects for failure.
+ha.heartbeat_timeout=<%= @ha_heartbeat_timeout %>s
+
+# Host and port to bind the cluster management communication.
+ha.host.coordination=<%= @ha_host_coordination %>
+
+# Hostname and port to bind the HA server.
+ha.host.data=<%= @ha_host_data %>
+
+# A comma-separated list of other members of the cluster to join.
+ha.initial_hosts=<%= @ha_initial_hosts.join(',') %>
+
+# Timeout for waiting for internal conditions during state switch, like for
+# transactions to complete, before switching to master or slave.
+ha.internal_role_switch_timeout=<%= @ha_internal_role_switch_timeout %>
+
+# Timeout for joining a cluster. Defaults to ha.broadcast_timeout.
+ha.join_timeout=<%= @ha_join_timeout %>
+
+# Timeout for learning values. Defaults to ha.default_timeout.
+ha.learn_timeout=<%= @ha_learn_timeout %>
+
+# Timeout for waiting for cluster leave to finish. Defaults to
+# ha.broadcast_timeout.
+ha.leave_timeout=<%= @ha_leave_timeout %>
+
+# Maximum number of servers to involve when agreeing to membership changes.
+ha.max_acceptors=<%= @ha_max_acceptors %>
+
+# Maximum number of connections a slave can have to the master.
+ha.max_channels_per_slave=<%= @ha_max_channels_per_slave %>
+
+# Default value for all Paxos timeouts.
+ha.paxos_timeout=<%= @ha_paxos_timeout %>
+
+# Timeout for Paxos phase 1.
+ha.phase1_timeout=<%= @ha_phase1_timeout %>
+
+# Timeout for Paxos phase 2.
+ha.phase2_timeout=<%= @ha_phase2_timeout %>
+
+# Size of batches of transactions applied on slaves when pulling from master.
+ha.pull_batch_size=<%= @ha_pull_batch_size %>
+
+# Interval of pulling updates from master.
+ha.pull_interval=<%= @ha_pull_interval %>
+
+# Timeout for request threads waiting for instance to become master or slave.
+ha.role_switch_timeout=<%= @ha_role_switch_timeout %>
+  
+# Id for a cluster instance. Must be unique within the cluster.
+ha.server_id=<%= @ha_server_id %>
+
+# Timeout for taking remote (write) locks on slaves.
+ha.slave_lock_timeout=<%= @ha_slave_lock_timeout %>
+
+# Whether this instance should only participate as slave in cluster. If set to
+# true, it will never be elected as master.
+ha.slave_only=<%= @ha_slave_only %>
+
+# How long a slave will wait for response from master before giving up.
+ha.slave_read_timeout=<%= @ha_slave_read_timeout %>
+
+# The amount of slaves the master will ask to replicate a committed transaction.
+ha.tx_push_factor=<%= @ha_tx_push_factor %>
+
+# Push strategy of a transaction to a slave during commit.
+ha.tx_push_strategy=<%= @ha_tx_push_strategy %>

@@ -1,0 +1,13 @@
+[Unit]
+Description=<%= scope['neo4j::service_name'] %>
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=<%= scope['neo4j::neo4j_home'] %>/bin
+ExecStart=<%= scope['neo4j::neo4j_home'] %>/bin/neo4j start > /dev/null 2>&1
+ExecStop=<%= scope['neo4j::neo4j_home'] %>/bin/neo4j stop > /dev/null 2>&1
+PIDFile=/var/run/neo4j/neo4j.pid
+
+[Install]
+WantedBy=multi-user.target

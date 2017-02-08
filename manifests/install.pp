@@ -10,23 +10,22 @@
 #
 # === Copyright
 #
-# Copyright 2016 Marc Lambrichs, unless otherwise noted.
+# Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::install (
-  $data_dir        = $neo4j::data_dir,
-  $group           = $neo4j::group,
-  $log_dir         = $neo4j::log_dir,
-  $install_method  = $neo4j::install_method,
-  $install_prefix  = $neo4j::install_prefix,
-  $manage_repo     = $neo4j::manage_repo,
-  $neo4j_home      = $neo4j::neo4j_home,
-  $package_name    = $neo4j::package_name,
-  $source_tarball  = $neo4j::source_tarball,
-  $source_name     = $neo4j::source_name,
-  $user            = $neo4j::user,
-  $version         = $neo4j::version,
-)
-{
+  $data_dir              = $::neo4j::data_dir,
+  $group                 = $::neo4j::group,
+  $install_method        = $::neo4j::install_method,
+  $install_prefix        = $::neo4j::install_prefix,
+  $logs_dir              = $::neo4j::logs_dir,
+  $manage_repo           = $::neo4j::manage_repo,
+  $neo4j_home            = $::neo4j::neo4j_home,
+  $package_name          = $::neo4j::package_name,
+  $source_tarball        = $::neo4j::source_tarball,
+  $source_name           = $::neo4j::source_name,
+  $user                  = $::neo4j::user,
+  $version               = $::neo4j::version,
+){
   case $install_method {
     'package': {
       if $manage_repo {
@@ -62,6 +61,12 @@ class neo4j::install (
       package { 'neo4j':
         ensure => $version,
         name   => $package_name,
+      } ->
+
+      file { $data_dir:
+        ensure => directory,
+        owner  => $user,
+        group  => $group,
       }
     }
     'archive': {
@@ -84,19 +89,6 @@ class neo4j::install (
 
       file { $install_prefix:
         ensure => directory,
-      }
-
-      file { $data_dir:
-        ensure => directory,
-      }
-
-      File[$install_prefix] -> File[$data_dir]
-
-      if ( $log_dir ){
-        file { $log_dir:
-          ensure => directory,
-          mode   => '0644'
-        }
       }
 
       file { $neo4j_home:

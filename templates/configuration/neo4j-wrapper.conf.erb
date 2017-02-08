@@ -44,6 +44,7 @@ dbms.jvm.additional=<%= @dbms_jvm_additional_trust_final_non_static_fields %>
 # Disable explicit garbage collection, which is occasionally invoked by the JDK itself.
 dbms.jvm.additional=<%= @dbms_jvm_additional_disable_explicit_gc %>
 
+<%if @jmx_enable %>
 # Remote JMX monitoring, uncomment and adjust the following lines as needed.
 # Also make sure to update the jmx.access and jmx.password files with appropriate permission roles and passwords,
 # the shipped configuration contains only a read only role called 'monitor' with password 'Neo4j'.
