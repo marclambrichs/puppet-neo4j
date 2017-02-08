@@ -401,7 +401,7 @@ class neo4j::config (
   ###
   if ( $jmx_enable ) {
     file { 'jmx.access':
-      path    => "${config_dir}/jmx.access",
+      path    => "${config_dir}/${dbms_jvm_additional_jmxremote_access_file}",
       content => template('neo4j/configuration/jmx.access.erb'),
     }
   }
@@ -411,7 +411,7 @@ class neo4j::config (
   ###
   if ( $jmx_enable ) {
     file { 'jmx.password':
-      path    => "${config_dir}/jmx.password",
+      path    => "${config_dir}/${dbms_jvm_additional_jmxremote_password_file}",
       content => template('neo4j/configuration/jmx.password.erb'),
     }
   }
