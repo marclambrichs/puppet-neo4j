@@ -16,7 +16,7 @@
 # Default: 0
 #
 # @param browser_remote_content_hostname_whitelist
-# Whitelist of hosts for the Neo4j Browser to be allo¯wed to fetch content from.
+# Whitelist of hosts for the Neo4j Browser to be allowed to fetch content from.
 # Type: string
 # Default: http://guides.neo4j.com,https://guides.neo4j.com,http://localhost,https://localhost
 #
@@ -26,23 +26,27 @@
 # Default: true
 #
 # @param causal_clustering_array_block_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of ARRAY_BLOCK IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_catchup_batch_size
+# Version: 3.1
 # The maximum batch size when catching up (in unit of entries).
 # Type: integer
 # Default: 64
 #
 # @param causal_clustering_cluster_allow_reads_on_followers
+# Version: 3.1
 # Configure if the dbms.cluster.routing.getServers() procedure should include
 # followers as read endpoints or return only read replicas.
 # Type: boolean
 # Default: false
 #
 # @param causal_clustering_cluster_routing_ttl
+# Version: 3.1
 # How long drivers should cache the data from the
 # dbms.cluster.routing.getServers() procedure.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
@@ -50,264 +54,311 @@
 # Default: 300000
 #
 # @param causal_clustering_cluster_topology_refresh
+# Version: 3.1
 # Time between scanning the cluster to refresh current server’s view of topology.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 #       which is minimum 1000
 # Default: 60000
 #
 # @param causal_clustering_disable_middleware_logging
+# Version: 3.1
 # Prevents the network middleware from dumping its own logs.
 # Type: boolean
 # Default: true
 #
 # @param causal_clustering_discovery_advertised_address
+# Version: 3.1
 # Advertised cluster member discovery management communication.
 # Type: an advertised socket address
 # Default: localhost:5000
 #
 # @param causal_clustering_discovery_listen_address
+# Version: 3.1
 # Host and port to bind the cluster member discovery management communication.
 # Type: a listen socket address
 # Default: localhost:5000
 #
 # @param causal_clustering_expected_core_cluster_size
+# Version: 3.1
 # Expected number of Core machines in the cluster.
 # Type: integer
 # Default: 3
 #
 # @param causal_clustering_global_session_tracker_state_size
+# Version: 3.1
 # The maximum file size before the global session tracker state file is rotated
 # (in unit of entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_id_alloc_state_size
+# Version: 3.1
 # The maximum file size before the ID allocation file is rotated (in unit of
 # entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_initial_discovery_members
+# Version: 3.1
 # A comma-separated list of other members of the cluster to join.
 # Type: list, separated by ",", where items are an advertised socket address
 # Mandatory: yes
 #
 # @param causal_clustering_join_catch_up_timeout
+# Version: 3.1
 # Time out for a new member to catch up.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 600000
 #
 # @param causal_clustering_label_token_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of LABEL_TOKEN IDs.
 # Type: integer
 # Default: 32
 #
 # @param causal_clustering_label_token_name_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of LABEL_TOKEN_NAME IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_last_applied_state_size
+# Version: 3.1
 # The maximum file size before the storage file is rotated (in unit of entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_leader_election_timeout
+# Version: 3.1
 # The time limit within which a new leader election will occur if no messages
 # are received.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 7000
 #
 # @param causal_clustering_log_shipping_max_lag
+# Version: 3.1
 # The maximum lag allowed before log shipping pauses (in unit of entries).
 # Type: integer
 # Default: 256
 #
 # @param causal_clustering_neostore_block_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of NEOSTORE_BLOCK IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_node_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of NODE IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_node_labels_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of NODE_LABELS IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_outgoing_queue_size
+# Version: 3.1
 # The number of messages waiting to be sent to other servers in the cluster.
 # Type: integer
 # Default: 64
 #
 # @param causal_clustering_property_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of PROPERTY IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_property_key_token_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of PROPERTY_KEY_TOKEN IDs.
 # Type: integer
 # Default: 32
 #
 # @param causal_clustering_property_key_token_name_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of PROPERTY_KEY_TOKEN_NAME IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_pull_interval
+# Version: 3.1
 # Interval of pulling updates from cores.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 1000
 #
 # @param causal_clustering_raft_advertised_address
+# Version: 3.1
 # Advertised hostname/IP address and port for the RAFT server.
 # Type: an advertised socket address
 # Default: localhost:7000
 #
 # @param causal_clustering_raft_listen_address
+# Version: 3.1
 # Network interface and port for the RAFT server to listen on.
 # Type: a listen socket address
 # Default: localhost:7000
 #
 # @param causal_clustering_raft_log_implementation
+# Version: 3.1
 # RAFT log implementation.
 # Type: string
 # Default: SEGMENTED
 #
 # @param causal_clustering_raft_log_prune_strategy
+# Version: 3.1
 # RAFT log pruning strategy.
 # Type: string
 # Default: 1g size
 #
 # @param causal_clustering_raft_log_pruning_frequency
+# Version: 3.1
 # RAFT log pruning frequency.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 600000
 #
 # @param causal_clustering_raft_log_reader_pool_size
+# Version: 3.1
 # RAFT log reader pool size.
 # Type: integer
 # Default: 8
 #
 # @param causal_clustering_raft_log_rotation_size
+# Version: 3.1
 # RAFT log rotation size.
 # Type: byte size (valid multipliers are 'k', 'm', 'g', 'K', 'M', 'G')
 #       which is minimum 1024
 # Default: 262144000
 #
 # @param causal_clustering_raft_membership_state_size
+# Version: 3.1
 # The maximum file size before the membership state file is rotated (in unit of
 # entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_raft_messages_log_enable
+# Version: 3.1
 # Enable or disable the dump of all network messages pertaining to the RAFT
 # protocol.
 # Type: boolean
 # Default: false
 #
 # @param causal_clustering_raft_term_state_size
+# Version: 3.1
 # The maximum file size before the term state file is rotated (in unit of
 # entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_raft_vote_state_size
+# Version: 3.1
 # The maximum file size before the vote state file is rotated (in unit of
 # entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_read_replica_refresh_rate
+# Version: 3.1
 # Read replica 'call home' frequency.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 #       which is minimum 5000
 # Default: 5000
 #
 # @param causal_clustering_read_replica_time_to_live
+# Version: 3.1
 # Time To Live before read replica is considered unavailable.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 #       which is minimum 60000
 # Default: 60000
 #
 # @param causal_clustering_relationship_group_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of RELATIONSHIP_GROUP IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_relationship_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of RELATIONSHIP IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_relationship_type_token_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of RELATIONSHIP_TYPE_TOKEN IDs.
 # Type: integer
 # Default: 32
 #
 # @param causal_clustering_relationship_type_token_name_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of RELATIONSHIP_TYPE_TOKEN_NAME IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_replicated_lock_token_state_size
+# Version: 3.1
 # The maximum file size before the replicated lock token state file is rotated
 # (in unit of entries).
 # Type: integer
 # Default: 1000
 #
 # @param causal_clustering_schema_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of SCHEMA IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_state_machine_apply_max_batch_size
+# Version: 3.1
 # The maximum number of operations to be batched during applications of
 # operations in the state machines.
 # Type: integer
 # Default: 16
 #
 # @param causal_clustering_state_machine_flush_window_size
+# Version: 3.1
 # The number of operations to be processed before the state machines flush to
 # disk.
 # Type: integer
 # Default: 4096
 #
 # @param causal_clustering_string_block_id_allocation_size
+# Version: 3.1
 # The size of the ID allocation requests Core servers will make when they run
 # out of STRING_BLOCK IDs.
 # Type: integer
 # Default: 1024
 #
 # @param causal_clustering_transaction_advertised_address
+# Version: 3.1
 # Advertised hostname/IP address and port for the transaction shipping server.
 # Type: an advertised socket address
 # Default: localhost:6000
 #
 # @param causal_clustering_transaction_listen_address
+# Version: 3.1
 # Network interface and port for the transaction shipping server to listen on.
 # Type: a listen socket address
 # Default: localhost:6000
 #
 # @param causal_clustering_unknown_address_logging_throttle
+# Version: 3.1
 # Throttle limit for logging unknown cluster member address.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 10000
@@ -435,11 +486,13 @@
 # @param dbms_connectors_default_advertised_address
 # Default hostname or IP address the server uses to advertise itself to its
 # connectors.
+# Version: 3.1
 # Type: string
 # Default: localhost
 #
 # @param dbms_connectors_default_listen_address
 # Default network interface to listen for incoming connections.
+# Version: 3.1
 # Type: string
 # Default: localhost
 #
@@ -494,6 +547,7 @@
 # Default: '512m'
 #
 # @param dbms_ids_reuse_types_override
+# Version: 3.1
 # Specified names of id types (comma separated) that should be reused.
 # Type: list separated by "," where items are one of {NODE, RELATIONSHIP}
 # Default: [RELATIONSHIP, NODE]
@@ -719,22 +773,26 @@
 # Default: 0
 #
 # @param dbms_logs_security_level
+# Version: 3.1
 # Security log level threshold.
 # Type: one of DEBUG, INFO, WARN, ERROR, NONE
 # Default: INFO
 #
 # @param dbms_logs_security_rotation_delay
+# Version: 3.1
 # Minimum time interval after last rotation of the security log before it may be
 # rotated again.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: '300s'
 #
 # @param dbms_logs_security_rotation_keep_number
+# Version: 3.1
 # Maximum number of history files for the security log.
 # Type: integer
 # Default: 7
 #
 # @param dbms_logs_security_rotation_size
+# Version: 3.1
 # Threshold for rotation of the security log.
 # Type: byte size (valid multipliers are 'k', 'm', 'g', 'K', 'M', 'G')
 #       which is minimum 0, maximum 9223372036854775807
@@ -755,8 +813,8 @@
 #   'SINGLE' for stand-alone operation,
 #   'HA' for operating as a member in a cluster,
 #   'ARBITER' for an HA-only cluster member with no database,
-#   'CORE' for a core member of a Causal Clustering cluster,
-#   or 'READ_REPLICA' for read replica.
+#   'CORE' for a core member of a Causal Clustering cluster, (3.1)
+#   or 'READ_REPLICA' for read replica. (3.1)
 # Type: string
 # Default: SINGLE
 #
@@ -792,17 +850,20 @@
 # Default: true
 #
 # @param dbms_security_allow_publisher_create_token
+# Version: 3.1
 # Set to true if users with role publisher are allowed to create new tokens.
 # Type: boolean
 # Default: false
 #
 # @param dbms_security_auth_cache_max_capacity
+# Version: 3.1
 # The maximum capacity for authentication and authorization caches
 # (respectively).
 # Type: integer
 # Default: 10000
 #
 # @param dbms_security_auth_cache_ttl
+# Version: 3.1
 # The time to live (TTL) for cached authentication and authorization info when
 # using external auth providers (LDAP or plugin).
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
@@ -814,6 +875,7 @@
 # Default: false
 #
 # @param dbms_security_auth_provider
+# Version: 3.1
 # The authentication and authorization provider that contains both the users and
 # roles. Possible values 'native', 'ldap'.
 # Type: string
@@ -830,42 +892,50 @@
 # Default: []
 #
 # @param dbms_security_ldap_authentication_cache_enabled
+# Version: 3.1
 # Determines if the result of authentication via the LDAP server should be
 # cached or not.
 # Type: boolean
 # Default: true
 #
 # @param dbms_security_ldap_authentication_mechanism
+# Version: 3.1
 # LDAP authentication mechanism.
 # Type: string (valid values are {'simple', 'DIGEST-MD5'})
 # Default: 'simple'
 #
 # @param dbms_security_ldap_authentication_user_dn_template
+# Version: 3.1
 # LDAP user DN template.
 # Type: string
 # Default: uid={0},ou=users,dc=example,dc=com
 #
 # @param dbms_security_ldap_authorization_group_membership_attributes
+# Version: 3.1
 # A list of attribute names on a user object that contains groups to be used for
 # mapping to roles when LDAP authorization is enabled.
 # Type: list separated by "," where items are a string
 # Default: [memberOf]
 #
 # @param dbms_security_ldap_authorization_group_to_role_mapping
+# Version: 3.1
 # An authorization mapping from LDAP group names to Neo4j role names.
 # Type: string
 #
 # @param dbms_security_ldap_authorization_system_password
+# Version: 3.1
 # An LDAP system account password to use for authorization searches when
 # dbms.security.ldap.authorization.use_system_account is true.
 # Type: string
 #
 # @param dbms_security_ldap_authorization_system_username
+# Version: 3.1
 # An LDAP system account username to use for authorization searches when
 # dbms.security.ldap.authorization.use_system_account is true.
 # Type: string
 #
 # @param dbms_security_ldap_authorization_use_system_account
+# Version: 3.1
 # Perform LDAP search for authorization info using a system account instead of
 # the user’s own account.
 # If this is set to false (default), the search for group membership will be
@@ -875,55 +945,65 @@
 # Default: false
 #
 # @param dbms_security_ldap_authorization_user_search_base
+# Version: 3.1
 # The name of the base object or named context to search for user objects when
 # LDAP authorization is enabled.
 # Type: string
 # Default: ou=users,dc=example,dc=com
 #
 # @param dbms_security_ldap_authorization_user_search_filter
+# Version: 3.1
 # The LDAP search filter to search for a user principal when LDAP authorization
 # is enabled.
 # Type: string
 # Default: (&(objectClass=*)(uid={0}))
 #
 # @param dbms_security_ldap_connection_timeout
+# Version: 3.1
 # The timeout for establishing an LDAP connection.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 30000
 #
 # @param dbms_security_ldap_host
+# Version: 3.1
 # URL of LDAP server to use for authentication and authorization.
 # Type: string
 # Default: localhost
 #
 # @param dbms_security_ldap_read_timeout
+# Version: 3.1
 # The timeout for an LDAP read request (i.e. search). A value of 0 means wait
 # for a response indefinitely.
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 30000
 #
 # @param dbms_security_ldap_referral
+# Version: 3.1
 # The LDAP referral behavior when creating a connection.
 # Type: string
 # Default: follow
 #
 # @param dbms_security_ldap_use_starttls
+# Version: 3.1
 # Use secure communication with the LDAP server using opportunistic TLS.
 # Type: boolean
 # Default: false
 #
 # @param dbms_security_log_successful_authentication
+# Version: 3.1
 # Set to log successful authentication events to the security log.
 # Type: boolean
 # Default: true
 #
 # @param dbms_security_procedures_default_allowed
+# Version: 3.1
 # The default role that can execute all procedures and user-defined functions
 # that are not covered by the dbms.security.procedures.roles setting.
 # Type: string
 # Default: ''
 #
 # @param dbms_security_procedures_roles
+# Version: 3.1
 # This provides a finer level of control over which roles can execute procedures
 # than the dbms.security.procedures.default_allowed setting.
 # Type: string
@@ -1166,6 +1246,11 @@
 # Type: filesystem path; must be absolute path.
 # Default: '/usr/share'
 #
+# @param jmx_enable
+# Enable remote JMX monitoring
+# Type: boolean
+# Default: false
+#
 # @param manage_repo
 # Add neo4j repository as custom repository.
 # Type: boolean
@@ -1237,6 +1322,7 @@
 # Default: false
 #
 # @param metrics_neo4j_causal_clustering_enabled
+# Version: 3.1
 # Enable reporting metrics about Causal Clustering mode.
 # Type: boolean
 # Default: false
@@ -1366,6 +1452,7 @@ class neo4j (
   $group                                                             = $::neo4j::params::group,
   $install_prefix                                                    = $::neo4j::params::install_prefix,
   $install_method                                                    = $::neo4j::params::install_method,
+  $jmx_enable                                                        = $::neo4j::params::jmx_enable,
   $manage_repo                                                       = $::neo4j::params::manage_repo,
   $service_enable                                                    = $::neo4j::params::service_enable,
   $service_ensure                                                    = $::neo4j::params::service_ensure,
@@ -1678,6 +1765,7 @@ class neo4j (
     $dbms_udc_enabled,
     $ha_allow_init_cluster,
     $ha_slave_only,
+    $jmx_enable,
     $manage_repo,
     $metrics_bolt_messages_enabled,
     $metrics_csv_enabled,
@@ -1882,7 +1970,7 @@ class neo4j (
 
   case $install_method {
     'package': {
-      if ( versioncmp( $version, '3.0.0' ) < 0 ) {
+      if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) < 0 ) {
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
       $neo4j_home = "${install_prefix}/neo4j"
