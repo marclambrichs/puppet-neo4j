@@ -57,8 +57,8 @@ class neo4j::params {
   $causal_clustering_state_machine_apply_max_batch_size              = 16
   $causal_clustering_state_machine_flush_window_size                 = 4096
   $causal_clustering_string_block_id_allocation_size                 = 1024
-  $causal_clustering_transaction_advertised_address                  = 'localhost:6000'
-  $causal_clustering_transaction_listen_address                      = 'localhost:6000'
+  $causal_clustering_transaction_advertised_address                  = '127.0.0.1:6000'
+  $causal_clustering_transaction_listen_address                      = '127.0.0.1:6000'
   $causal_clustering_unknown_address_logging_throttle                = '10000'
   $cypher_default_language_version                                   = 'default'
   $cypher_forbid_exhaustive_shortestpath                             = false
@@ -73,7 +73,7 @@ class neo4j::params {
   $dbms_checkpoint_interval_time                                     = '300000'
   $dbms_checkpoint_interval_tx                                       = 100000
   $dbms_checkpoint_iops_limit                                        = 1000
-  $dbms_connector_bolt_advertised_address                            = '0.0.0.0:7687'
+  $dbms_connector_bolt_advertised_address                            = '0.0.0.0:9000'
   $dbms_connector_bolt_enabled                                       = true
   $dbms_connector_bolt_listen_address                                = '0.0.0.0:7687'
   $dbms_connector_http_advertised_address                            = '0.0.0.0:7474'
@@ -107,7 +107,7 @@ class neo4j::params {
   $dbms_jvm_additional_jmxremote_password_file                       = 'jmx.password'
   $dbms_jvm_additional_jmxremote_port                                = 3637
   $dbms_jvm_additional_jmxremote_ssl                                 = false
-  $dbms_jvm_additional_omit_stacktrace_in_fast_throw                 = '-XX:OmitStackTraceInFastThrow'
+  $dbms_jvm_additional_omit_stacktrace_in_fast_throw                 = '-XX:-OmitStackTraceInFastThrow'
   $dbms_jvm_additional_rmi_server_hostname                           = '-Djava.rmi.server.hostname='
   $dbms_jvm_additional_ssl_keystore                                  = 'MyCert.jks'
   $dbms_jvm_additional_ssl_keystore_password                         = 'secret'
@@ -141,8 +141,8 @@ class neo4j::params {
   $dbms_logs_security_rotation_delay                                 = '300s'
   $dbms_logs_security_rotation_keep_number                           = 7
   $dbms_logs_security_rotation_size                                  = '20m'
-  $dbms_memory_heap_initial_size                                     = '512m'
-  $dbms_memory_heap_max_size                                         = '512m'
+  $dbms_memory_heap_initial_size                                     = '512'
+  $dbms_memory_heap_max_size                                         = '512'
   $dbms_memory_pagecache_size                                        = '240k'
   $dbms_memory_pagecache_swapper                                     = undef
   $dbms_mode                                                         = 'SINGLE'
@@ -224,6 +224,7 @@ class neo4j::params {
   $ha_tx_push_strategy                                               = 'fixed_ascending'
   $install_method                                                    = 'package'
   $install_prefix                                                    = '/usr/share'
+  $jmx_enable                                                        = false
   $manage_repo                                                       = false
   $metrics_bolt_messages_enabled                                     = false
   $metrics_csv_enabled                                               = false
