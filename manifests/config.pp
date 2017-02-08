@@ -120,12 +120,20 @@ class neo4j::config (
   $dbms_connectors_default_listen_address     = $::neo4j::dbms_connectors_default_listen_address
   $dbms_threads_worker_count                  = $::neo4j::dbms_threads_worker_count
 
-  concat::fragment{ 'neo4j config connectors':
-    target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.connectors.erb'),
-    order   => '36',
+  if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) == 0 ) {
+    concat::fragment{ 'neo4j config connectors':
+      target  => $config_file,
+      content => template('neo4j/configuration/connectors/3.0/neo4j.conf.connectors.3.0.erb'),
+      order   => '36',
+    }
+  } else {
+    concat::fragment{ 'neo4j config connectors':
+      target  => $config_file,
+      content => template('neo4j/configuration/connectors/3.1/neo4j.conf.connectors.3.1.erb'),
+      order   => '36',
+    }      
   }
-
+  
   #-----------------------------------------------------------------------------
   # 4.1. Causal Cluster
   #-----------------------------------------------------------------------------
@@ -181,10 +189,12 @@ class neo4j::config (
   $causal_clustering_transaction_listen_address                      = $::neo4j::causal_clustering_transaction_listen_address
   $causal_clustering_unknown_address_logging_throttle                = $::neo4j::causal_clustering_unknown_address_logging_throttle
 
-  concat::fragment{ 'neo4j config causal cluster':
-    target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/clustering/neo4j.conf.clustering.causal.erb'),
-    order   => '41',
+  if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) > 0 ) {
+    concat::fragment{ 'neo4j config causal cluster':
+      target  => $config_file,
+      content => template('neo4j/configuration/clustering/neo4j.conf.clustering.causal.erb'),
+      order   => '41',
+    }
   }
 
   #-----------------------------------------------------------------------------
@@ -267,11 +277,20 @@ class neo4j::config (
   $dbms_security_procedures_default_allowed                     = $::neo4j::dbms_security_procedures_default_allowed
   $dbms_security_procedures_roles                               = $::neo4j::dbms_security_procedures_roles
 
-  concat::fragment{ 'neo4j config authentication and authorization':
-    target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/security/neo4j.conf.enterprise.authentication.erb'),
-    order   => '71',
+  if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) == 0 ) {
+    concat::fragment{ 'neo4j config authentication and authorization':
+      target  => $config_file,
+      content => template('neo4j/configuration/security/3.0/neo4j.conf.authentication.erb'),
+      order   => '71',
+    }
+  } else {
+    concat::fragment{ 'neo4j config authentication and authorization':
+      target  => $config_file,
+      content => template('neo4j/configuration/security/3.1/neo4j.conf.enterprise.authentication.erb'),
+      order   => '71',
+    }
   }
+
 
   #-----------------------------------------------------------------------------
   # 8.1. Metrics
@@ -301,10 +320,12 @@ class neo4j::config (
   $metrics_neo4j_tx_enabled                = $::neo4j::metrics_neo4j_tx_enabled
   $metrics_prefix                          = $::neo4j::metrics_prefix
 
-  concat::fragment{ 'neo4j config metrics logging':
-    target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.metrics.erb'),
-    order   => '81',
+  if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) > 0 ) {
+    concat::fragment{ 'neo4j config metrics logging':
+      target  => $config_file,
+      content => template('neo4j/configuration/monitoring/neo4j.conf.monitoring.metrics.erb'),
+      order   => '81',
+    }
   }
 
   #-----------------------------------------------------------------------------
