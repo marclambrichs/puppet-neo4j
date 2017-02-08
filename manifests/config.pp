@@ -22,7 +22,7 @@ class neo4j::config (
     ensure  => file,
     mode    => '0600',
     owner  => $::neo4j::user,
-    group  => $::neo4j::group,    
+    group  => $::neo4j::group,
     before  => Service['neo4j'],
     notify  => Service['neo4j'],
   }
@@ -81,7 +81,7 @@ class neo4j::config (
   $dbms_record_format                               = $::neo4j::dbms_record_format
   $dbms_relationship_grouping_threshold             = $::neo4j::dbms_relationship_grouping_threshold
   $dbms_rest_transaction_idle_timeout               = $::neo4j::dbms_rest_transaction_idle_timeout
-  $dbms_security_allow_csv_import_from_file_urls    = $::neo4j::dbms_security_allow_csv_import_from_file_urls  
+  $dbms_security_allow_csv_import_from_file_urls    = $::neo4j::dbms_security_allow_csv_import_from_file_urls
   $dbms_shell_enabled                               = $::neo4j::dbms_shell_enabled
   $dbms_shell_host                                  = $::neo4j::dbms_shell_host
   $dbms_shell_read_only                             = $::neo4j::dbms_shell_read_only
@@ -137,9 +137,9 @@ class neo4j::config (
       target  => $config_file,
       content => template('neo4j/configuration/connectors/3.1/neo4j.conf.connectors.3.1.erb'),
       order   => '36',
-    }      
+    }
   }
-  
+
   #-----------------------------------------------------------------------------
   # 4.1. Causal Cluster
   #-----------------------------------------------------------------------------
@@ -292,7 +292,7 @@ class neo4j::config (
   } else {
     concat::fragment{ 'neo4j config authentication and authorization':
       target  => $config_file,
-      content => template('neo4j/configuration/security/3.1/neo4j.conf.enterprise.authentication.erb'),
+      content => template('neo4j/configuration/security/3.1/neo4j.conf.authentication.erb'),
       order   => '71',
     }
   }
