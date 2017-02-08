@@ -44,6 +44,7 @@ dbms.jvm.additional=<%= @dbms_jvm_additional_trust_final_non_static_fields %>
 # Disable explicit garbage collection, which is occasionally invoked by the JDK itself.
 dbms.jvm.additional=<%= @dbms_jvm_additional_disable_explicit_gc %>
 
+<%if @jmx_enable %>
 # Remote JMX monitoring, uncomment and adjust the following lines as needed.
 # Also make sure to update the jmx.access and jmx.password files with appropriate permission roles and passwords,
 # the shipped configuration contains only a read only role called 'monitor' with password 'Neo4j'.
@@ -57,6 +58,7 @@ dbms.jvm.additional=-Dcom.sun.management.jmxremote.authenticate=<%= @dbms_jvm_ad
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.ssl=<%= @dbms_jvm_additional_jmxremote_ssl %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.password.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_password_file %>
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.access.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_access_file %>
+<% end -%>
 
 # Some systems cannot discover host name automatically, and need this line configured:
 dbms.jvm.additional=-Djava.rmi.server.hostname=<%= @dbms_jvm_additional_rmi_server_hostname %>

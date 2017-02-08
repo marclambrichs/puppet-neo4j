@@ -12,13 +12,17 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::config (
-  $config_dir = $neo4j::neo4j_home,
+  $config_dir = "${::neo4j::neo4j_home}/conf",
+  $jmx_enable = $::neo4j::jmx_enable,
+  $version    = $::neo4j::version,
 )
 {
 
   File {
     ensure  => file,
-    mode    => '0644',
+    mode    => '0600',
+    owner  => $::neo4j::user,
+    group  => $::neo4j::group,    
     before  => Service['neo4j'],
     notify  => Service['neo4j'],
   }
@@ -47,6 +51,7 @@ class neo4j::config (
   $cypher_planner                                   = $::neo4j::cypher_planner
   $cypher_statistics_divergence_threshold           = $::neo4j::cypher_statistics_divergence_threshold
   $dbms_active_database                             = $::neo4j::dbms_active_database
+  $dbms_allow_format_migration                      = $::neo4j::dbms_allow_format_migration
   $dbms_checkpoint_interval_time                    = $::neo4j::dbms_checkpoint_interval_time
   $dbms_checkpoint_interval_tx                      = $::neo4j::dbms_checkpoint_interval_tx
   $dbms_checkpoint_iops_limit                       = $::neo4j::dbms_checkpoint_iops_limit
@@ -76,6 +81,7 @@ class neo4j::config (
   $dbms_record_format                               = $::neo4j::dbms_record_format
   $dbms_relationship_grouping_threshold             = $::neo4j::dbms_relationship_grouping_threshold
   $dbms_rest_transaction_idle_timeout               = $::neo4j::dbms_rest_transaction_idle_timeout
+  $dbms_security_allow_csv_import_from_file_urls    = $::neo4j::dbms_security_allow_csv_import_from_file_urls  
   $dbms_shell_enabled                               = $::neo4j::dbms_shell_enabled
   $dbms_shell_host                                  = $::neo4j::dbms_shell_host
   $dbms_shell_read_only                             = $::neo4j::dbms_shell_read_only
@@ -100,7 +106,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config general':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.general.erb'),
+    content => template('neo4j/configuration/neo4j.conf.general.erb'),
     order   => '01',
   }
 
@@ -233,7 +239,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config HA cluster':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/clustering/neo4j.conf.clustering.ha.erb'),
+    content => template('neo4j/configuration/clustering/neo4j.conf.clustering.ha.erb'),
     order   => '42',
   }
 
@@ -245,7 +251,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config backups':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/neo4j.conf.backup.erb'),
+    content => template('neo4j/configuration/neo4j.conf.backup.erb'),
     order   => '61',
   }
 
@@ -342,7 +348,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config logging':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.logging.erb'),
+    content => template('neo4j/configuration/monitoring/neo4j.conf.monitoring.logging.erb'),
     order   => '82',
   }
 
@@ -353,7 +359,7 @@ class neo4j::config (
 
   concat::fragment{ 'neo4j config query management':
     target  => $config_file,
-    content => template('neo4j/configuration/neo4j.conf/monitoring/neo4j.conf.monitoring.query_management.erb'),
+    content => template('neo4j/configuration/monitoring/neo4j.conf.monitoring.query_management.erb'),
     order   => '83',
   }
 
@@ -364,6 +370,8 @@ class neo4j::config (
   $dbms_jvm_additional_disable_explicit_gc            = $::neo4j::dbms_jvm_additional_disable_explicit_gc
   $dbms_jvm_additional_hashcode                       = $::neo4j::dbms_jvm_additional_hashcode
   $dbms_jvm_additional_jmxremote_authenticate         = $::neo4j::dbms_jvm_additional_jmxremote_authenticate
+  $dbms_jvm_additional_jmxremote_access_file          = $::neo4j::dbms_jvm_additional_jmxremote_access_file
+  $dbms_jvm_additional_jmxremote_password_file        = $::neo4j::dbms_jvm_additional_jmxremote_password_file
   $dbms_jvm_additional_jmxremote_port                 = $::neo4j::dbms_jvm_additional_jmxremote_port
   $dbms_jvm_additional_jmxremote_ssl                  = $::neo4j::dbms_jvm_additional_jmxremote_ssl
   $dbms_jvm_additional_omit_stacktrace_in_fast_throw  = $::neo4j::dbms_jvm_additional_omit_stacktrace_in_fast_throw
@@ -376,7 +384,27 @@ class neo4j::config (
   $dbms_memory_heap_max_size                          = $::neo4j::dbms_memory_heap_max_size
 
   file { 'neo4j-wrapper.conf':
-    path    => "${neo4j::neo4j_home}/neo4j-wrapper.conf",
+    path    => "${config_dir}/neo4j-wrapper.conf",
     content => template('neo4j/configuration/neo4j-wrapper.conf.erb'),
+  }
+
+  ###
+  ### jmx.access
+  ###
+  if ( $jmx_enable ) {
+    file { 'jmx.access':
+      path    => "${config_dir}/jmx.access",
+      content => template('neo4j/configuration/jmx.access.erb'),
+    }
+  }
+
+  ###
+  ### jmx.password
+  ###
+  if ( $jmx_enable ) {
+    file { 'jmx.password':
+      path    => "${config_dir}/jmx.password",
+      content => template('neo4j/configuration/jmx.password.erb'),
+    }
   }
 }

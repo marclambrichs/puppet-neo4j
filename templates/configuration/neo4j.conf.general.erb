@@ -7,7 +7,7 @@ dbms.active_database=<%= @dbms_active_database %>
 
 # Whether to allow a store upgrade in case the current version of the database
 # starts against an older store version.
-dbms.allow_format_migration=<% @dbms_allow_format_migration %>
+dbms.allow_format_migration=<%= @dbms_allow_format_migration %>
 
 # Configure the operating mode of the database — 
 #   'SINGLE' for stand-alone operation,
@@ -129,20 +129,6 @@ dbms.index_searcher_cache_size=<%= @dbms_index_searcher_cache_size %>
 #-----------------------------------------------------------------
 
 #-----------------------------------------------------------------
-# JMX Parameters
-#-----------------------------------------------------------------
-# These settings are used for exposing the JMX.
-dbms.jvm.additional=-Dcom.sun.management.jmxremote.access_file=<%= @dbms_jvm_additional_jmxremote_access_file %>
-
-dbms_jvm_additional=-Dcom.sun.management.jmxremote.authenticate=<%= @dbms_jvm_additional_jmxremote_authenticate %>
-
-dbms_jvm_additional=-Dcom.sun.management.jmxremote.password_file=<%= @dbms_jvm_additional_jmxremote_password_file %>
-
-dbms_jvm_additional=-Dcom.sun.management.jmxremote.port=<%= @dbms_jvm_additional_jmxremote_port %>
-
-dbms_jvm_additional=-Dcom.sun.management.jmxremote.ssl=<%= @dbms_jvm_additional_jmxremote_ssl %>
-
-#-----------------------------------------------------------------
 # Logging
 #-----------------------------------------------------------------
 # Debug log level threshold.
@@ -220,7 +206,7 @@ dbms.relationship_grouping_threshold=<%= @dbms_relationship_grouping_threshold %
 dbms.rest.transaction.idle_timeout=<%= @dbms_rest_transaction_idle_timeout %>
 
 # Comma-separated list of <classname>=<mount point> for unmanaged extensions.
-dbms.unmanaged_extension_classes=<%= @dbms_unmanaged_extension_classes %>
+dbms.unmanaged_extension_classes=<%= @dbms_unmanaged_extension_classes.join(',') %>
 
 #-----------------------------------------------------------------
 # Shell

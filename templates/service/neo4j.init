@@ -40,7 +40,7 @@
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 NAME=neo4j
-DAEMON=<%= scope['neo4j::neo4j_home'] %>/bin/${NAME}
+DAEMON=<%= scope['neo4j::neo4j_home']/bin/${NAME}
 PIDDIR=/var/run/${NAME}
 PIDFILE=${PIDDIR}/neo4j.pid
 SCRIPTNAME=/etc/init.d/${NAME}
