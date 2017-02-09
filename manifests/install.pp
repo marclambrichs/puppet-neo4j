@@ -25,7 +25,19 @@ class neo4j::install (
   $source_name           = $::neo4j::source_name,
   $user                  = $::neo4j::user,
   $version               = $::neo4j::version,
-){
+  ){
+
+  ## define the user and group the neo4j service will be running.
+  group { $group:
+    ensure => present
+  } ->
+  user { $user:
+    ensure => present,
+    gid    => $group,
+    shell  => '/bin/bash',
+    home   => $neo4j_home
+  }
+
   case $install_method {
     'package': {
       if $manage_repo {
@@ -70,16 +82,6 @@ class neo4j::install (
       }
     }
     'archive': {
-      ## define the user and group the neo4j service will be running.
-      group { $group:
-        ensure => present
-      } ->
-      user { $user:
-        ensure => present,
-        gid    => $group,
-        shell  => '/bin/bash',
-        home   => $neo4j_home
-      }
 
       if (! defined(Package['lsof'])) and ( versioncmp( $version, '3.1.0' ) < 0 )  {
         package { 'lsof' :
