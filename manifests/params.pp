@@ -82,8 +82,8 @@ class neo4j::params {
   $dbms_connector_https_advertised_address                           = '0.0.0.0:7473'
   $dbms_connector_https_enabled                                      = true
   $dbms_connector_https_listen_address                               = '0.0.0.0:7473'
-  $dbms_connectors_default_advertised_address                        = 'localhost'
-  $dbms_connectors_default_listen_address                            = 'localhost'
+  $dbms_connectors_default_advertised_address                        = '0.0.0.0'
+  $dbms_connectors_default_listen_address                            = '0.0.0.0'
   $dbms_ids_reuse_types_override                                     = [ 'RELATIONSHIP', 'NODE']
   $dbms_index_sampling_background_enabled                            = true
   $dbms_index_sampling_buffer_size                                   = '64m'
@@ -147,7 +147,7 @@ class neo4j::params {
   $dbms_security_allow_publisher_create_token                        = false
   $dbms_security_auth_cache_max_capacity                             = 10000
   $dbms_security_auth_cache_ttl                                      = '10m'
-  $dbms_security_auth_enabled                                        = false
+  $dbms_security_auth_enabled                                        = true
   $dbms_security_auth_provider                                       = 'native'
   $dbms_security_ha_status_auth_enabled                              = true
   $dbms_security_http_authorization_classes                          = []
