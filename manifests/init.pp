@@ -436,6 +436,8 @@
 # The advertised_address setting specifies the address clients should use for
 # this connector. This is useful in a causal cluster as it allows each server
 # to correctly advertise addresses of the other servers in the cluster.
+# Type: hostname and port
+# Default: :9000
 #
 # @param dbms_connector_bolt_enabled
 # The enabled setting allows the client connector to be enabled or disabled.
@@ -448,11 +450,13 @@
 # The listen_address setting specifies how Neo4j listens for incoming
 # connections.
 # Type: hostname and port
+# Default: :7687
 #
 # @param dbms_connector_http_advertised_address
 # The advertised_address setting specifies the address clients should use for
 # this connector. This is useful in a causal cluster as it allows each server
 # to correctly advertise addresses of the other servers in the cluster.
+# Default: :7474
 #
 # @param dbms_connector_http_enabled
 # The enabled setting allows the client connector to be enabled or disabled.
@@ -465,6 +469,7 @@
 # The listen_address setting specifies how Neo4j listens for incoming
 # connections.
 # Type: hostname and port
+# Default: :7474
 #
 # @param dbms_connector_https_advertised_address
 # The advertised_address setting specifies the address clients should use for
@@ -482,6 +487,7 @@
 # The listen_address setting specifies how Neo4j listens for incoming
 # connections.
 # Type: hostname and port
+# Default: :7473
 #
 # @param dbms_connectors_default_advertised_address
 # Default hostname or IP address the server uses to advertise itself to its
@@ -729,7 +735,7 @@
 # @param dbms_logs_http_enabled
 # Enable HTTP request logging.
 # Type: boolean
-# Default: false
+# Default: true
 #
 # @param dbms_logs_http_rotation_keep_number
 # Number of HTTP logs to keep.

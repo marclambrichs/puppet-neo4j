@@ -73,16 +73,16 @@ class neo4j::params {
   $dbms_checkpoint_interval_time                                     = '300000'
   $dbms_checkpoint_interval_tx                                       = 100000
   $dbms_checkpoint_iops_limit                                        = 1000
-  $dbms_connector_bolt_advertised_address                            = '0.0.0.0:9000'
+  $dbms_connector_bolt_advertised_address                            = ':9000'
   $dbms_connector_bolt_enabled                                       = true
-  $dbms_connector_bolt_listen_address                                = '0.0.0.0:7687'
-  $dbms_connector_http_advertised_address                            = '0.0.0.0:7474'
+  $dbms_connector_bolt_listen_address                                = ':7687'
+  $dbms_connector_http_advertised_address                            = ':7474'
   $dbms_connector_http_enabled                                       = true
-  $dbms_connector_http_listen_address                                = '0.0.0.0:7474'
-  $dbms_connector_https_advertised_address                           = '0.0.0.0:7473'
+  $dbms_connector_http_listen_address                                = ':7474'
+  $dbms_connector_https_advertised_address                           = ':7473'
   $dbms_connector_https_enabled                                      = true
-  $dbms_connector_https_listen_address                               = '0.0.0.0:7473'
-  $dbms_connectors_default_advertised_address                        = '0.0.0.0'
+  $dbms_connector_https_listen_address                               = ':7473'
+  $dbms_connectors_default_advertised_address                        = 'localhost'
   $dbms_connectors_default_listen_address                            = '0.0.0.0'
   $dbms_ids_reuse_types_override                                     = [ 'RELATIONSHIP', 'NODE']
   $dbms_index_sampling_background_enabled                            = true
@@ -121,7 +121,7 @@ class neo4j::params {
                                                                         '-XX:+PrintTenuringDistribution' ]
   $dbms_logs_gc_rotation_keep_number                                 = 5
   $dbms_logs_gc_rotation_size                                        = '20m'
-  $dbms_logs_http_enabled                                            = false
+  $dbms_logs_http_enabled                                            = true
   $dbms_logs_http_rotation_keep_number                               = 5
   $dbms_logs_http_rotation_size                                      = '20m'
   $dbms_logs_query_enabled                                           = false
