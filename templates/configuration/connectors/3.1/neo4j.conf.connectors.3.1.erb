@@ -3,7 +3,14 @@
 # 3.6. Configure Neo4j connectors
 #*****************************************************************
 # Default connector settings
+# With default configuration Neo4j only accepts local connections.
+# To accept non-local-connections, uncomment this line:
 dbms.connectors.default_listen_address=<%= @dbms_connectors_default_listen_address %>
+
+# The address at which this server can be reached by its clients. This may be
+# the server's IP address or DNS name, or it may be the address of a reverse
+# proxy which sits in front of the server. This setting may be overridden for
+# individual connectos below.
 dbms.connectors.default_advertised_address=<%= @dbms_connectors_default_advertised_address %>
 
 <% if @dbms_connector_bolt_enabled %>

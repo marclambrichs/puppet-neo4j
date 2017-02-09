@@ -24,30 +24,30 @@ dbms.read_only=<%= @dbms_read_only %>
 # Paths of directories
 #-----------------------------------------------------------------
 # Directory for storing certificates to be used by Neo4j for TLS connections.
-dbms_directories_certificates=<%= @dbms_directories_certificates %>
+dbms.directories.certificates=<%= @dbms_directories_certificates %>
 
 # Path of the data directory.
-dbms_directories_data=<%= @dbms_directories_data %>
+dbms.directories.data=<%= @dbms_directories_data %>
 <% if @allow_load_csv -%>
 
 # Sets the root directory for file URLs used with the Cypher LOAD CSV clause.
-dbms_directories_import=<%= @dbms_directories_import %>
+dbms.directories.import=<%= @dbms_directories_import %>
 <% end -%>
 
 # Path of the lib directory.
-dbms_directories_lib=<%= @dbms_directories_lib %>
+dbms.directories.lib=<%= @dbms_directories_lib %>
 
 # Path of the logs directory.
-dbms_directories_logs=<%= @dbms_directories_logs %>
+dbms.directories.logs=<%= @dbms_directories_logs %>
 
 # The target location of the CSV files: a path to a directory wherein a CSV file
-dbms_directories_metrics=<%= @dbms_directories_metrics %>
+dbms.directories.metrics=<%= @dbms_directories_metrics %>
 
 # Location of the database plugin directory.
-dbms_directories_plugins=<%= @dbms_directories_plugins %>
+dbms.directories.plugins=<%= @dbms_directories_plugins %>
 
 # Path of the run directory.
-dbms_directories_run=<%= @dbms_directories_run %>
+dbms.directories.run=<%= @dbms_directories_run %>
 
 #-----------------------------------------------------------------
 # Browser
@@ -220,7 +220,7 @@ dbms.shell.enabled=<%= @dbms_shell_enabled %>
 dbms.shell.host=<%= @dbms_shell_host %>
 
 # The port the shell will listen on.
-dbms_shell_port=<%= @dbms_shell_port %>
+dbms.shell.port=<%= @dbms_shell_port %>
 
 # Read only mode.
 dbms.shell.read_only=<%= @dbms_shell_read_only %>
