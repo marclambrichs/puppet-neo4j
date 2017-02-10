@@ -12,8 +12,8 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::config (
-  $default_file = $neo4j::default_file,
-  $config_dir   = "${::neo4j::neo4j_home}/conf",
+  $default_file = $::neo4j::default_file,
+  $config_dir   = $::neo4j::config_dir,
   $jmx_enable   = $::neo4j::jmx_enable,
   $version      = $::neo4j::version,
 ){

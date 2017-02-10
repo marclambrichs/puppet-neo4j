@@ -363,9 +363,14 @@
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 10000
 #
+# @param config_dir
+# Directory that contains the neo4j configuration file
+# Type: filesystem path; absolute.
+# Default: /etc/neo4j
+#
 # @param cypher_default_language_version
 # Set this to specify the default parser (language version).
-# Type: one of {2.3, 3.0, 3.1, default}
+# Type: one of [2.3, 3.0, 3.1, default]
 # Default: default
 #
 # @param cypher_forbid_exhaustive_shortestpath
@@ -387,7 +392,7 @@
 #
 # @param cypher_planner
 # Set this to specify the default planner for the default language version.
-# Type: one of {COST, RULE, default}
+# Type: one of [COST, RULE, default]
 # Default: default
 #
 # @param cypher_statistics_divergence_threshold
@@ -555,7 +560,7 @@
 # @param dbms_ids_reuse_types_override
 # Version: 3.1
 # Specified names of id types (comma separated) that should be reused.
-# Type: list separated by "," where items are one of {NODE, RELATIONSHIP}
+# Type: list separated by "," where items are one of [NODE, RELATIONSHIP]
 # Default: [RELATIONSHIP, NODE]
 #
 # @param dbms_index_sampling_background_enabled
@@ -1072,6 +1077,8 @@
 # Type: list
 # Default: []
 #
+# @param dbms_windows_service_name
+#
 # @param default_file
 # File containing environment variables
 # Type: filesystem path; relative paths are resolved agains the installation root, <neo4j-home>
@@ -1468,6 +1475,7 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j (
+  $config_dir                                                        = $::neo4j::params::config_dir,
   $edition                                                           = $::neo4j::params::edition,
   $group                                                             = $::neo4j::params::group,
   $install_prefix                                                    = $::neo4j::params::install_prefix,
@@ -1752,7 +1760,10 @@ class neo4j (
   ) inherits neo4j::params {
 
   ### validate absolute path
-  validate_absolute_path( $install_prefix )
+  validate_absolute_path( [
+    $config_dir,
+    $install_prefix
+  ] )
 
   ### validate booleans
   validate_bool(
