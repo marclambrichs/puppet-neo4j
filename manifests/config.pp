@@ -3,6 +3,13 @@
 # Config Neo4J (http://www.neo4j.com) on RHEL/Ubuntu/Debian from their
 # distribution tarballs downloaded directly from their site.
 #
+# === Parameters
+#
+# @param default_file
+# @param config_dir
+# @param jmx_enable
+# @param version
+#
 # === Authors
 #
 # Marc Lambrichs <marc.lambrichs@gmail.com>
@@ -37,7 +44,7 @@ class neo4j::config (
 
   $config_file = "${config_dir}/neo4j.conf"
 
-  concat { $config_file :
+  concat { $config_file:
     owner  => $::neo4j::user,
     group  => $::neo4j::group,
     mode   => '0644',

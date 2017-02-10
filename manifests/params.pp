@@ -60,7 +60,6 @@ class neo4j::params {
   $causal_clustering_transaction_advertised_address                  = '127.0.0.1:6000'
   $causal_clustering_transaction_listen_address                      = '127.0.0.1:6000'
   $causal_clustering_unknown_address_logging_throttle                = '10000'
-  $config_dir                                                        = '/etc/neo4j'
   $cypher_default_language_version                                   = 'default'
   $cypher_forbid_exhaustive_shortestpath                             = false
   $cypher_hints_error                                                = false

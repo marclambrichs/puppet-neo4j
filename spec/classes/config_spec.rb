@@ -6,7 +6,7 @@ describe 'neo4j' do
       context "config" do
 
         context 'with defaults for all parameters' do
-          it { should contain_concat('/usr/share/neo4j/conf/neo4j.conf') }          
+          it { should contain_concat('/etc/neo4j/neo4j.conf') }          
           it { should contain_concat__fragment('neo4j config general') }
           it { should contain_concat__fragment('neo4j config connectors') }
           it { should contain_concat__fragment('neo4j config HA cluster') }                    

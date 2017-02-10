@@ -363,11 +363,6 @@
 # Type: duration (valid units are {'ms', 's', 'm'}; default unit is 's'.)
 # Default: 10000
 #
-# @param config_dir
-# Directory that contains the neo4j configuration file
-# Type: filesystem path; absolute.
-# Default: /etc/neo4j
-#
 # @param cypher_default_language_version
 # Set this to specify the default parser (language version).
 # Type: one of [2.3, 3.0, 3.1, default]
@@ -919,7 +914,7 @@
 # Version: 3.1
 # LDAP user DN template.
 # Type: string
-# Default: uid={0},ou=users,dc=example,dc=com
+# Default: "uid={0},ou=users,dc=example,dc=com"
 #
 # @param dbms_security_ldap_authorization_group_membership_attributes
 # Version: 3.1
@@ -967,7 +962,7 @@
 # The LDAP search filter to search for a user principal when LDAP authorization
 # is enabled.
 # Type: string
-# Default: (&(objectClass=*)(uid={0}))
+# Default: "(&(objectClass=*)(uid={0}))"
 #
 # @param dbms_security_ldap_connection_timeout
 # Version: 3.1
@@ -1475,7 +1470,6 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j (
-  $config_dir                                                        = $::neo4j::params::config_dir,
   $edition                                                           = $::neo4j::params::edition,
   $group                                                             = $::neo4j::params::group,
   $install_prefix                                                    = $::neo4j::params::install_prefix,
@@ -1761,7 +1755,6 @@ class neo4j (
 
   ### validate absolute path
   validate_absolute_path( [
-    $config_dir,
     $install_prefix
   ] )
 
@@ -2011,12 +2004,14 @@ class neo4j (
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
       $neo4j_home = "${install_prefix}/neo4j"
+      $config_dir = '/etc/neo4j'
     }
     'archive': {
       if ( versioncmp( $version, '3.0.0' ) < 0 ) {
         fail('Only versions >= 3.0.0 are supported at this time.')
       }
       $neo4j_home = "${install_prefix}/${source_name}"
+      $config_dir = "${neo4j_home}/conf"
     }
     default: {
       fail("Installation method ${install_method} not supported.")
