@@ -73,13 +73,13 @@ class neo4j::params {
   $dbms_checkpoint_interval_time                                     = '300000'
   $dbms_checkpoint_interval_tx                                       = 100000
   $dbms_checkpoint_iops_limit                                        = 1000
-  $dbms_connector_bolt_advertised_address                            = ':9000'
+  $dbms_connector_bolt_advertised_address                            = undef
   $dbms_connector_bolt_enabled                                       = true
-  $dbms_connector_bolt_listen_address                                = ':7687'
-  $dbms_connector_http_advertised_address                            = ':7474'
+  $dbms_connector_bolt_listen_address                                = ':9000'
+  $dbms_connector_http_advertised_address                            = undef
   $dbms_connector_http_enabled                                       = true
   $dbms_connector_http_listen_address                                = ':7474'
-  $dbms_connector_https_advertised_address                           = ':7473'
+  $dbms_connector_https_advertised_address                           = undef
   $dbms_connector_https_enabled                                      = true
   $dbms_connector_https_listen_address                               = ':7473'
   $dbms_connectors_default_advertised_address                        = 'localhost'
@@ -133,8 +133,8 @@ class neo4j::params {
   $dbms_logs_security_rotation_delay                                 = '300s'
   $dbms_logs_security_rotation_keep_number                           = 7
   $dbms_logs_security_rotation_size                                  = '20m'
-  $dbms_memory_heap_initial_size                                     = '512'
-  $dbms_memory_heap_max_size                                         = '512'
+  $dbms_memory_heap_initial_size                                     = '512m'
+  $dbms_memory_heap_max_size                                         = '512m'
   $dbms_memory_pagecache_size                                        = '240k'
   $dbms_memory_pagecache_swapper                                     = undef
   $dbms_mode                                                         = 'SINGLE'
@@ -150,7 +150,7 @@ class neo4j::params {
   $dbms_security_auth_enabled                                        = true
   $dbms_security_auth_provider                                       = 'native'
   $dbms_security_ha_status_auth_enabled                              = true
-  $dbms_security_http_authorization_classes                          = []
+  $dbms_security_http_authorization_classes                          = undef
   $dbms_security_ldap_authentication_cache_enabled                   = true
   $dbms_security_ldap_authentication_mechanism                       = 'simple'
   $dbms_security_ldap_authentication_user_dn_template                = 'uid={0},ou=users,dc=example,dc=com'
@@ -182,7 +182,7 @@ class neo4j::params {
   $dbms_unmanaged_extension_classes                                  = []
   $dbms_windows_service_name                                         = undef
   $edition                                                           = 'community'
-  $group                                                             = 'neo4j'
+  $group                                                             = 'users'
   $ha_allow_init_cluster                                             = true
   $ha_branched_data_copying_strategy                                 = 'branch_then_copy'
   $ha_branched_data_policy                                           = 'keep_all'
@@ -257,13 +257,13 @@ class neo4j::params {
   case $::osfamily {
     'RedHat': {
       $dbms_directories_certificates = 'certificates'
-      $dbms_directories_data         = 'data'
+      $dbms_directories_data         = '/var/lib/neo4j/data'
       $dbms_directories_import       = 'import'
-      $dbms_directories_lib          = 'lib'
-      $dbms_directories_logs         = 'logs'
+      $dbms_directories_lib          = '/usr/share/neo4j/lib'
+      $dbms_directories_logs         = '/var/log/neo4j'
       $dbms_directories_metrics      = 'metrics'
       $dbms_directories_plugins      = 'plugins'
-      $dbms_directories_run          = 'run'
+      $dbms_directories_run          = '/var/run/neo4j'
       $default_file                  = '/etc/sysconfig/neo4j'
       $service_provider              = 'redhat'
       $version                       = 'installed'

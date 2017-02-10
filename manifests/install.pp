@@ -76,12 +76,6 @@ class neo4j::install (
       package { 'neo4j':
         ensure => $version,
         name   => $package_name,
-      } ->
-
-      file { $data_dir:
-        ensure => directory,
-        owner  => $user,
-        group  => $group,
       }
     }
     'archive': {

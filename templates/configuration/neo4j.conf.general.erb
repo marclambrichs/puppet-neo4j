@@ -69,14 +69,14 @@ browser.retain_connection_credentials=<%= @browser_retain_connection_credentials
 # Checkpointing
 #-------------------------------------------------------------------------------
 # Configures the time interval between check-points.
-dbms.checkpoint_interval_time=<%= @dbms_checkpoint_interval_time %>
+dbms.checkpoint.interval.time=<%= @dbms_checkpoint_interval_time %>
 
 # Configures the transaction interval between check-points.
-dbms.checkpoint_interval_tx=<%= @dbms_checkpoint_interval_tx %>
+dbms.checkpoint.interval.tx=<%= @dbms_checkpoint_interval_tx %>
 
 # Limit the number of IOs the background checkpoint process will consume per
 # second.
-dbms.checkpoint_iops_limit=<%= @dbms_checkpoint_iops_limit %>
+dbms.checkpoint.iops.limit=<%= @dbms_checkpoint_iops_limit %>
 
 #-------------------------------------------------------------------------------
 # Cypher configuration
@@ -102,7 +102,7 @@ cypher.min_replan_interval=<%= @cypher_min_replan_interval %>
 # Set this to specify the default planner for the default language version.
 cypher.planner=<%= @cypher_planner %>
 
-dbms.query_cache.size=<%= @dbms_query_cache_size %>
+dbms.query_cache_size=<%= @dbms_query_cache_size %>
 
 # The threshold when a plan is considered stale.
 cypher.statistics_divergence_threshold=<%= @cypher_statistics_divergence_threshold %>
@@ -111,17 +111,17 @@ cypher.statistics_divergence_threshold=<%= @cypher_statistics_divergence_thresho
 # Lucene index handling
 #-------------------------------------------------------------------------------
 # Enable or disable background index sampling.
-dbms.index_sampling_background_enabled=<%= @dbms_index_sampling_background_enabled %>
+dbms.index_sampling.background_enabled=<%= @dbms_index_sampling_background_enabled %>
 
 # Size of buffer used by index sampling
-dbms.index_sampling_buffer_size=<%= @dbms_index_sampling_buffer_size %>
+dbms.index_sampling.buffer_size=<%= @dbms_index_sampling_buffer_size %>
 
 # Index sampling chunk size limit.
-dbms.index_sampling_sample_size_limit=<%= @dbms_index_sampling_sample_size_limit %>
+dbms.index_sampling.sample_size_limit=<%= @dbms_index_sampling_sample_size_limit %>
 
 # Percentage of index updates of total index size required before sampling of a
 # given index is triggered.
-dbms.index_sampling_update_percentage=<%= @dbms_index_sampling_update_percentage %>
+dbms.index_sampling.update_percentage=<%= @dbms_index_sampling_update_percentage %>
 
 # The maximum number of open Lucene index searchers.
 dbms.index_searcher_cache_size=<%= @dbms_index_searcher_cache_size %>

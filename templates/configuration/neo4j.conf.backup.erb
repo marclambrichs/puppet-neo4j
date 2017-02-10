@@ -4,7 +4,7 @@
 #*****************************************************************
 dbms.backup.enabled=<%= @dbms_backup_enabled %>
 <% if @dbms_backup_enabled -%>
-dbms.backup_address=<%= @dbms_backup_address %>
+dbms.backup.address=<%= @dbms_backup_address %>
 <% else -%>
-#dbms.backup_address=0.0.0.0:6362
+#dbms.backup.address=0.0.0.0:6362
 <% end -%>

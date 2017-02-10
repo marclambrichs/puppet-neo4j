@@ -17,21 +17,27 @@ dbms.connectors.default_advertised_address=<%= @dbms_connectors_default_advertis
 # Bolt connector
 dbms.connector.bolt.enabled=<%= @dbms_connector_bolt_enabled %>
 dbms.connector.bolt.listen_address=<%= @dbms_connector_bolt_listen_address %>
+<% if @dbms_connector_bolt_advertised_address %>
 dbms.connector.bolt.advertised_address=<%= @dbms_connector_bolt_advertised_address %>
+<% end -%>
 <% end -%>
 
 <% if @dbms_connector_http_enabled %>
 # HTTP Connector
 dbms.connector.http.enabled=<%= @dbms_connector_http_enabled %>
 dbms.connector.http.listen_address=<%= @dbms_connector_http_listen_address %>
+<% if @dbms_connector_http_advertised_address %>
 dbms.connector.http.advertised_address=<%= @dbms_connector_http_advertised_address %>
+<% end -%>
 <% end -%>
 
 <% if @dbms_connector_https_enabled %>
 # HTTPS Connector
 dbms.connector.https.enabled=<%= @dbms_connector_https_enabled %>
 dbms.connector.https.listen_address=<%= @dbms_connector_https_listen_address %>
+<% if @dbms_connector_https_advertised_address %>
 dbms.connector.https.advertised_address=<%= @dbms_connector_https_advertised_address %>
+<% end -%>
 <% end -%>
 
 <% if @dbms_threads_worker_count %>
