@@ -1,6 +1,6 @@
-#=================================================================
-# Neo4j configuration - Managed by Puppet
-#=================================================================
+#===============================================================================
+# Neo4j configuration = Managed by Puppet
+#===============================================================================
 
 # Name of the database to load.
 dbms.active_database=<%= @dbms_active_database %>
@@ -20,9 +20,9 @@ dbms.mode=<%= @dbms_mode %>
 # Only allow read operations from this Neo4j instance.
 dbms.read_only=<%= @dbms_read_only %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Paths of directories
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Directory for storing certificates to be used by Neo4j for TLS connections.
 dbms.directories.certificates=<%= @dbms_directories_certificates %>
 
@@ -49,9 +49,9 @@ dbms.directories.plugins=<%= @dbms_directories_plugins %>
 # Path of the run directory.
 dbms.directories.run=<%= @dbms_directories_run %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Browser
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Configure the policy for outgoing Neo4j Browser connections
 browser.allow_outgoing_connections=<%= @browser_allow_outgoing_connections %>
 
@@ -65,9 +65,9 @@ browser.remote_content_hostname_whitelist=<%= @browser_remote_content_hostname_w
 # Configure the Neo4j Browser to store or not to store user credentials.
 browser.retain_connection_credentials=<%= @browser_retain_connection_credentials %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Checkpointing
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Configures the time interval between check-points.
 dbms.checkpoint_interval_time=<%= @dbms_checkpoint_interval_time %>
 
@@ -78,9 +78,9 @@ dbms.checkpoint_interval_tx=<%= @dbms_checkpoint_interval_tx %>
 # second.
 dbms.checkpoint_iops_limit=<%= @dbms_checkpoint_iops_limit %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Cypher configuration
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Determines if Cypher will allow using file URLs when loading data using
 # LOAD CSV.
 dbms.security.allow_csv_import_from_file_urls=<%= @dbms_security_allow_csv_import_from_file_urls %>
@@ -107,9 +107,9 @@ dbms.query_cache.size=<%= @dbms_query_cache_size %>
 # The threshold when a plan is considered stale.
 cypher.statistics_divergence_threshold=<%= @cypher_statistics_divergence_threshold %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Lucene index handling
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Enable or disable background index sampling.
 dbms.index_sampling_background_enabled=<%= @dbms_index_sampling_background_enabled %>
 
@@ -126,13 +126,69 @@ dbms.index_sampling_update_percentage=<%= @dbms_index_sampling_update_percentage
 # The maximum number of open Lucene index searchers.
 dbms.index_searcher_cache_size=<%= @dbms_index_searcher_cache_size %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # JVM Parameters
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# Java Heap Size: by default the Java heap size is dynamically
+# calculated based on available system resources.
+# Uncomment these lines to set specific initial and maximum
+# heap size in MB.
+dbms.memory.heap.initial_size=<%= @dbms_memory_heap_initial_size %>
+dbms.memory.heap.max_size=<%= @dbms_memory_heap_max_size %>
 
-#-----------------------------------------------------------------
+# G1GC generally strikes a good balance between throughput and tail
+# latency, without too much tuning.
+dbms.jvm.additional=<%= @dbms_jvm_additional_use_g1gc %>
+
+# Have common exceptions keep producing stack traces, so they can be
+# debugged regardless of how often logs are rotated.
+dbms.jvm.additional=<%= @dbms_jvm_additional_omit_stacktrace_in_fast_throw %>
+
+# Reduce probability of objects getting the same identity hash code
+# via a race, by computing them with thread-local PRNGs.
+dbms.jvm.additional=<%= @dbms_jvm_additional_hashcode %>
+
+# Make sure that `initmemory` is not only allocated, but committed to
+# the process, before starting the database. This reduces memory
+# fragmentation, increasing the effectiveness of transparent huge
+# pages. It also reduces the possibility of seeing performance drop
+# due to heap-growing GC events, where a decrease in available page
+# cache leads to an increase in mean IO response time.
+# Try reducing the heap memory, if this flag degrades performance.
+dbms.jvm.additional=<%= @dbms_jvm_additional_commit_memory_to_process %>
+
+# Trust that non-static final fields are really final.
+# This allows more optimisations and improves overall performance.
+# NOTE: Disable this if you use embedded mode, or have extensions or depencies that may use reflection or serialization
+# to change the value of final fields!
+dbms.jvm.additional=<%= @dbms_jvm_additional_unlock_experimental_vm_options %>
+dbms.jvm.additional=<%= @dbms_jvm_additional_trust_final_non_static_fields %>
+
+# Disable explicit garbage collection, which is occasionally invoked by the JDK itself.
+dbms.jvm.additional=<%= @dbms_jvm_additional_disable_explicit_gc %>
+
+<%if @jmx_enable %>
+# Remote JMX monitoring, uncomment and adjust the following lines as needed.
+# Also make sure to update the jmx.access and jmx.password files with appropriate permission roles and passwords,
+# the shipped configuration contains only a read only role called 'monitor' with password 'Neo4j'.
+# For more details, see: http://download.oracle.com/javase/8/docs/technotes/guides/management/agent.html
+# On Unix based systems the jmx.password file needs to be owned by the user that will run the server,
+# and have permissions set to 0600.
+# For details on setting these file permissions on Windows see:
+#     http://docs.oracle.com/javase/8/docs/technotes/guides/management/security-windows.html
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.port=<%= @dbms_jvm_additional_jmxremote_port %>
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.authenticate=<%= @dbms_jvm_additional_jmxremote_authenticate %>
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.ssl=<%= @dbms_jvm_additional_jmxremote_ssl %>
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.password.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_password_file %>
+dbms.jvm.additional=-Dcom.sun.management.jmxremote.access.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_access_file %>
+<% end -%>
+
+# Some systems cannot discover host name automatically, and need this line configured:
+dbms.jvm.additional=-Djava.rmi.server.hostname=<%= @dbms_jvm_additional_rmi_server_hostname %>
+
+#-------------------------------------------------------------------------------
 # Logging
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Debug log level threshold.
 dbms.logs.debug.level=<%= @dbms_logs_debug_level %>
 
@@ -180,9 +236,9 @@ dbms_tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy
 # Specifies at which file size the logical log will auto-rotate.
 dbms.tx_log.rotation.size=<%= @dbms_tx_log_rotation_size %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Memory
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # The amount of memory to use for mapping the store files, in bytes (or
 # kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
 dbms.memory.pagecache.size=<%= @dbms_memory_pagecache_size %>
@@ -192,9 +248,9 @@ dbms.memory.pagecache.size=<%= @dbms_memory_pagecache_size %>
 dbms.memory.pagecache.swapper=<%= @dbms_memory_pagecache_swapper %>
 <% end -%>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Miscellaeneous
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Specified names of id types (comma separated) that should be reused.
 dbms.ids.reuse.types.override=<%= @dbms_ids_reuse_types_override.join(',') %>
 
@@ -210,9 +266,9 @@ dbms.rest.transaction.idle_timeout=<%= @dbms_rest_transaction_idle_timeout %>
 # Comma-separated list of <classname>=<mount point> for unmanaged extensions.
 dbms.unmanaged_extension_classes=<%= @dbms_unmanaged_extension_classes.join(',') %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Shell
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Enable a remote shell server which Neo4j Shell clients can log in to.
 dbms.shell.enabled=<%= @dbms_shell_enabled %>
 
@@ -228,9 +284,9 @@ dbms.shell.read_only=<%= @dbms_shell_read_only %>
 # The name of the shell.
 dbms.shell.rmi_name=<%= @dbms_shell_rmi_name %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Tools
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Perform checks between nodes, relationships, properties, types and tokens.
 tools.consistency_checker.check_graph=<%= @tools_consistency_checker_check_graph %>
 
@@ -243,9 +299,24 @@ tools.consistency_checker.check_label_scan_store=<%= @tools_consistency_checker_
 # Perform optional additional checking on property ownership.
 tools.consistency_checker.check_property_owners=<%= @tools_consistency_checker_check_property_owners %>
 
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # UDC
-#-----------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # Enable/disable the UDC extension. (http://neo4j.com/docs/stable/usage-data-collector.html)
 dbms.udc.enabled=<%= @dbms_udc_enabled %>
 
+#-------------------------------------------------------------------------------
+# Wrapper Windows NT/2000/XP Service Properties
+#-------------------------------------------------------------------------------
+# WARNING - Do not modify any of these properties when an application
+#  using this configuration file has been installed as a service.
+#  Please uninstall the service before modifying this section.  The
+#  service can then be reinstalled.
+
+# Name of the service
+dbms.windows_service_name=neo4j
+
+#-------------------------------------------------------------------------------
+# Other Neo4j system properties
+#-------------------------------------------------------------------------------
+dbms.jvm.additional=-Dunsupported.dbms.udc.source=<%= @dbms_jvm_additional_unsupported_dbms_udc_source %>

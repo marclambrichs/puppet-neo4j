@@ -14,7 +14,6 @@ describe 'neo4j' do
           it { should contain_concat__fragment('neo4j config authentication and authorization') }
           it { should contain_concat__fragment('neo4j config logging') }
           it { should contain_concat__fragment('neo4j config query management') }          
-          it { should contain_file('neo4j-wrapper.conf') }
         end
 
         context 'with install_method set to archive and version to 3.0.8' do
