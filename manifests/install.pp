@@ -3,6 +3,20 @@
 # Installs Neo4J (http://www.neo4j.com) on RHEL/Ubuntu/Debian from their
 # distribution tarballs downloaded directly from their site.
 #
+# === Parameters
+#
+# @param data_dir
+# @param group
+# @param install_method
+# @param install_prefix
+# @param logs_dir
+# @param manage_repo
+# @param neo4j_home
+# @param package_name
+# @param source_tarball
+# @param source_name
+# @param user
+# @param version
 #
 # === Authors
 #
