@@ -45,7 +45,7 @@ class neo4j::install (
           'RedHat': {
             yumrepo {'neo4j':
               descr    => 'Neo4j Yum Repo',
-              baseurl  => 'http://yum.neo4j.org',
+              baseurl  => 'http://yum.neo4j.org/testing',
               gpgcheck => 1,
               gpgkey   => 'http://debian.neo4j.org/neotechnology.gpg.key',
               enabled  => 1,
