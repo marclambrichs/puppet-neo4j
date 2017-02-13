@@ -58,7 +58,7 @@ class neo4j::install (
           'Debian': {
             apt::source { 'neo4j':
               location => 'http://debian.neo4j.org/repo',
-              release  => 'stable/',
+              release  => 'testing/',
               repos    => '',
               key      => {
                 'id'     => '66D34E951A8C53D90242132B26C95CF201182252',
