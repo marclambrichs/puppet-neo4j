@@ -1406,6 +1406,11 @@
 # Type: string
 # Default: 'neo4j'
 #
+# @param service_provider
+# The puppet service provider. Could be one of 'debian', 'redhat', 'systemd', 'init'
+# Type: string
+# Default: dependent on your OS
+#
 # @param service_ulimit
 # Maximum number of open file descriptors.
 # Type: integer
@@ -1479,6 +1484,7 @@ class neo4j (
   $service_enable                                                    = $::neo4j::params::service_enable,
   $service_ensure                                                    = $::neo4j::params::service_ensure,
   $service_name                                                      = $::neo4j::params::service_name,
+  $service_provider                                                  = $::neo4j::params::service_provider,
   $user                                                              = $::neo4j::params::user,
   $version                                                           = $::neo4j::params::version,
 
@@ -1899,6 +1905,9 @@ class neo4j (
   validate_re( $ha_host_coordination,                 '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
   validate_re( $ha_host_data,                         '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
   validate_re( $metrics_graphite_server,              '([a-z][0-9a-z_]*(\.[0-9a-z]_)*)?:[1-9][0-9]*' )
+
+  ### validate service provider
+  validate_re( $service_provider, 'debian|init|redhat|systemd' )
 
   ### validate arrays
   validate_array( $browser_remote_content_hostname_whitelist )
