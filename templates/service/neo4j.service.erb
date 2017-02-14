@@ -1,13 +1,14 @@
 [Unit]
-Description=<%= scope['neo4j::service_name'] %>
+Description=Neo4j Graph Database
 After=network.target
 
 [Service]
-Type=forking
-WorkingDirectory=<%= scope['neo4j::neo4j_home'] %>/bin
-ExecStart=<%= scope['neo4j::neo4j_home'] %>/bin/neo4j start > /dev/null 2>&1
-ExecStop=<%= scope['neo4j::neo4j_home'] %>/bin/neo4j stop > /dev/null 2>&1
-PIDFile=/var/run/neo4j/neo4j.pid
+ExecStart=/usr/share/neo4j/bin/neo4j console
+Restart=on-failure
+User=neo4j
+Environment="NEO4J_CONF=/etc/neo4j" "NEO4J_HOME=/var/lib/neo4j"
+LimitNOFILE=60000
+TimeoutSec=120
 
 [Install]
 WantedBy=multi-user.target
