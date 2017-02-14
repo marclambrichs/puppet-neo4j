@@ -215,7 +215,6 @@ class neo4j::params {
   $ha_tx_push_factor                                                 = 1
   $ha_tx_push_strategy                                               = 'fixed_ascending'
   $install_method                                                    = 'package'
-  $install_prefix                                                    = '/usr/share'
   $jmx_enable                                                        = false
   $manage_repo                                                       = false
   $metrics_bolt_messages_enabled                                     = false
@@ -256,6 +255,16 @@ class neo4j::params {
 
   case $::osfamily {
     'RedHat': {
+      case $::operatingsystemrelease {
+        /6.*/ : {
+          $install_prefix   = '/usr/share'
+          $service_provider = 'redhat'
+        }
+        default : {
+          $install_prefix   = '/usr/share'
+          $service_provider = 'systemd'
+        }
+      }
       $dbms_directories_certificates = 'certificates'
       $dbms_directories_data         = '/var/lib/neo4j/data'
       $dbms_directories_import       = 'import'
@@ -265,20 +274,27 @@ class neo4j::params {
       $dbms_directories_plugins      = 'plugins'
       $dbms_directories_run          = '/var/run/neo4j'
       $default_file                  = '/etc/sysconfig/neo4j'
-      $service_provider              = 'redhat'
       $version                       = 'installed'
     }
     'Debian': {
-      $dbms_directories_certificates = '/var/lib/neo4j/certificates'
+      case $::operatingsystemrelease {
+        /(7.*|14\.04.*)/ : {
+          $service_provider = 'debian'
+        }
+        default : {
+          $service_provider = 'systemd'
+        }
+      }
+      $dbms_directories_certificates = 'certificates'
       $dbms_directories_data         = '/var/lib/neo4j/data'
-      $dbms_directories_import       = '/var/lib/neo4j/import'
-      $dbms_directories_lib          = 'lib'
+      $dbms_directories_import       = 'import'
+      $dbms_directories_lib          = '/usr/share/neo4j/lib'
       $dbms_directories_logs         = '/var/log/neo4j'
-      $dbms_directories_metrics      = '/var/lib/neo4j/metrics'
-      $dbms_directories_plugins      = '/var/lib/neo4j/plugins'
+      $dbms_directories_metrics      = 'metrics'
+      $dbms_directories_plugins      = 'plugins'
       $dbms_directories_run          = '/var/run/neo4j'
       $default_file                  = '/etc/default/neo4j'
-      $service_provider              = 'debian'
+      $install_prefix                = '/usr'
       $version                       = 'installed'
     }
     default: {

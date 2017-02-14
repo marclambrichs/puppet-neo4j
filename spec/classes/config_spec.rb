@@ -20,6 +20,7 @@ describe 'neo4j' do
           let(:params) {
             {
                 :install_method => 'archive',
+                :install_prefix => '/usr/share',
                 :version        => '3.0.8'
             }
           }
@@ -30,6 +31,7 @@ describe 'neo4j' do
           let(:params) {
             {
                 :install_method => 'archive',
+                :install_prefix => '/usr/share',
                 :version        => '3.1.1'
             }
           }

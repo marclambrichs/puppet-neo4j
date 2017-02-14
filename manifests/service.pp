@@ -45,9 +45,10 @@ class neo4j::service (
       }
     }
 
-    service { $service_name:
+    service { 'neo4j':
       ensure   => $service_ensure,
       enable   => $service_enable,
+      name     => $service_name,
       provider => $service_provider,
     }
   }
