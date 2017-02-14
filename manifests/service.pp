@@ -13,6 +13,7 @@
 #
 class neo4j::service (
   $group            = $::neo4j::group,
+  $install_method   = $::neo4j::install_method,
   $service_enable   = $::neo4j::service_enable,
   $service_ensure   = $::neo4j::service_ensure,
   $service_name     = $::neo4j::service_name,
@@ -21,24 +22,26 @@ class neo4j::service (
 ){
 
   if $service_enable {
-    case $service_provider {
-      'debian','init','redhat': {
-        file { "/etc/init.d/${neo4j::service_name}":
-          content => template('neo4j/service/neo4j.init.erb'),
-          group   => $group,
-          mode    => '0755',
-          notify  => Service[$service_name],
-          owner   => $user,
+    if $install_method == 'source' {
+      case $service_provider {
+        'debian','init','redhat': {
+          file { "/etc/init.d/${neo4j::service_name}":
+            content => template('neo4j/service/neo4j.init.erb'),
+            group   => $group,
+            mode    => '0755',
+            notify  => Service[$service_name],
+            owner   => $user,
+          }
         }
-      }
-      'systemd': {
-        ::systemd::unit_file { "${service_name}.service":
-          content => template('neo4j/service/neo4j.service.erb'),
-          before  => Service[$service_name],
+        'systemd': {
+          ::systemd::unit_file { "${service_name}.service":
+            content => template('neo4j/service/neo4j.service.erb'),
+            before  => Service[$service_name],
+          }
         }
-      }
-      default: {
-        fail("Service provider ${service_provider} not supported")
+        default: {
+          fail("Service provider ${service_provider} not supported")
+        }
       }
     }
 
