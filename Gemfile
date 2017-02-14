@@ -1,5 +1,10 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
+case RUBY_PLATFORM
+when /darwin/
+  gem 'CFPropertyList', '2.2.6'
+end
+
 def location_for(place, fake_version = nil)
   if place =~ /^(git[:@][^#]*)#(.*)/
     [fake_version, { :git => $1, :branch => $2, :require => false }].compact
