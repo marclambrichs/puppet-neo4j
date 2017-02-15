@@ -242,6 +242,8 @@ class neo4j::params {
   $metrics_neo4j_server_enabled                                      = false
   $metrics_neo4j_tx_enabled                                          = false
   $metrics_prefix                                                    = 'neo4j'
+  $release_deb                                                       = 'stable'
+  $release_rpm                                                       = 'stable'
   $service_enable                                                    = true
   $service_ensure                                                    = 'running'
   $service_name                                                      = 'neo4j'

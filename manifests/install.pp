@@ -13,6 +13,8 @@
 # @param manage_repo
 # @param neo4j_home
 # @param package_name
+# @param release_deb
+# @param release_rpm
 # @param source_tarball
 # @param source_name
 # @param user
@@ -35,6 +37,8 @@ class neo4j::install (
   $manage_repo           = $::neo4j::manage_repo,
   $neo4j_home            = $::neo4j::neo4j_home,
   $package_name          = $::neo4j::package_name,
+  $release_deb           = $::neo4j::release_deb,
+  $release_rpm           = $::neo4j::release_rpm,
   $source_tarball        = $::neo4j::source_tarball,
   $source_name           = $::neo4j::source_name,
   $user                  = $::neo4j::user,
@@ -48,7 +52,7 @@ class neo4j::install (
           'RedHat': {
             yumrepo {'neo4j':
               descr    => 'Neo4j Yum Repo',
-              baseurl  => 'http://yum.neo4j.org/testing',
+              baseurl  => "http://yum.neo4j.org/${release_rpm}",
               gpgcheck => 1,
               gpgkey   => 'http://debian.neo4j.org/neotechnology.gpg.key',
               enabled  => 1,
@@ -58,7 +62,7 @@ class neo4j::install (
           'Debian': {
             apt::source { 'neo4j':
               location => 'http://debian.neo4j.org/repo',
-              release  => 'testing/',
+              release  => "${release_deb}/",
               repos    => '',
               key      => {
                 'id'     => '66D34E951A8C53D90242132B26C95CF201182252',

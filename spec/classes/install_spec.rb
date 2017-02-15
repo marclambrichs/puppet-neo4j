@@ -12,6 +12,34 @@ describe 'neo4j' do
           it { should contain_package('neo4j') }
         end
 
+        context 'with release_deb set to testing', :if => (facts[:osfamily] == 'Debian') do
+          let(:params) {
+            {
+              :manage_repo => true,
+              :release_deb => 'testing',
+            }
+          }
+          it { should contain_apt__source('neo4j').with(
+            {
+              'release' => 'testing/'
+            })
+          }
+        end
+
+        context 'with release_rpm set to testing', :if => (facts[:osfamily] == 'RedHat') do
+          let(:params) {
+            {
+              :manage_repo => true,
+              :release_rpm => 'testing',
+            }
+          }
+          it { should contain_yumrepo('neo4j').with(
+            {
+              'baseurl' => 'http://yum.neo4j.org/testing'
+            })
+          }
+        end
+
         context 'with install_method set to archive and version to 3.0.8' do
           let(:params) {
             {

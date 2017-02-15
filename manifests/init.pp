@@ -919,7 +919,7 @@
 # Version: 3.1
 # LDAP user DN template.
 # Type: string
-# Default: "uid={0},ou=users,dc=example,dc=com"
+# Default: "uid=\\{0},ou=users,dc=example,dc=com"
 #
 # @param dbms_security_ldap_authorization_group_membership_attributes
 # Version: 3.1
@@ -967,7 +967,7 @@
 # The LDAP search filter to search for a user principal when LDAP authorization
 # is enabled.
 # Type: string
-# Default: "(&(objectClass=*)(uid={0}))"
+# Default: "(&(objectClass=*)(uid=\\{0}))"
 #
 # @param dbms_security_ldap_connection_timeout
 # Version: 3.1
@@ -1396,6 +1396,16 @@
 # Type: string
 # Default: neo4j
 #
+# @param release_deb
+# The name of the debian release to use, only used when manage_repo is true.
+# Type: string
+# Default: stable
+#
+# @param release_rpm
+# The name of the rpm release to use, only used when manage_repo is true.
+# Type: string
+# Default: stable
+#
 # @param service_enable
 # Manage neo4j service.
 # Type: boolean
@@ -1487,6 +1497,8 @@ class neo4j (
   $install_method                                                    = $::neo4j::params::install_method,
   $jmx_enable                                                        = $::neo4j::params::jmx_enable,
   $manage_repo                                                       = $::neo4j::params::manage_repo,
+  $release_deb                                                       = $::neo4j::params::release_deb,
+  $release_rpm                                                       = $::neo4j::params::release_rpm,
   $service_enable                                                    = $::neo4j::params::service_enable,
   $service_ensure                                                    = $::neo4j::params::service_ensure,
   $service_name                                                      = $::neo4j::params::service_name,
@@ -1990,6 +2002,8 @@ class neo4j (
     $ha_tx_push_strategy,
     $install_method,
     $metrics_prefix,
+    $release_deb,
+    $release_rpm,
     $service_ensure,
     $service_name,
     $user,
