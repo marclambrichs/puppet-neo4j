@@ -3,6 +3,16 @@
 # Installs Neo4J (http://www.neo4j.com) on RHEL/Ubuntu/Debian from their
 # distribution tarballs downloaded directly from their site.
 #
+# === Parameters
+#
+# @param group
+# @param install_method
+# @param service_enable
+# @param service_ensure
+# @param service_name
+# @param service_provider
+# @param user
+#
 # === Authors
 #
 # Marc Lambrichs <marc.lambrichs@gmail.com>
