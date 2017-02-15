@@ -395,6 +395,11 @@
 # Type: double, minimum 0.0, maximum 1.0
 # Default: 0.75
 #
+# @param data_prefix
+# Determines the directory where neo4j data dirs will be installed.
+# Type: filesystem path; must be absolute path.
+# Default: '/var/lib/neo4j'
+#
 # @param dbms_active_database
 # Name of the database to load.
 # Type: string
@@ -1414,7 +1419,7 @@
 # @param service_ulimit
 # Maximum number of open file descriptors.
 # Type: integer
-# Default: 40000
+# Default: 60000
 #
 # @param service_shutdown_timeout
 # Number of seconds to wait for shutdown before killing the process.
@@ -1475,6 +1480,7 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j (
+  $data_prefix                                                       = $::neo4j::params::data_prefix,
   $edition                                                           = $::neo4j::params::edition,
   $group                                                             = $::neo4j::params::group,
   $install_prefix                                                    = $::neo4j::params::install_prefix,
@@ -1761,6 +1767,7 @@ class neo4j (
 
   ### validate absolute path
   validate_absolute_path( [
+    $data_prefix,
     $install_prefix
   ] )
 

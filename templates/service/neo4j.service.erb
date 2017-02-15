@@ -3,12 +3,12 @@ Description=Neo4j Graph Database
 After=network.target
 
 [Service]
-ExecStart=/usr/share/neo4j/bin/neo4j console
+ExecStart=<%= scope['neo4j::neo4j_home'] %>/bin/neo4j console
 Restart=on-failure
-User=neo4j
-Environment="NEO4J_CONF=/etc/neo4j" "NEO4J_HOME=/var/lib/neo4j"
-LimitNOFILE=60000
-TimeoutSec=120
+User=<%= scope['neo4j::user'] %>
+Environment="NEO4J_CONF=<%= scope['neo4j::config_dir'] %>" "NEO4J_HOME=<%= scope['neo4j::data_prefix'] %>"
+LimitNOFILE=<%= scope['neo4j::service_ulimit'] %>
+TimeoutSec=<%= scope['neo4j::service_shutdown_timeout'] %>
 
 [Install]
 WantedBy=multi-user.target

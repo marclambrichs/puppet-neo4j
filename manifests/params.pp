@@ -66,6 +66,7 @@ class neo4j::params {
   $cypher_min_replan_interval                                        = '10000'
   $cypher_planner                                                    = 'default'
   $cypher_statistics_divergence_threshold                            = 0.75
+  $data_prefix                                                       = '/var/lib/neo4j'
   $dbms_active_database                                              = 'graph.db'
   $dbms_allow_format_migration                                       = false
   $dbms_backup_address                                               = '127.0.0.1:6362'
@@ -244,7 +245,7 @@ class neo4j::params {
   $service_enable                                                    = true
   $service_ensure                                                    = 'running'
   $service_name                                                      = 'neo4j'
-  $service_ulimit                                                    = 40000
+  $service_ulimit                                                    = 60000
   $service_shutdown_timeout                                          = 120
   $tools_consistency_checker_check_graph                             = true
   $tools_consistency_checker_check_indexes                           = true
@@ -266,7 +267,7 @@ class neo4j::params {
         }
       }
       $dbms_directories_certificates = 'certificates'
-      $dbms_directories_data         = '/var/lib/neo4j/data'
+      $dbms_directories_data         = 'data'
       $dbms_directories_import       = 'import'
       $dbms_directories_lib          = '/usr/share/neo4j/lib'
       $dbms_directories_logs         = '/var/log/neo4j'
@@ -286,7 +287,7 @@ class neo4j::params {
         }
       }
       $dbms_directories_certificates = 'certificates'
-      $dbms_directories_data         = '/var/lib/neo4j/data'
+      $dbms_directories_data         = 'data'
       $dbms_directories_import       = 'import'
       $dbms_directories_lib          = '/usr/share/neo4j/lib'
       $dbms_directories_logs         = '/var/log/neo4j'
