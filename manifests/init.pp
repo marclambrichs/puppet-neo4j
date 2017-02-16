@@ -199,13 +199,13 @@
 #
 # @param dbms_connector_bolt_enabled [Boolean] The enabled setting allows the client connector to be enabled or disabled. When disabled, Neo4j does not listen for incoming connections on the relevant port.
 #
-# @param dbms_connector_bolt_listen_address [Pattern[/[^:]+:[1-9][0-9]{4}/]] The listen_address setting specifies how Neo4j listens for incoming connections.
+# @param dbms_connector_bolt_listen_address [Pattern[/[^:]*:[1-9][0-9]{4}/]] The listen_address setting specifies how Neo4j listens for incoming connections.
 #
 # @param dbms_connector_http_advertised_address The advertised_address setting specifies the address clients should use for this connector. This is useful in a causal cluster as it allows each server to correctly advertise addresses of the other servers in the cluster.
 #
 # @param dbms_connector_http_enabled [Boolean] The enabled setting allows the client connector to be enabled or disabled. When disabled, Neo4j does not listen for incoming connections on the relevant port.
 #
-# @param dbms_connector_http_listen_address [Pattern[/[^:]+:[1-9][0-9]{4}/]] The listen_address setting specifies how Neo4j listens for incoming connections.
+# @param dbms_connector_http_listen_address [Pattern[/[^:]*:[1-9][0-9]{4}/]] The listen_address setting specifies how Neo4j listens for incoming connections.
 #
 # @param dbms_connector_https_advertised_address The advertised_address setting specifies the address clients should use for this connector. This is useful in a causal cluster as it allows each server to correctly advertise addresses of the other servers in the cluster.
 #
