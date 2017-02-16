@@ -11,7 +11,7 @@
 # @param service_ensure
 # @param service_name
 # @param service_provider
-# @param user$
+# @param user
 #
 # === Authors
 #
