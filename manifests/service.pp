@@ -32,10 +32,10 @@ class neo4j::service (
 ){
 
   if $service_enable {
-    if $install_method == 'source' {
+    if $install_method == 'archive' {
       case $service_provider {
         'debian','init','redhat': {
-          file { "/etc/init.d/${neo4j::service_name}":
+          file { "/etc/init.d/${service_name}":
             content => template('neo4j/service/neo4j.init.erb'),
             group   => $group,
             mode    => '0755',
@@ -57,7 +57,7 @@ class neo4j::service (
 
     service { 'neo4j':
       ensure   => $service_ensure,
-      enable   => $service_enable,
+      enable   => true,
       name     => $service_name,
       provider => $service_provider,
     }
