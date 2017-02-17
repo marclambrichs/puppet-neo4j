@@ -259,7 +259,7 @@ class neo4j::params {
   case $::osfamily {
     'RedHat': {
       case $::operatingsystemrelease {
-        /6.*/ : {
+        /^6.*/ : {
           $install_prefix   = '/usr/share'
           $service_provider = 'redhat'
         }
@@ -281,7 +281,7 @@ class neo4j::params {
     }
     'Debian': {
       case $::operatingsystemrelease {
-        /(7.*|14\.04.*)/ : {
+        /(^7.*|^14\.04.*)/ : {
           $service_provider = 'debian'
         }
         default : {

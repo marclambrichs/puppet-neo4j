@@ -12,7 +12,7 @@ describe 'neo4j' do
           it { should contain_package('neo4j') }
         end
 
-        context 'with release_deb set to testing', :if => (facts[:osfamily] == 'Debian') do
+        context 'with release_deb set to testing on Debian', :if => (facts[:osfamily] == 'Debian') do
           let(:params) {
             {
               :manage_repo => true,
@@ -26,7 +26,7 @@ describe 'neo4j' do
           }
         end
 
-        context 'with release_rpm set to testing', :if => (facts[:osfamily] == 'RedHat') do
+        context 'with release_rpm set to testing on RedHat', :if => (facts[:osfamily] == 'RedHat') do
           let(:params) {
             {
               :manage_repo => true,
