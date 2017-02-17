@@ -4,7 +4,7 @@ driver:
 provisioner:
   name: puppet_apply
   require_chef_for_busser: false
-  manifest: init.pp
+  manifest: package.pp
   manifests_path: examples
 verifier:
   name: inspec
@@ -35,8 +35,13 @@ platforms:
     puppet_yum_repo: https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
     puppet_yum_collections_repo: http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 suites:
-  - name: puppet3
-  - name: puppet4
+  - name: puppet3_package
+  - name: puppet4_package
     provisioner:
+      puppet_omnibus_url: https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet_agent.sh
+      require_puppet_collections: true
+  - name: puppet4_archive
+    provisioner:
+      manifest: archive.pp
       puppet_omnibus_url: https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet_agent.sh
       require_puppet_collections: true
