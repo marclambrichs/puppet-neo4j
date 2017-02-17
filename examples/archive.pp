@@ -88,8 +88,9 @@ class { '::java':
 }
 
 class { '::neo4j' :
-  group       => $group,
-  manage_repo => true,
+  group          => $group,
+  install_method => 'archive',
+  version        => '3.2.0-alpha04',
 }
 
 Class['java'] -> Service['neo4j']
