@@ -1,9 +1,16 @@
-## 2017-??-?? - Release ?.?.?
+## 2017-02-20 - Release 2.0.0
+
+### Summary
+Completed parameter list, fixed documentation and added spec tests.
+
+### Improvements
 - Removed option to install java from within module
 - Added version indication to parameters whereever needed
 - Completed parameter list: ALL possible settings should be in here.
 - Default setup should make use of packages, whether it be rpm's or debs. The
   reason is, that no sane company is using a source install.
+- Added spec testing
+- Moving to test kitchen for integration testing
 
 ## 2016-11-15 - Release 1.2.4
 Adaptations needed for install with rpm.
