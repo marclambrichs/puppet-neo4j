@@ -373,7 +373,6 @@
 #   is minimum 1048576, maximum 2147483647] Size of buffer used by index
 #   sampling.
 #   Depracated: since 3.0.3. Use dbms.index_sampling.sample_size_limit instead.
-
 #
 # @param dbms_index_sampling_sample_size_limit [Integer[1048576, 2147483647]]
 #   Index sampling chunk size limit.
@@ -696,7 +695,7 @@
 #   Policy for how to handle branched data.
 #
 # @param ha_broadcast_timeout [Pattern[/[1-9][0-9]*(ms|s|m)?/]] Timeout for
-# broadcasting values in cluster.
+#   broadcasting values in cluster.
 #
 # @param ha_configuration_timeout [Pattern[/[1-9][0-9]*(ms|s|m)?/]] Timeout for 
 #   waiting for configuration from an existing cluster member during
@@ -753,7 +752,7 @@
 #   phase 1.
 #
 # @param ha_phase2_timeout [Pattern[/[1-9][0-9]*(ms|s|m)/]] Timeout for Paxos
-# phase 2.
+#   phase 2.
 #
 # @param ha_pull_batch_size [Integer] Size of batches of transactions applied on
 #   slaves when pulling from master.
@@ -768,7 +767,7 @@
 #   Mandatory: yes
 #
 # @param ha_slave_lock_timeout [Pattern[/[1-9][0-9]*(ms|s|m)/]] Timeout for
-# taking remote (write) locks on slaves.
+#   taking remote (write) locks on slaves.
 #
 # @param ha_slave_only [Boolean] Whether this instance should only participate
 #   as slave in cluster.
@@ -807,7 +806,7 @@
 #   about number of occurred replanning events.
 #
 # @param metrics_enabled [Boolean] The default enablement value for all the
-# supported metrics.
+#   supported metrics.
 #
 # @param metrics_graphite_enabled [Boolean] Set to true to enable exporting
 #   metrics to Graphite.
@@ -825,7 +824,7 @@
 #   duration of garbage collections.
 #
 # @param metrics_jvm_memory_enabled [Boolean] Enable reporting metrics about the
-#    memory usage.
+#   memory usage.
 #
 # @param metrics_jvm_threads_enabled [Boolean] Enable reporting metrics about
 #   the current number of threads running.
