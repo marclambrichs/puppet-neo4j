@@ -307,7 +307,7 @@ describe 'neo4j::service' do
             user: 'neo4j'
           }
         end
-        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Service provider magic not supported}) }
+        it { is_expected.to raise_error(%r{Service provider magic not supported}) }
       end
     end
 
