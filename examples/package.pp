@@ -90,8 +90,6 @@ class { '::java':
 class { '::neo4j' :
   group       => $group,
   manage_repo => true,
-  release_deb => 'testing',
-  release_rpm => 'testing',
 }
 
 Class['java'] -> Service['neo4j']

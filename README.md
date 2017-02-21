@@ -43,7 +43,8 @@ Here are some examples of different configurations that people could use this mo
 ### Install from source
 ```puppet
 class { 'neo4j' :
-  install_method => 'archive'
+  install_method => 'archive',
+  version        => '3.1.1',
 }
 ```
 
@@ -222,7 +223,7 @@ class { 'neo4j' :
 All known versions >= 3.0.0 can be installed.  For the list of current releases, you can go to http://neo4j.com/download/.
 ```puppet
 class { 'neo4j' :
-  version => '3.1.0',
+  version => '3.1.1',
   edition => 'enterprise',
 }
 ```
