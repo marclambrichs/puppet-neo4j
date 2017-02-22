@@ -52,7 +52,6 @@
 #
 # @param causal_clustering_discovery_listen_address [Pattern[/[^:]+:[1-9][0-9]{4}/]]
 #   Host and port to bind the cluster member discovery management communication.
-# 
 #   (Since 3.1)
 #
 # @param causal_clustering_expected_core_cluster_size [Integer] Expected number 

@@ -183,7 +183,7 @@ class neo4j::params {
   $dbms_unmanaged_extension_classes                                  = []
   $dbms_windows_service_name                                         = undef
   $edition                                                           = 'community'
-  $group                                                             = 'users'
+  $group                                                             = 'neo4j'
   $ha_allow_init_cluster                                             = true
   $ha_branched_data_copying_strategy                                 = 'branch_then_copy'
   $ha_branched_data_policy                                           = 'keep_all'
