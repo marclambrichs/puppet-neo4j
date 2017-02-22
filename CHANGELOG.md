@@ -1,3 +1,8 @@
+## 2017-02-22 - Release 2.0.1
+- Fix to improve the quality score on puppetforge.
+- Fixes to templates: some config settings are optional.
+- Changed default group to 'neo4j'. Not all neo4j packages comply (yet).
+
 ## 2017-02-20 - Release 2.0.0
 
 ### Summary

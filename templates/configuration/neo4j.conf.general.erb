@@ -183,8 +183,11 @@ dbms.jvm.additional=-Dcom.sun.management.jmxremote.password.file=<%= @config_dir
 dbms.jvm.additional=-Dcom.sun.management.jmxremote.access.file=<%= @config_dir %>/<%= @dbms_jvm_additional_jmxremote_access_file %>
 <% end -%>
 
+<% if @dbms_jvm_additional_rmi_server_hostname !~ /=$/ -%>
 # Some systems cannot discover host name automatically, and need this line configured:
 dbms.jvm.additional=-Djava.rmi.server.hostname=<%= @dbms_jvm_additional_rmi_server_hostname %>
+<% end -%>
+
 
 #-------------------------------------------------------------------------------
 # Logging

@@ -82,10 +82,14 @@ dbms.security.ldap.use_starttls=<%= @dbms_security_ldap_use_starttls %>
 #-----------------------------------------------------------------
 # 7.1.5.5. Use a self-signed certificate in a test environment
 #-----------------------------------------------------------------
+<% if @dbms_jvm_additional_ssl_keystore -%>
 dbms.jvm.additional=-Djavax.net.ssl.keyStore=<%= @dbms_jvm_additional_ssl_keystore %>
 dbms.jvm.additional=-Djavax.net.ssl.keyStorePassword=<%= @dbms_jvm_additional_ssl_keystore_password %>
+<% end -%>
+<% if @dbms_jvm_additional_ssl_truststore -%>
 dbms.jvm.additional=-Djavax.net.ssl.trustStore=<%= @dbms_jvm_additional_ssl_truststore %>
 dbms.jvm.additional=-Djavax.net.ssl.trustStorePassword=<%= @dbms_jvm_additional_ssl_truststore_password %>
+<% end -%>
 
 #-----------------------------------------------------------------
 # Connection pooling
