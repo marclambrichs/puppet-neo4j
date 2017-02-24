@@ -19,6 +19,7 @@
 # Copyright 2016-2017 Marc Lambrichs, unless otherwise noted.
 #
 class neo4j::config (
+  $dbms_mode    = $::neo4j::dbms_mode,
   $default_file = $::neo4j::default_file,
   $config_dir   = $::neo4j::config_dir,
   $jmx_enable   = $::neo4j::jmx_enable,
@@ -115,7 +116,6 @@ class neo4j::config (
   $dbms_memory_heap_max_size                          = $::neo4j::dbms_memory_heap_max_size
   $dbms_memory_pagecache_size                         = $::neo4j::dbms_memory_pagecache_size
   $dbms_memory_pagecache_swapper                      = $::neo4j::dbms_memory_pagecache_swapper
-  $dbms_mode                                          = $::neo4j::dbms_mode
   $dbms_query_cache_size                              = $::neo4j::dbms_query_cache_size
   $dbms_read_only                                     = $::neo4j::dbms_read_only
   $dbms_record_format                                 = $::neo4j::dbms_record_format
@@ -227,7 +227,7 @@ class neo4j::config (
   $causal_clustering_unknown_address_logging_throttle                = $::neo4j::causal_clustering_unknown_address_logging_throttle
 
   if ( $dbms_mode in ['CORE', 'READ_REPLICA'] and
-      versioncmp( $version, '3.1.0' ) >= 0 ) {
+      ( $version =~ /[\d.]+/ and versioncmp( $version, '3.1.0' ) >= 0 ) ) {
         concat::fragment{ 'neo4j config causal cluster':
           target  => $config_file,
           content => template('neo4j/configuration/clustering/neo4j.conf.clustering.causal.erb'),
@@ -271,7 +271,7 @@ class neo4j::config (
   $ha_tx_push_strategy               = $::neo4j::ha_tx_push_strategy
 
   if ( $dbms_mode in ['ARBITER', 'HA'] and
-      versioncmp( $version, '3.0.0' ) >= 0 ) {
+      ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) >= 0 ) ) {
       concat::fragment{ 'neo4j config HA cluster':
         target  => $config_file,
         content => template('neo4j/configuration/clustering/neo4j.conf.clustering.ha.erb'),
