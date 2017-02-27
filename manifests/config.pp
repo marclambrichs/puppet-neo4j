@@ -226,13 +226,14 @@ class neo4j::config (
   $causal_clustering_transaction_listen_address                      = $::neo4j::causal_clustering_transaction_listen_address
   $causal_clustering_unknown_address_logging_throttle                = $::neo4j::causal_clustering_unknown_address_logging_throttle
 
-  if ( $dbms_mode in ['CORE', 'READ_REPLICA'] and
-      ( $version =~ /[\d.]+/ and versioncmp( $version, '3.1.0' ) >= 0 ) ) {
-        concat::fragment{ 'neo4j config causal cluster':
-          target  => $config_file,
-          content => template('neo4j/configuration/clustering/neo4j.conf.clustering.causal.erb'),
-          order   => '41',
-        }
+  if ( $dbms_mode in ['CORE', 'READ_REPLICA'] ) {
+    unless $version =~ /[\d.]+/ and ( versioncmp( $version, '3.1.0' ) < 0 ) {
+      concat::fragment{ 'neo4j config causal cluster':
+        target  => $config_file,
+        content => template('neo4j/configuration/clustering/neo4j.conf.clustering.causal.erb'),
+        order   => '41',
+      }
+    }
   }
 
   #-----------------------------------------------------------------------------
@@ -270,13 +271,14 @@ class neo4j::config (
   $ha_tx_push_factor                 = $::neo4j::ha_tx_push_factor
   $ha_tx_push_strategy               = $::neo4j::ha_tx_push_strategy
 
-  if ( $dbms_mode in ['ARBITER', 'HA'] and
-      ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) >= 0 ) ) {
+  if ( $dbms_mode in ['ARBITER', 'HA'] ) {
+    unless $version =~ /[\d.]+/ and ( versioncmp( $version, '3.0.0' ) < 0 ) {
       concat::fragment{ 'neo4j config HA cluster':
         target  => $config_file,
         content => template('neo4j/configuration/clustering/neo4j.conf.clustering.ha.erb'),
         order   => '42',
       }
+    }
   }
 
   #-----------------------------------------------------------------------------
@@ -333,7 +335,6 @@ class neo4j::config (
       order   => '71',
     }
   }
-
 
   #-----------------------------------------------------------------------------
   # 8.1. Metrics

@@ -41,7 +41,7 @@ causal_clustering.global_session_tracker_state_size=<%= @causal_clustering_globa
 causal_clustering.id_alloc_state_size=<%= @causal_clustering_id_alloc_state_size %>
 
 # A comma-separated list of other members of the cluster to join.
-causal_clustering.initial_discovery_members=<%= @causal_clustering_initial_discovery_members %>
+causal_clustering.initial_discovery_members=<%= @causal_clustering_initial_discovery_members.join(',') %>
 
 # Time out for a new member to catch up.
 causal_clustering.join_catch_up_timeout=<%= @causal_clustering_join_catch_up_timeout %>

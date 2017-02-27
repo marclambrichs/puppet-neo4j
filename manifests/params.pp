@@ -15,8 +15,8 @@ class neo4j::params {
   $causal_clustering_cluster_routing_ttl                             = '300000'
   $causal_clustering_cluster_topology_refresh                        = '60000'
   $causal_clustering_disable_middleware_logging                      = true
-  $causal_clustering_discovery_advertised_address                    = 'localhost:5000'
-  $causal_clustering_discovery_listen_address                        = 'localhost:5000'
+  $causal_clustering_discovery_advertised_address                    = "${::fqdn}:5000"
+  $causal_clustering_discovery_listen_address                        = '0.0.0.0:5000'
   $causal_clustering_expected_core_cluster_size                      = 3
   $causal_clustering_global_session_tracker_state_size               = 1000
   $causal_clustering_id_alloc_state_size                             = 1000
@@ -35,8 +35,8 @@ class neo4j::params {
   $causal_clustering_property_key_token_id_allocation_size           = 32
   $causal_clustering_property_key_token_name_id_allocation_size      = 1024
   $causal_clustering_pull_interval                                   = '1000'
-  $causal_clustering_raft_advertised_address                         = 7000
-  $causal_clustering_raft_listen_address                             = 7000
+  $causal_clustering_raft_advertised_address                         = "${::fqdn}:7000"
+  $causal_clustering_raft_listen_address                             = '0.0.0.0:7000'
   $causal_clustering_raft_log_implementation                         = 'SEGMENTED'
   $causal_clustering_raft_log_prune_strategy                         = '1g size'
   $causal_clustering_raft_log_pruning_frequency                      = '600000'
@@ -57,8 +57,8 @@ class neo4j::params {
   $causal_clustering_state_machine_apply_max_batch_size              = 16
   $causal_clustering_state_machine_flush_window_size                 = 4096
   $causal_clustering_string_block_id_allocation_size                 = 1024
-  $causal_clustering_transaction_advertised_address                  = '127.0.0.1:6000'
-  $causal_clustering_transaction_listen_address                      = '127.0.0.1:6000'
+  $causal_clustering_transaction_advertised_address                  = "${::fqdn}:6000"
+  $causal_clustering_transaction_listen_address                      = '0.0.0.0:6000'
   $causal_clustering_unknown_address_logging_throttle                = '10000'
   $cypher_default_language_version                                   = 'default'
   $cypher_forbid_exhaustive_shortestpath                             = false
@@ -83,7 +83,7 @@ class neo4j::params {
   $dbms_connector_https_advertised_address                           = undef
   $dbms_connector_https_enabled                                      = true
   $dbms_connector_https_listen_address                               = ':7473'
-  $dbms_connectors_default_advertised_address                        = 'localhost'
+  $dbms_connectors_default_advertised_address                        = $::fqdn
   $dbms_connectors_default_listen_address                            = '0.0.0.0'
   $dbms_ids_reuse_types_override                                     = [ 'RELATIONSHIP', 'NODE']
   $dbms_index_sampling_background_enabled                            = true
