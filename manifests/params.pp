@@ -226,7 +226,7 @@ class neo4j::params {
   $metrics_enabled                                                   = false
   $metrics_graphite_enabled                                          = false
   $metrics_graphite_interval                                         = '3m'
-  $metrics_graphite_server                                           = 'localhost:2003'
+  $metrics_graphite_server                                           = '127.0.0.1:2003'
   $metrics_jvm_buffers_enabled                                       = false
   $metrics_jvm_gc_enabled                                            = false
   $metrics_jvm_memory_enabled                                        = false
