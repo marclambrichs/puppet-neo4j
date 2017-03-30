@@ -19,6 +19,8 @@ group :test do
   gem 'json', '< 2.0.0',         :require => false if RUBY_VERSION < '2.0.0'
   gem 'json_pure', '<= 2.0.1',   :require => false if RUBY_VERSION < '2.0.0'
   gem 'metadata-json-lint',      :require => false
+  gem 'parallel_tests',  '< 2.10.0',  :require => false if RUBY_VERSION < '2.0.0'
+  gem 'parallel_tests',  :require => false if RUBY_VERSION >= '2.0.0'
   gem 'puppet-strings',          :require => false
   gem 'puppet_facts',            :require => false
   gem 'puppetlabs_spec_helper',  :require => false

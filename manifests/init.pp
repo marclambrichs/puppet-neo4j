@@ -1480,9 +1480,9 @@ class neo4j (
     }
   }
 
-  anchor { 'neo4j::begin': } ->
-  class{'::neo4j::install':} ->
-  class{'::neo4j::config':} ~>
-  class{'::neo4j::service':} ->
-  anchor { 'neo4j::end': }
+  anchor { 'neo4j::begin': }
+  -> class{'::neo4j::install':}
+  -> class{'::neo4j::config':}
+  ~> class{'::neo4j::service':}
+  -> anchor { 'neo4j::end': }
 }

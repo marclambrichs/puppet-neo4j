@@ -86,8 +86,8 @@ class neo4j::install (
       ## define the user and group the neo4j service will be running.
       group { $group:
         ensure => present
-      } ->
-      user { $user:
+      }
+      -> user { $user:
         ensure => present,
         gid    => $group,
         shell  => '/bin/bash',
