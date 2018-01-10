@@ -377,6 +377,7 @@ class neo4j::config (
   #-----------------------------------------------------------------------------
   $dbms_logs_query_enabled                     = $::neo4j::dbms_logs_query_enabled
   $dbms_logs_query_parameter_logging_enabled   = $::neo4j::dbms_logs_query_parameter_logging_enabled
+  $dbms_logs_query_time_logging_enabled        = $::neo4j::dbms_logs_query_time_logging_enabled
   $dbms_logs_query_rotation_size               = $::neo4j::dbms_logs_query_rotation_size
   $dbms_logs_query_threshold                   = $::neo4j::dbms_logs_query_threshold
   $dbms_logs_security_rotation_keep_number     = $::neo4j::dbms_logs_security_rotation_keep_number

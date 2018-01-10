@@ -127,6 +127,7 @@ class neo4j::params {
   $dbms_logs_http_rotation_size                                      = '20m'
   $dbms_logs_query_enabled                                           = false
   $dbms_logs_query_parameter_logging_enabled                         = true
+  $dbms_logs_query_time_logging_enabled                              = true
   $dbms_logs_query_rotation_keep_number                              = 7
   $dbms_logs_query_rotation_size                                     = '20m'
   $dbms_logs_query_threshold                                         = '0'

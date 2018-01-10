@@ -480,6 +480,9 @@
 # @param dbms_logs_query_parameter_logging_enabled [Boolean] Log parameters for
 #   executed queries that took longer than the configured threshold.
 #
+# @param dbms_logs_query_time_logging_enabled [Boolean] Log detailed time
+#   information for executed queries being logged.
+#
 # @param dbms_logs_query_rotation_keep_number [Integer[1]] Maximum number of
 #   history files for the query log.
 #
@@ -1102,6 +1105,7 @@ class neo4j (
   ### config monitoring logging variables
   $dbms_logs_query_enabled                                           = $::neo4j::params::dbms_logs_query_enabled,
   $dbms_logs_query_parameter_logging_enabled                         = $::neo4j::params::dbms_logs_query_parameter_logging_enabled,
+  $dbms_logs_query_time_logging_enabled                              = $::neo4j::params::dbms_logs_query_time_logging_enabled,
   $dbms_logs_query_rotation_keep_number                              = $::neo4j::params::dbms_logs_query_rotation_keep_number,
   $dbms_logs_query_rotation_size                                     = $::neo4j::params::dbms_logs_query_rotation_size,
   $dbms_logs_query_threshold                                         = $::neo4j::params::dbms_logs_query_threshold,
@@ -1218,6 +1222,7 @@ class neo4j (
     $dbms_logs_http_enabled,
     $dbms_logs_query_enabled,
     $dbms_logs_query_parameter_logging_enabled,
+    $dbms_logs_query_time_logging_enabled,
     $dbms_read_only,
     $dbms_security_allow_csv_import_from_file_urls,
     $dbms_security_allow_publisher_create_token,
