@@ -1,6 +1,6 @@
 # neo4j puppet module
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/mlambrichs/neo4j.svg)](https://forge.puppetlabs.com/mlambrichs/neo4j) [![Build Status](https://travis-ci.org/mlambrichs/puppet-neo4j.svg?branch=master)](https://travis-ci.org/mlambrichs/puppet-neo4j)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/mlambrichs/neo4j.svg)](https://forge.puppetlabs.com/mlambrichs/neo4j) [![Build Status](https://travis-ci.org/mlambrichs/puppet-neo4j.svg?branch=master)](https://travis-ci.org/marclambrichs/puppet-neo4j)
 
 =====================
 
