@@ -234,7 +234,7 @@ dbms.logs.security.level=<%= @dbms_logs_security_level %>
 dbms.logs.security.rotation.delay=<%= @dbms_logs_security_rotation_delay %>
 
 # Make Neo4j keep the logical transaction logs for being able to backup the database.
-dbms_tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy %>
+dbms.tx_log.rotation.retention_policy=<%= @dbms_tx_log_rotation_retention_policy %>
 
 # Specifies at which file size the logical log will auto-rotate.
 dbms.tx_log.rotation.size=<%= @dbms_tx_log_rotation_size %>
