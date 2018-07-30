@@ -1,3 +1,7 @@
+## 2018-08-21 - Release 2.0.2
+- Fix typo in template neo4j.conf.general.erb
+- Update rvm and puppet version in travis.yml
+
 ## 2017-02-22 - Release 2.0.1
 - Fix to improve the quality score on puppetforge.
 - Fixes to templates: some config settings are optional.
