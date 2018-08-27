@@ -4,10 +4,10 @@ class neo4j::params {
   $browser_allow_outgoing_connections                                = true
   $browser_credential_timeout                                        = '0'
   $browser_remote_content_hostname_whitelist                         = ['http://guides.neo4j.com',
-                                                                        'https://guides.neo4j.com',
-                                                                        'http://localhost',
-                                                                        'https://localhost'
-]
+    'https://guides.neo4j.com',
+    'http://localhost',
+    'https://localhost'
+  ]
   $browser_retain_connection_credentials                             = true
   $causal_clustering_array_block_id_allocation_size                  = 1024
   $causal_clustering_catchup_batch_size                              = 64
@@ -116,10 +116,10 @@ class neo4j::params {
   $dbms_logs_debug_rotation_size                                     = '20m'
   $dbms_logs_gc_enabled                                              = false
   $dbms_logs_gc_options                                              = ['-XX:+PrintGCDetails',
-                                                                        '-XX:+PrintGCDateStamps',
-                                                                        '-XX:+PrintGCApplicationStoppedTime',
-                                                                        '-XX:+PrintPromotionFailure',
-                                                                        '-XX:+PrintTenuringDistribution' ]
+    '-XX:+PrintGCDateStamps',
+    '-XX:+PrintGCApplicationStoppedTime',
+    '-XX:+PrintPromotionFailure',
+    '-XX:+PrintTenuringDistribution' ]
   $dbms_logs_gc_rotation_keep_number                                 = 5
   $dbms_logs_gc_rotation_size                                        = '20m'
   $dbms_logs_http_enabled                                            = true
@@ -170,6 +170,7 @@ class neo4j::params {
   $dbms_security_log_successful_authentication                       = true
   $dbms_security_procedures_default_allowed                          = ''
   $dbms_security_procedures_roles                                    = ''
+  $dbms_security_procedures_unrestricted                             = ''
   $dbms_shell_enabled                                                = false
   $dbms_shell_host                                                   = '127.0.0.1'
   $dbms_shell_port                                                   = 1337

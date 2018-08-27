@@ -320,6 +320,7 @@ class neo4j::config (
   $dbms_security_ldap_use_starttls                                 = $::neo4j::dbms_security_ldap_use_starttls
   $dbms_security_procedures_default_allowed                        = $::neo4j::dbms_security_procedures_default_allowed
   $dbms_security_procedures_roles                                  = $::neo4j::dbms_security_procedures_roles
+  $dbms_security_procedures_unrestricted                           = $::neo4j::dbms_security_procedures_unrestricted
   $unsupported_dbms_security_ldap_authorization_connection_pooling = $::neo4j::unsupported_dbms_security_ldap_authorization_connection_pooling
 
   if ( $version =~ /[\d.]+/ and versioncmp( $version, '3.0.0' ) == 0 ) {

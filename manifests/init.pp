@@ -645,6 +645,10 @@
 #   dbms.security.procedures.default_allowed setting.
 #   (Since 3.1)
 #
+# @param dbms_security_procedures_unrestricted [String] This provides a high level
+#   control for procedures to run.
+#   (Since 3.1)
+#
 # @param dbms_shell_enabled [Boolean] Enable a remote shell server which Neo4j
 #   Shell clients can log in to.
 #
@@ -1167,6 +1171,7 @@ class neo4j (
   $dbms_security_ldap_use_starttls                                   = $::neo4j::params::dbms_security_ldap_use_starttls,
   $dbms_security_procedures_default_allowed                          = $::neo4j::params::dbms_security_procedures_default_allowed,
   $dbms_security_procedures_roles                                    = $::neo4j::params::dbms_security_procedures_roles,
+  $dbms_security_procedures_unrestricted                             = $::neo4j::params::dbms_security_procedures_unrestricted,
   $unsupported_dbms_security_ldap_authorization_connection_pooling   = $::neo4j::params::unsupported_dbms_security_ldap_authorization_connection_pooling,
 
   ### variables neo4j-wrapper.conf
@@ -1189,7 +1194,7 @@ class neo4j (
   $dbms_jvm_additional_use_g1gc                                      = $::neo4j::params::dbms_jvm_additional_use_g1gc,
   $dbms_windows_service_name                                         = $::neo4j::params::dbms_windows_service_name,
 
-  ) inherits neo4j::params {
+) inherits neo4j::params {
 
   ### validate absolute path
   validate_absolute_path( [
@@ -1408,6 +1413,7 @@ class neo4j (
     $dbms_security_ldap_referral,
     $dbms_security_procedures_default_allowed,
     $dbms_security_procedures_roles,
+    $dbms_security_procedures_unrestricted,
     $dbms_shell_host,
     $dbms_shell_rmi_name,
     $dbms_tx_log_rotation_retention_policy,
