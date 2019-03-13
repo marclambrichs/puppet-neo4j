@@ -2,7 +2,7 @@ require 'spec_helper'
 describe 'neo4j::service' do
   let(:facts) do
     {
-      path: '/usr/bin'
+      path: '/usr/bin',
     }
   end
   let(:params) do
@@ -18,7 +18,7 @@ describe 'neo4j::service' do
       service_provider: 'systemd',
       service_shutdown_timeout: '120',
       service_ulimit: '60000',
-      user: 'neo4j'
+      user: 'neo4j',
     }
   end
 
@@ -42,7 +42,7 @@ describe 'neo4j::service' do
           service_provider: 'systemd',
           service_shutdown_timeout: '120',
           service_ulimit: '60000',
-          user: 'neo4j'
+          user: 'neo4j',
         }
       end
 
@@ -66,9 +66,10 @@ describe 'neo4j::service' do
               service_provider: 'systemd',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'neo4j'
+              user: 'neo4j',
             }
           end
+
           it { is_expected.not_to contain_file('/etc/init.d/test') }
           it { is_expected.to contain_systemd__unit_file('test.service') }
           it do
@@ -91,9 +92,10 @@ describe 'neo4j::service' do
             service_provider: 'debian',
             service_shutdown_timeout: '120',
             service_ulimit: '60000',
-            user: 'neo4j'
+            user: 'neo4j',
           }
         end
+
         it { is_expected.to contain_file('/etc/init.d/neo4j') }
         it { is_expected.not_to contain_systemd__unit_file('neo4j.service') }
         it do
@@ -114,9 +116,10 @@ describe 'neo4j::service' do
               service_provider: 'debian',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'test'
+              user: 'test',
             }
           end
+
           it do
             is_expected.to contain_file('/etc/init.d/neo4j').with('group' => 'test',
                                                                   'owner' => 'test')
@@ -137,9 +140,10 @@ describe 'neo4j::service' do
               service_provider: 'debian',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'neo4j'
+              user: 'neo4j',
             }
           end
+
           it { is_expected.to contain_file('/etc/init.d/test') }
           it { is_expected.not_to contain_systemd__unit_file('test.service') }
           it do
@@ -162,9 +166,10 @@ describe 'neo4j::service' do
             service_provider: 'init',
             service_shutdown_timeout: '120',
             service_ulimit: '60000',
-            user: 'neo4j'
+            user: 'neo4j',
           }
         end
+
         it { is_expected.to contain_file('/etc/init.d/neo4j') }
         it { is_expected.not_to contain_systemd__unit_file('neo4j.service') }
         it do
@@ -185,9 +190,10 @@ describe 'neo4j::service' do
               service_provider: 'init',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'test'
+              user: 'test',
             }
           end
+
           it do
             is_expected.to contain_file('/etc/init.d/neo4j').with('group' => 'test',
                                                                   'owner' => 'test')
@@ -208,9 +214,10 @@ describe 'neo4j::service' do
               service_provider: 'init',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'neo4j'
+              user: 'neo4j',
             }
           end
+
           it { is_expected.to contain_file('/etc/init.d/test') }
           it { is_expected.not_to contain_systemd__unit_file('test.service') }
           it do
@@ -233,9 +240,10 @@ describe 'neo4j::service' do
             service_provider: 'redhat',
             service_shutdown_timeout: '120',
             service_ulimit: '60000',
-            user: 'neo4j'
+            user: 'neo4j',
           }
         end
+
         it { is_expected.to contain_file('/etc/init.d/neo4j') }
         it { is_expected.not_to contain_systemd__unit_file('neo4j.service') }
         it do
@@ -256,9 +264,10 @@ describe 'neo4j::service' do
               service_provider: 'redhat',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'test'
+              user: 'test',
             }
           end
+
           it do
             is_expected.to contain_file('/etc/init.d/neo4j').with('group' => 'test',
                                                                   'owner' => 'test')
@@ -279,9 +288,10 @@ describe 'neo4j::service' do
               service_provider: 'redhat',
               service_shutdown_timeout: '120',
               service_ulimit: '60000',
-              user: 'neo4j'
+              user: 'neo4j',
             }
           end
+
           it { is_expected.to contain_file('/etc/init.d/test') }
           it { is_expected.not_to contain_systemd__unit_file('test.service') }
           it do
@@ -304,9 +314,10 @@ describe 'neo4j::service' do
             service_provider: 'magic',
             service_shutdown_timeout: '120',
             service_ulimit: '60000',
-            user: 'neo4j'
+            user: 'neo4j',
           }
         end
+
         it { is_expected.to raise_error(%r{Service provider magic not supported}) }
       end
     end
@@ -331,9 +342,10 @@ describe 'neo4j::service' do
           service_provider: 'systemd',
           service_shutdown_timeout: '120',
           service_ulimit: '60000',
-          user: 'neo4j'
+          user: 'neo4j',
         }
       end
+
       it do
         is_expected.to contain_service('neo4j').with('ensure' => 'stopped')
       end
@@ -354,9 +366,10 @@ describe 'neo4j::service' do
         service_provider: 'systemd',
         service_shutdown_timeout: '120',
         service_ulimit: '60000',
-        user: 'neo4j'
+        user: 'neo4j',
       }
     end
+
     it { is_expected.not_to contain_service('neo4j') }
   end
 end
