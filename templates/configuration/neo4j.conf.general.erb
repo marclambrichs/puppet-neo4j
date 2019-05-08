@@ -144,10 +144,6 @@ dbms.jvm.additional=<%= @dbms_jvm_additional_use_g1gc %>
 # debugged regardless of how often logs are rotated.
 dbms.jvm.additional=<%= @dbms_jvm_additional_omit_stacktrace_in_fast_throw %>
 
-# Reduce probability of objects getting the same identity hash code
-# via a race, by computing them with thread-local PRNGs.
-dbms.jvm.additional=<%= @dbms_jvm_additional_hashcode %>
-
 # Make sure that `initmemory` is not only allocated, but committed to
 # the process, before starting the database. This reduces memory
 # fragmentation, increasing the effectiveness of transparent huge
@@ -163,6 +159,10 @@ dbms.jvm.additional=<%= @dbms_jvm_additional_commit_memory_to_process %>
 # to change the value of final fields!
 dbms.jvm.additional=<%= @dbms_jvm_additional_unlock_experimental_vm_options %>
 dbms.jvm.additional=<%= @dbms_jvm_additional_trust_final_non_static_fields %>
+
+# Reduce probability of objects getting the same identity hash code
+# via a race, by computing them with thread-local PRNGs.
+dbms.jvm.additional=<%= @dbms_jvm_additional_hashcode %>
 
 # Disable explicit garbage collection, which is occasionally invoked by the JDK itself.
 dbms.jvm.additional=<%= @dbms_jvm_additional_disable_explicit_gc %>
