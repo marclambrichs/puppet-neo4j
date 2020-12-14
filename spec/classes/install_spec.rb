@@ -35,7 +35,7 @@ describe 'neo4j' do
           }
           it { should contain_yumrepo('neo4j').with(
             {
-              'baseurl' => 'http://yum.neo4j.org/testing'
+              'baseurl' => 'http://yum.neo4j.com/testing'
             })
           }
         end
