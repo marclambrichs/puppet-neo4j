@@ -52,22 +52,22 @@ class neo4j::install (
           'RedHat': {
             yumrepo {'neo4j':
               descr    => 'Neo4j Yum Repo',
-              baseurl  => "http://yum.neo4j.org/${release_rpm}",
+              baseurl  => "http://yum.neo4j.com/${release_rpm}",
               gpgcheck => 1,
-              gpgkey   => 'http://debian.neo4j.org/neotechnology.gpg.key',
+              gpgkey   => 'http://debian.neo4j.com/neotechnology.gpg.key',
               enabled  => 1,
             }
             Yumrepo['neo4j'] -> Package['neo4j']
           }
           'Debian': {
             apt::source { 'neo4j':
-              location => 'http://debian.neo4j.org/repo',
+              location => 'http://debian.neo4j.com/repo',
               release  => "${release_deb}/",
               repos    => '',
               key      => {
                 'id'     => '66D34E951A8C53D90242132B26C95CF201182252',
                 'server' => 'pgp.mit.edu',
-                'source' => 'http://debian.neo4j.org/neotechnology.gpg.key',
+                'source' => 'http://debian.neo4j.com/neotechnology.gpg.key',
               },
             }
             Apt::Source['neo4j'] -> Package['neo4j']
