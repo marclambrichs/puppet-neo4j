@@ -1,6 +1,7 @@
 # == Class: neo4j::params
 #
 class neo4j::params {
+  $allow_load_csv                                                    = true
   $browser_allow_outgoing_connections                                = true
   $browser_credential_timeout                                        = '0'
   $browser_remote_content_hostname_whitelist                         = ['http://guides.neo4j.com',

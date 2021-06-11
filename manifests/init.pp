@@ -907,6 +907,9 @@
 #
 # @param version [String] The version of the neo4 package.
 #
+# @param allow_load_csv [Boolean] Allow set dbms_directories_import directory
+#   in neo4j.conf.general.erb
+#
 class neo4j (
   $data_prefix                                                       = $::neo4j::params::data_prefix,
   $edition                                                           = $::neo4j::params::edition,
@@ -923,7 +926,7 @@ class neo4j (
   $service_provider                                                  = $::neo4j::params::service_provider,
   $user                                                              = $::neo4j::params::user,
   $version                                                           = $::neo4j::params::version,
-
+  $allow_load_csv                                                    = $::neo4j::allow_load_csv,
   ### config default settings
   $default_file                                                      = $::neo4j::params::default_file,
   $service_shutdown_timeout                                          = $::neo4j::params::service_shutdown_timeout,
@@ -1264,6 +1267,7 @@ class neo4j (
     $tools_consistency_checker_check_label_scan_store,
     $tools_consistency_checker_check_property_owners,
     $unsupported_dbms_security_ldap_authorization_connection_pooling,
+    $allow_load_csv,
   )
 
   ### validate byte size

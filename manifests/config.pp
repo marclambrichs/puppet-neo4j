@@ -9,6 +9,7 @@
 # @param config_dir
 # @param jmx_enable
 # @param version
+# @param allow_load_csv
 #
 # === Authors
 #
@@ -24,6 +25,7 @@ class neo4j::config (
   $config_dir   = $::neo4j::config_dir,
   $jmx_enable   = $::neo4j::jmx_enable,
   $version      = $::neo4j::version,
+  $allow_load_csv = $::neo4j::allow_load_csv,
 ){
   ### variables default/sysconfig
   $service_shutdown_timeout = $neo4j::service_shutdown_timeout
